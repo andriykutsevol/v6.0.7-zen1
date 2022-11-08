@@ -2298,6 +2298,8 @@ static int uvc_register_video(struct uvc_device *dev,
 					 &uvc_fops, &uvc_ioctl_ops);
 }
 
+
+
 /*
  * Register all video devices in all chains.
  */
