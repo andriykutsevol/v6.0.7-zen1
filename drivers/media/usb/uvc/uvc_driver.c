@@ -464,6 +464,7 @@ static struct uvc_streaming *uvc_stream_by_id(struct uvc_device *dev, int id)
 
 static void uvc_stream_delete(struct uvc_streaming *stream)
 {
+	
 	if (stream->async_wq)
 		destroy_workqueue(stream->async_wq);
 
@@ -479,6 +480,9 @@ static void uvc_stream_delete(struct uvc_streaming *stream)
 static struct uvc_streaming *uvc_stream_new(struct uvc_device *dev,
 					    struct usb_interface *intf)
 {
+	
+	printk(KERN_INFO "uvc_stream_new 0\n");
+	
 	struct uvc_streaming *stream;
 
 	stream = kzalloc(sizeof(*stream), GFP_KERNEL);
