@@ -481,7 +481,7 @@ static struct uvc_streaming *uvc_stream_new(struct uvc_device *dev,
 					    struct usb_interface *intf)
 {
 	
-	printk(KERN_INFO "uvc_stream_new 0\n");
+	printk(KERN_INFO "!!!dgnet: uvc_stream_new 0\n");
 	
 	struct uvc_streaming *stream;
 
