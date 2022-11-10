@@ -233,6 +233,9 @@ static struct uvc_format_desc uvc_fmts[] = {
 struct usb_host_endpoint *uvc_find_endpoint(struct usb_host_interface *alts,
 		u8 epaddr)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_find_endpoint 0\n");
+
 	struct usb_host_endpoint *ep;
 	unsigned int i;
 
@@ -247,6 +250,8 @@ struct usb_host_endpoint *uvc_find_endpoint(struct usb_host_interface *alts,
 
 static struct uvc_format_desc *uvc_format_by_guid(const u8 guid[16])
 {
+	printk(KERN_INFO "!!!dgnet: uvc_format_by_guid 0\n");
+	
 	unsigned int len = ARRAY_SIZE(uvc_fmts);
 	unsigned int i;
 
@@ -277,6 +282,9 @@ static enum v4l2_colorspace uvc_colorspace(const u8 primaries)
 
 static enum v4l2_xfer_func uvc_xfer_func(const u8 transfer_characteristics)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_xfer_func 0\n");
+	
 	/*
 	 * V4L2 does not currently have definitions for all possible values of
 	 * UVC transfer characteristics. If v4l2_xfer_func is extended with new
@@ -448,6 +456,9 @@ static struct uvc_entity *uvc_entity_by_reference(struct uvc_device *dev,
 
 static struct uvc_streaming *uvc_stream_by_id(struct uvc_device *dev, int id)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_stream_by_id 0\n");
+
 	struct uvc_streaming *stream;
 
 	list_for_each_entry(stream, &dev->streams, list) {
@@ -514,6 +525,9 @@ static int uvc_parse_format(struct uvc_device *dev,
 	struct uvc_streaming *streaming, struct uvc_format *format,
 	u32 **intervals, unsigned char *buffer, int buflen)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_parse_format 0\n");
+
 	struct usb_interface *intf = streaming->intf;
 	struct usb_host_interface *alts = intf->cur_altsetting;
 	struct uvc_format_desc *fmtdesc;
@@ -797,6 +811,10 @@ static int uvc_parse_format(struct uvc_device *dev,
 static int uvc_parse_streaming(struct uvc_device *dev,
 	struct usb_interface *intf)
 {
+	
+	
+	printk(KERN_INFO "!!!dgnet: uvc_parse_streaming 0\n");
+	
 	struct uvc_streaming *streaming = NULL;
 	struct uvc_format *format;
 	struct uvc_frame *frame;
@@ -1052,6 +1070,9 @@ static const u8 uvc_processing_guid[16] = UVC_GUID_UVC_PROCESSING;
 static struct uvc_entity *uvc_alloc_entity(u16 type, u16 id,
 		unsigned int num_pads, unsigned int extra_size)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_alloc_entity 0\n");
+	
 	struct uvc_entity *entity;
 	unsigned int num_inputs;
 	unsigned int size;
@@ -1109,6 +1130,9 @@ static struct uvc_entity *uvc_alloc_entity(u16 type, u16 id,
 static int uvc_parse_vendor_control(struct uvc_device *dev,
 	const unsigned char *buffer, int buflen)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_parse_vendor_control 0\n");
+	
 	struct usb_device *udev = dev->udev;
 	struct usb_host_interface *alts = dev->intf->cur_altsetting;
 	struct uvc_entity *unit;
@@ -1188,6 +1212,9 @@ static int uvc_parse_vendor_control(struct uvc_device *dev,
 static int uvc_parse_standard_control(struct uvc_device *dev,
 	const unsigned char *buffer, int buflen)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_parse_standard_control 0\n");
+	
 	struct usb_device *udev = dev->udev;
 	struct uvc_entity *unit, *term;
 	struct usb_interface *intf;
@@ -1449,6 +1476,9 @@ static int uvc_parse_standard_control(struct uvc_device *dev,
 
 static int uvc_parse_control(struct uvc_device *dev)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_parse_control 0\n");
+	
 	struct usb_host_interface *alts = dev->intf->cur_altsetting;
 	unsigned char *buffer = alts->extra;
 	int buflen = alts->extralen;
@@ -1957,6 +1987,9 @@ static const char *uvc_print_chain(struct uvc_video_chain *chain)
 
 static struct uvc_video_chain *uvc_alloc_chain(struct uvc_device *dev)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_alloc_chain 0\n");
+	
 	struct uvc_video_chain *chain;
 
 	chain = kzalloc(sizeof(*chain), GFP_KERNEL);

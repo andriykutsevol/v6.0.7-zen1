@@ -376,6 +376,9 @@ done:
 static int uvc_v4l2_get_streamparm(struct uvc_streaming *stream,
 		struct v4l2_streamparm *parm)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_v4l2_get_streamparm 0\n");
+	
 	u32 numerator, denominator;
 
 	if (parm->type != stream->type)
@@ -411,6 +414,9 @@ static int uvc_v4l2_get_streamparm(struct uvc_streaming *stream,
 static int uvc_v4l2_set_streamparm(struct uvc_streaming *stream,
 		struct v4l2_streamparm *parm)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_v4l2_set_streamparm 0\n");
+	
 	struct uvc_streaming_control probe;
 	struct v4l2_fract timeperframe;
 	struct uvc_format *format;
@@ -557,6 +563,9 @@ static int uvc_has_privileges(struct uvc_fh *handle)
 
 static int uvc_v4l2_open(struct file *file)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_v4l2_open 0\n");
+	
 	struct uvc_streaming *stream;
 	struct uvc_fh *handle;
 	int ret = 0;
@@ -601,6 +610,9 @@ static int uvc_v4l2_open(struct file *file)
 
 static int uvc_v4l2_release(struct file *file)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_v4l2_release 0\n");
+	
 	struct uvc_fh *handle = file->private_data;
 	struct uvc_streaming *stream = handle->stream;
 
@@ -629,6 +641,9 @@ static int uvc_v4l2_release(struct file *file)
 static int uvc_ioctl_querycap(struct file *file, void *fh,
 			      struct v4l2_capability *cap)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_ioctl_querycap 0\n");
+	
 	struct uvc_fh *handle = file->private_data;
 	struct uvc_video_chain *chain = handle->chain;
 	struct uvc_streaming *stream = handle->stream;
@@ -645,6 +660,9 @@ static int uvc_ioctl_querycap(struct file *file, void *fh,
 static int uvc_ioctl_enum_fmt(struct uvc_streaming *stream,
 			      struct v4l2_fmtdesc *fmt)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_ioctl_enum_fmt 0\n");
+	
 	struct uvc_format *format;
 	enum v4l2_buf_type type = fmt->type;
 	u32 index = fmt->index;
@@ -1461,6 +1479,9 @@ static long uvc_v4l2_compat_ioctl32(struct file *file,
 static ssize_t uvc_v4l2_read(struct file *file, char __user *data,
 		    size_t count, loff_t *ppos)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_v4l2_read 0\n");
+	
 	struct uvc_fh *handle = file->private_data;
 	struct uvc_streaming *stream = handle->stream;
 
@@ -1470,6 +1491,9 @@ static ssize_t uvc_v4l2_read(struct file *file, char __user *data,
 
 static int uvc_v4l2_mmap(struct file *file, struct vm_area_struct *vma)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_v4l2_mmap 0\n");
+
 	struct uvc_fh *handle = file->private_data;
 	struct uvc_streaming *stream = handle->stream;
 
@@ -1480,6 +1504,9 @@ static int uvc_v4l2_mmap(struct file *file, struct vm_area_struct *vma)
 
 static __poll_t uvc_v4l2_poll(struct file *file, poll_table *wait)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_v4l2_poll 0\n");
+	
 	struct uvc_fh *handle = file->private_data;
 	struct uvc_streaming *stream = handle->stream;
 
