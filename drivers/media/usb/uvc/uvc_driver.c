@@ -527,7 +527,7 @@ static int uvc_parse_format(struct uvc_device *dev,
 {
 	
 	printk(KERN_INFO, "!!!dgnet: uvc_parse_format: dev->udev->devnum: %d, buflen: %d 0\n", dev->udev->devnum, buflen);
-	dev_info(&dev, "!!!dgnet: uvc_parse_format: dev->udev->devnum: %d, buflen: %d 0\n", dev->udev->devnum, buflen);
+	dev_info(&dev->udev->dev, "!!!dgnet: uvc_parse_format: dev->udev->devnum: %d, buflen: %d 0\n", dev->udev->devnum, buflen);
 
 	struct usb_interface *intf = streaming->intf;
 	struct usb_host_interface *alts = intf->cur_altsetting;
