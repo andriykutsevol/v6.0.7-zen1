@@ -761,11 +761,10 @@ extern unsigned int uvc_dbg_param;
 extern unsigned int uvc_timeout_param;
 extern unsigned int uvc_hw_timestamps_param;
 
+
 #define uvc_dbg(_dev, flag, fmt, ...)					\
 do {									\
-	if (uvc_dbg_param & UVC_DBG_##flag)				\
-		dev_printk(KERN_DEBUG, &(_dev)->udev->dev, fmt,		\
-			   ##__VA_ARGS__);				\
+	dev_printk(KERN_DEBUG, &(_dev)->udev->dev, fmt,	##__VA_ARGS__);				\
 } while (0)
 
 #define uvc_dbg_cont(flag, fmt, ...)					\
