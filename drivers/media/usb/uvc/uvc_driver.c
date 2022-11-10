@@ -526,8 +526,8 @@ static int uvc_parse_format(struct uvc_device *dev,
 	u32 **intervals, unsigned char *buffer, int buflen)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_parse_format: dev->udev->dev: %d, buflen: %d 0\n", dev->udev->dev, buflen);
-	//uvc_dbg(dev, DESCR,"!!!dgnet buflen: %d videostreaming interface %d FORMAT error\n");
+	//printk(KERN_INFO "!!!dgnet: uvc_parse_format: dev->udev->dev: %d, buflen: %d 0\n", dev->udev->dev, buflen);
+	uvc_dbg(dev, DESCR,"!!!dgnet uvc_parse_format 0: buflen: %d\n", buflen);
 
 	struct usb_interface *intf = streaming->intf;
 	struct usb_host_interface *alts = intf->cur_altsetting;
