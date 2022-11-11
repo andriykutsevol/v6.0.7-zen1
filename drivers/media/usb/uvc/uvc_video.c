@@ -2231,6 +2231,9 @@ void uvc_video_stop_streaming(struct uvc_streaming *stream)
 		unsigned int pipe;
 
 		pipe = usb_sndbulkpipe(stream->dev->udev, epnum) | dir;
+
+		printk("!!!dgnet: uvc_video_stop_streaming(): usb_clear_halt() call\n");
+
 		usb_clear_halt(stream->dev->udev, pipe);
 	}
 
