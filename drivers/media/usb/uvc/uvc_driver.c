@@ -749,7 +749,7 @@ static int uvc_parse_format(struct uvc_device *dev,
 		frame->dwFrameInterval = *intervals;
 
 
-		printk(KERN_INFO "!!!dgnet: uvc_parse_format: frame->dwMaxVideoFrameBufferSize: %d\n",frame->dwMaxVideoFrameBufferSize);
+		printk(KERN_INFO "!!!dgnet: uvc_parse_format: frame->dwMaxVideoFrameBufferSize 1: %d\n",frame->dwMaxVideoFrameBufferSize);
 
 		/*
 		 * Several UVC chipsets screw up dwMaxVideoFrameBufferSize
@@ -767,6 +767,9 @@ static int uvc_parse_format(struct uvc_device *dev,
 			frame->dwMaxVideoFrameBufferSize = format->bpp * frame->wWidth * frame->wHeight / 8;
 		
 		}
+
+
+		printk(KERN_INFO "!!!dgnet: uvc_parse_format: frame->dwMaxVideoFrameBufferSize 2: %d\n",frame->dwMaxVideoFrameBufferSize);
 			
 
 		/*
