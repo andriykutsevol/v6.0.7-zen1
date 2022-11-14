@@ -526,8 +526,8 @@ static int uvc_parse_format(struct uvc_device *dev,
 	u32 **intervals, unsigned char *buffer, int buflen)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_parse_format: dev->udev->devnum: %d, buflen: %d 0\n", dev->udev->devnum, buflen);
-	dev_info(&dev->udev->dev, "!!!dgnet: uvc_parse_format: dev->udev->devnum: %d, buflen: %d 0\n", dev->udev->devnum, buflen);
+	printk(KERN_INFO "!!!dgnet: uvc_parse_format: dev->udev->devnum: %d, buflen: %d\n", dev->udev->devnum, buflen);
+	dev_info(&dev->udev->dev, "!!!dgnet: uvc_parse_format: dev->udev->devnum: %d, buflen: %d\n", dev->udev->devnum, buflen);
 
 	struct usb_interface *intf = streaming->intf;
 	struct usb_host_interface *alts = intf->cur_altsetting;
@@ -544,7 +544,9 @@ static int uvc_parse_format(struct uvc_device *dev,
 
 	switch (buffer[2]) {
 	case UVC_VS_FORMAT_UNCOMPRESSED:
+		printk(KERN_INFO "!!!dgnet: uvc_parse_format: UVC_VS_FORMAT_UNCOMPRESSED\n");
 	case UVC_VS_FORMAT_FRAME_BASED:
+		printk(KERN_INFO "!!!dgnet: uvc_parse_format: UVC_VS_FORMAT_FRAME_BASED\n");
 		n = buffer[2] == UVC_VS_FORMAT_UNCOMPRESSED ? 27 : 28;
 		if (buflen < n) {
 			uvc_dbg(dev, DESCR,
@@ -611,6 +613,7 @@ static int uvc_parse_format(struct uvc_device *dev,
 		break;
 
 	case UVC_VS_FORMAT_MJPEG:
+		printk(KERN_INFO "!!!dgnet: uvc_parse_format: UVC_VS_FORMAT_MJPEGn");
 		if (buflen < 11) {
 			uvc_dbg(dev, DESCR,
 				"device %d videostreaming interface %d FORMAT error\n",
@@ -627,6 +630,7 @@ static int uvc_parse_format(struct uvc_device *dev,
 		break;
 
 	case UVC_VS_FORMAT_DV:
+		printk(KERN_INFO "!!!dgnet: uvc_parse_format: UVC_VS_FORMAT_DV");
 		if (buflen < 9) {
 			uvc_dbg(dev, DESCR,
 				"device %d videostreaming interface %d FORMAT error\n",
@@ -672,9 +676,12 @@ static int uvc_parse_format(struct uvc_device *dev,
 		break;
 
 	case UVC_VS_FORMAT_MPEG2TS:
+		printk(KERN_INFO "!!!dgnet: uvc_parse_format: UVC_VS_FORMAT_MPEG2TS");
 	case UVC_VS_FORMAT_STREAM_BASED:
+		printk(KERN_INFO "!!!dgnet: UVC_VS_FORMAT_STREAM_BASED");
 		/* Not supported yet. */
 	default:
+		printk(KERN_INFO "!!!dgnet: UNSUPPORTED FORMAT");
 		uvc_dbg(dev, DESCR,
 			"device %d videostreaming interface %d unsupported format %u\n",
 			dev->udev->devnum, alts->desc.bInterfaceNumber,
