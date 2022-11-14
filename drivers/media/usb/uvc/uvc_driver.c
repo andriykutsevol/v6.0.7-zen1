@@ -714,21 +714,42 @@ static int uvc_parse_format(struct uvc_device *dev,
 		frame->wWidth = get_unaligned_le16(&buffer[5])
 			      * width_multiplier;
 		frame->wHeight = get_unaligned_le16(&buffer[7]);
+
+		printk(KERN_INFO "!!!dgnet: uvc_parse_format: frame->wWidth: %d, frame->wHeight: %d\n", frame->wWidth, frame->wHeight );
+		
+
+
 		frame->dwMinBitRate = get_unaligned_le32(&buffer[9]);
 		frame->dwMaxBitRate = get_unaligned_le32(&buffer[13]);
+
+
 		if (ftype != UVC_VS_FRAME_FRAME_BASED) {
+
+			printk(KERN_INFO "!!!dgnet: uvc_parse_format: frame type: FRAME_BASED\n");
+
 			frame->dwMaxVideoFrameBufferSize =
 				get_unaligned_le32(&buffer[17]);
+
 			frame->dwDefaultFrameInterval =
 				get_unaligned_le32(&buffer[21]);
 			frame->bFrameIntervalType = buffer[25];
+
+
 		} else {
+
+			printk(KERN_INFO "!!!dgnet: uvc_parse_format: frame type: NOT FRAME_BASED\n");
+
 			frame->dwMaxVideoFrameBufferSize = 0;
+
 			frame->dwDefaultFrameInterval =
 				get_unaligned_le32(&buffer[17]);
 			frame->bFrameIntervalType = buffer[21];
+
 		}
 		frame->dwFrameInterval = *intervals;
+
+
+		printk(KERN_INFO "!!!dgnet: uvc_parse_format: frame->dwMaxVideoFrameBufferSize: %d\n",frame->dwMaxVideoFrameBufferSize);
 
 		/*
 		 * Several UVC chipsets screw up dwMaxVideoFrameBufferSize
@@ -739,9 +760,14 @@ static int uvc_parse_format(struct uvc_device *dev,
 		 * uncompressed formats this can be fixed by computing the
 		 * value from the frame size.
 		 */
-		if (!(format->flags & UVC_FMT_FLAG_COMPRESSED))
-			frame->dwMaxVideoFrameBufferSize = format->bpp
-				* frame->wWidth * frame->wHeight / 8;
+		if (!(format->flags & UVC_FMT_FLAG_COMPRESSED)){
+
+			printk(KERN_INFO "!!!dgnet: uvc_parse_format: !(format->flags & UVC_FMT_FLAG_COMPRESSED) \n");
+
+			frame->dwMaxVideoFrameBufferSize = format->bpp * frame->wWidth * frame->wHeight / 8;
+		
+		}
+			
 
 		/*
 		 * Some bogus devices report dwMinFrameInterval equal to
