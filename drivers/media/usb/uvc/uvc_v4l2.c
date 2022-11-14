@@ -794,6 +794,9 @@ static int uvc_ioctl_reqbufs(struct file *file, void *fh,
 static int uvc_ioctl_querybuf(struct file *file, void *fh,
 			      struct v4l2_buffer *buf)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_ioctl_querybuf\n");
+	
 	struct uvc_fh *handle = fh;
 	struct uvc_streaming *stream = handle->stream;
 
