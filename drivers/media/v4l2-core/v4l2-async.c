@@ -751,6 +751,9 @@ EXPORT_SYMBOL_GPL(__v4l2_async_nf_add_i2c);
 
 int v4l2_async_register_subdev(struct v4l2_subdev *sd)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2_async_register_subdev 0\n");
+	
 	struct v4l2_async_notifier *subdev_notifier;
 	struct v4l2_async_notifier *notifier;
 	int ret;
