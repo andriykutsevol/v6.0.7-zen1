@@ -1015,7 +1015,7 @@ static void uvc_video_stats_stop(struct uvc_streaming *stream)
  * uvc_video_decode_data() and uvc_video_decode_end().
  *
  * uvc_video_decode_start is called with URB data at the start of a bulk or
- * isochronous payload. It processes header data and returns the header size
+ * isoc hronous payload. It processes header data and returns the header size
  * in bytes if successful. If an error occurs, it returns a negative error
  * code. The following error codes have special meanings.
  *
@@ -1049,6 +1049,10 @@ static void uvc_video_stats_stop(struct uvc_streaming *stream)
 static int uvc_video_decode_start(struct uvc_streaming *stream,
 		struct uvc_buffer *buf, const u8 *data, int len)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_video_decode_start 0\n");
+	
+	
 	u8 fid;
 
 	/*
