@@ -1804,6 +1804,9 @@ u16 uvc_endpoint_max_bpi(struct usb_device *dev, struct usb_host_endpoint *ep)
 static int uvc_init_video_isoc(struct uvc_streaming *stream,
 	struct usb_host_endpoint *ep, gfp_t gfp_flags)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_init_video_isoc 0\n");
+	
 	struct urb *urb;
 	struct uvc_urb *uvc_urb;
 	unsigned int npackets, i;
@@ -1856,6 +1859,9 @@ static int uvc_init_video_isoc(struct uvc_streaming *stream,
 static int uvc_init_video_bulk(struct uvc_streaming *stream,
 	struct usb_host_endpoint *ep, gfp_t gfp_flags)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_init_video_bulk 0\n");
+	
 	struct urb *urb;
 	struct uvc_urb *uvc_urb;
 	unsigned int npackets, pipe;
@@ -1906,6 +1912,9 @@ static int uvc_init_video_bulk(struct uvc_streaming *stream,
 static int uvc_video_start_transfer(struct uvc_streaming *stream,
 				    gfp_t gfp_flags)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_video_start_transfer 0\n");
+	
 	struct usb_interface *intf = stream->intf;
 	struct usb_host_endpoint *ep;
 	struct uvc_urb *uvc_urb;

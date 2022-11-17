@@ -42,6 +42,9 @@ static int uvc_queue_setup(struct vb2_queue *vq,
 			   unsigned int *nbuffers, unsigned int *nplanes,
 			   unsigned int sizes[], struct device *alloc_devs[])
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_queue_setup 0\n");
+	
 	struct uvc_video_queue *queue = vb2_get_drv_priv(vq);
 	struct uvc_video *video = container_of(queue, struct uvc_video, queue);
 	unsigned int req_size;
@@ -70,6 +73,9 @@ static int uvc_queue_setup(struct vb2_queue *vq,
 
 static int uvc_buffer_prepare(struct vb2_buffer *vb)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_buffer_prepare 0\n");
+	
 	struct uvc_video_queue *queue = vb2_get_drv_priv(vb->vb2_queue);
 	struct vb2_v4l2_buffer *vbuf = to_vb2_v4l2_buffer(vb);
 	struct uvc_buffer *buf = container_of(vbuf, struct uvc_buffer, buf);
@@ -101,6 +107,9 @@ static int uvc_buffer_prepare(struct vb2_buffer *vb)
 
 static void uvc_buffer_queue(struct vb2_buffer *vb)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_buffer_queue 0\n");
+	
 	struct uvc_video_queue *queue = vb2_get_drv_priv(vb->vb2_queue);
 	struct vb2_v4l2_buffer *vbuf = to_vb2_v4l2_buffer(vb);
 	struct uvc_buffer *buf = container_of(vbuf, struct uvc_buffer, buf);
@@ -133,6 +142,9 @@ static const struct vb2_ops uvc_queue_qops = {
 int uvcg_queue_init(struct uvc_video_queue *queue, struct device *dev, enum v4l2_buf_type type,
 		    struct mutex *lock)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvcg_queue_init 0\n");
+	
 	struct uvc_video *video = container_of(queue, struct uvc_video, queue);
 	struct usb_composite_dev *cdev = video->uvc->func.config->cdev;
 	int ret;
@@ -179,6 +191,9 @@ void uvcg_free_buffers(struct uvc_video_queue *queue)
 int uvcg_alloc_buffers(struct uvc_video_queue *queue,
 			      struct v4l2_requestbuffers *rb)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvcg_alloc_buffers 0\n");
+	
 	int ret;
 
 	ret = vb2_reqbufs(&queue->queue, rb);
@@ -188,11 +203,17 @@ int uvcg_alloc_buffers(struct uvc_video_queue *queue,
 
 int uvcg_query_buffer(struct uvc_video_queue *queue, struct v4l2_buffer *buf)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvcg_query_buffer 0\n");
+
 	return vb2_querybuf(&queue->queue, buf);
 }
 
 int uvcg_queue_buffer(struct uvc_video_queue *queue, struct v4l2_buffer *buf)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvcg_queue_buffer 0\n");
+
 	return vb2_qbuf(&queue->queue, NULL, buf);
 }
 
@@ -203,6 +224,9 @@ int uvcg_queue_buffer(struct uvc_video_queue *queue, struct v4l2_buffer *buf)
 int uvcg_dequeue_buffer(struct uvc_video_queue *queue, struct v4l2_buffer *buf,
 			int nonblocking)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvcg_dequeue_buffer 0\n");
+	
 	return vb2_dqbuf(&queue->queue, buf, nonblocking);
 }
 
@@ -215,11 +239,17 @@ int uvcg_dequeue_buffer(struct uvc_video_queue *queue, struct v4l2_buffer *buf,
 __poll_t uvcg_queue_poll(struct uvc_video_queue *queue, struct file *file,
 			     poll_table *wait)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvcg_queue_poll 0\n");
+	
 	return vb2_poll(&queue->queue, file, wait);
 }
 
 int uvcg_queue_mmap(struct uvc_video_queue *queue, struct vm_area_struct *vma)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvcg_queue_mmap 0\n");
+	
 	return vb2_mmap(&queue->queue, vma);
 }
 
@@ -294,6 +324,9 @@ void uvcg_queue_cancel(struct uvc_video_queue *queue, int disconnect)
  */
 int uvcg_queue_enable(struct uvc_video_queue *queue, int enable)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvcg_queue_enable 0\n");
+	
 	unsigned long flags;
 	int ret = 0;
 
@@ -330,6 +363,9 @@ int uvcg_queue_enable(struct uvc_video_queue *queue, int enable)
 void uvcg_complete_buffer(struct uvc_video_queue *queue,
 					  struct uvc_buffer *buf)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvcg_complete_buffer 0\n");
+	
 	if (queue->flags & UVC_QUEUE_DROP_INCOMPLETE) {
 		queue->flags &= ~UVC_QUEUE_DROP_INCOMPLETE;
 		buf->state = UVC_BUF_STATE_ERROR;
