@@ -28,6 +28,9 @@ static int v4l2_async_nf_call_bound(struct v4l2_async_notifier *n,
 				    struct v4l2_subdev *subdev,
 				    struct v4l2_async_subdev *asd)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-async.c: v4l2_async_nf_call_bound 0\n");
+	
 	if (!n->ops || !n->ops->bound)
 		return 0;
 
@@ -38,6 +41,9 @@ static void v4l2_async_nf_call_unbind(struct v4l2_async_notifier *n,
 				      struct v4l2_subdev *subdev,
 				      struct v4l2_async_subdev *asd)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-async.c: v4l2_async_nf_call_unbind 0\n");
+	
 	if (!n->ops || !n->ops->unbind)
 		return;
 
@@ -46,6 +52,9 @@ static void v4l2_async_nf_call_unbind(struct v4l2_async_notifier *n,
 
 static int v4l2_async_nf_call_complete(struct v4l2_async_notifier *n)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-async.c: v4l2_async_nf_call_complete 0\n");
+	
 	if (!n->ops || !n->ops->complete)
 		return 0;
 
@@ -55,6 +64,9 @@ static int v4l2_async_nf_call_complete(struct v4l2_async_notifier *n)
 static void v4l2_async_nf_call_destroy(struct v4l2_async_notifier *n,
 				       struct v4l2_async_subdev *asd)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-async.c: v4l2_async_nf_call_destroy 0\n");
+	
 	if (!n->ops || !n->ops->destroy)
 		return;
 
@@ -80,6 +92,9 @@ match_fwnode_one(struct v4l2_async_notifier *notifier,
 		 struct v4l2_subdev *sd, struct fwnode_handle *sd_fwnode,
 		 struct v4l2_async_subdev *asd)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-async.c: match_fwnode_one 0\n");
+	
 	struct fwnode_handle *other_fwnode;
 	struct fwnode_handle *dev_fwnode;
 	bool asd_fwnode_is_ep;
@@ -149,6 +164,9 @@ match_fwnode_one(struct v4l2_async_notifier *notifier,
 static bool match_fwnode(struct v4l2_async_notifier *notifier,
 			 struct v4l2_subdev *sd, struct v4l2_async_subdev *asd)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-async.c: match_fwnode 0\n");
+	
 	if (match_fwnode_one(notifier, sd, sd->fwnode, asd))
 		return true;
 
@@ -167,6 +185,9 @@ static struct v4l2_async_subdev *
 v4l2_async_find_match(struct v4l2_async_notifier *notifier,
 		      struct v4l2_subdev *sd)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-async.c: v4l2_async_find_match 0\n");
+	
 	bool (*match)(struct v4l2_async_notifier *notifier,
 		      struct v4l2_subdev *sd, struct v4l2_async_subdev *asd);
 	struct v4l2_async_subdev *asd;
@@ -198,6 +219,9 @@ v4l2_async_find_match(struct v4l2_async_notifier *notifier,
 static bool asd_equal(struct v4l2_async_subdev *asd_x,
 		      struct v4l2_async_subdev *asd_y)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-async.c: asd_equal 0\n");
+	
 	if (asd_x->match_type != asd_y->match_type)
 		return false;
 
@@ -220,6 +244,9 @@ static bool asd_equal(struct v4l2_async_subdev *asd_x,
 static struct v4l2_async_notifier *
 v4l2_async_find_subdev_notifier(struct v4l2_subdev *sd)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-async.c: v4l2_async_find_subdev_notifier 0\n");
+	
 	struct v4l2_async_notifier *n;
 
 	list_for_each_entry(n, &notifier_list, list)
@@ -233,6 +260,9 @@ v4l2_async_find_subdev_notifier(struct v4l2_subdev *sd)
 static struct v4l2_device *
 v4l2_async_nf_find_v4l2_dev(struct v4l2_async_notifier *notifier)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-async.c: v4l2_async_nf_find_v4l2_dev 0\n");
+	
 	while (notifier->parent)
 		notifier = notifier->parent;
 
@@ -245,6 +275,9 @@ v4l2_async_nf_find_v4l2_dev(struct v4l2_async_notifier *notifier)
 static bool
 v4l2_async_nf_can_complete(struct v4l2_async_notifier *notifier)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-async.c: v4l2_async_nf_can_complete 0\n");
+	
 	struct v4l2_subdev *sd;
 
 	if (!list_empty(&notifier->waiting))
@@ -270,7 +303,7 @@ static int
 v4l2_async_nf_try_complete(struct v4l2_async_notifier *notifier)
 {
 	
-	printk(KERN_INFO "!!!dgnet: v4l2_async_nf_try_complete 0\n");
+	printk(KERN_INFO "!!!dgnet: v4l2-async.c: v4l2_async_nf_try_complete 0\n");
 	
 	/* Quick check whether there are still more sub-devices here. */
 	if (!list_empty(&notifier->waiting))
@@ -297,6 +330,9 @@ v4l2_async_nf_try_all_subdevs(struct v4l2_async_notifier *notifier);
 static int v4l2_async_create_ancillary_links(struct v4l2_async_notifier *n,
 					     struct v4l2_subdev *sd)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-async.c: v4l2_async_create_ancillary_links 0\n");
+	
 	struct media_link *link = NULL;
 
 #if IS_ENABLED(CONFIG_MEDIA_CONTROLLER)
@@ -318,7 +354,7 @@ static int v4l2_async_match_notify(struct v4l2_async_notifier *notifier,
 				   struct v4l2_async_subdev *asd)
 {
 	
-	printk(KERN_INFO "!!!dgnet: v4l2_async_match_notify 0\n");
+	printk(KERN_INFO "!!!dgnet: v4l2-async.c: v4l2_async_match_notify 0\n");
 	
 	struct v4l2_async_notifier *subdev_notifier;
 	int ret;
@@ -376,7 +412,7 @@ static int
 v4l2_async_nf_try_all_subdevs(struct v4l2_async_notifier *notifier)
 {
 	
-	printk(KERN_INFO "!!!dgnet: v4l2_async_nf_try_all_subdevs 0\n");
+	printk(KERN_INFO "!!!dgnet: v4l2-async.c: v4l2_async_nf_try_all_subdevs 0\n");
 	
 	struct v4l2_device *v4l2_dev =
 		v4l2_async_nf_find_v4l2_dev(notifier);
@@ -413,7 +449,7 @@ again:
 static void v4l2_async_cleanup(struct v4l2_subdev *sd)
 {
 	
-	printk(KERN_INFO "!!!dgnet: v4l2_async_cleanup 0\n");
+	printk(KERN_INFO "!!!dgnet: v4l2-async.c: v4l2_async_cleanup 0\n");
 	
 	v4l2_device_unregister_subdev(sd);
 	/*
@@ -428,6 +464,9 @@ static void v4l2_async_cleanup(struct v4l2_subdev *sd)
 static void
 v4l2_async_nf_unbind_all_subdevs(struct v4l2_async_notifier *notifier)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-async.c: v4l2_async_nf_unbind_all_subdevs 0\n");
+	
 	struct v4l2_subdev *sd, *tmp;
 
 	list_for_each_entry_safe(sd, tmp, &notifier->done, async_list) {
@@ -452,7 +491,7 @@ __v4l2_async_nf_has_async_subdev(struct v4l2_async_notifier *notifier,
 				 struct v4l2_async_subdev *asd)
 {
 	
-	printk(KERN_INFO "!!!dgnet: __v4l2_async_nf_has_async_subdev 0\n");
+	printk(KERN_INFO "!!!dgnet: v4l2-async.c: __v4l2_async_nf_has_async_subdev 0\n");
 	
 	struct v4l2_async_subdev *asd_y;
 	struct v4l2_subdev *sd;
@@ -482,7 +521,7 @@ v4l2_async_nf_has_async_subdev(struct v4l2_async_notifier *notifier,
 			       struct v4l2_async_subdev *asd, int this_index)
 {
 	
-	printk(KERN_INFO "!!!dgnet: v4l2_async_nf_has_async_subdev 0\n");
+	printk(KERN_INFO "!!!dgnet: v4l2-async.c: v4l2_async_nf_has_async_subdev 0\n");
 	
 	struct v4l2_async_subdev *asd_y;
 	int j = 0;
@@ -510,7 +549,7 @@ static int v4l2_async_nf_asd_valid(struct v4l2_async_notifier *notifier,
 				   int this_index)
 {
 	
-	printk(KERN_INFO "!!!dgnet: v4l2_async_nf_asd_valid 0\n");
+	printk(KERN_INFO "!!!dgnet: v4l2-async.c: v4l2_async_nf_asd_valid 0\n");
 	
 	struct device *dev =
 		notifier->v4l2_dev ? notifier->v4l2_dev->dev : NULL;
@@ -538,7 +577,7 @@ static int v4l2_async_nf_asd_valid(struct v4l2_async_notifier *notifier,
 void v4l2_async_nf_init(struct v4l2_async_notifier *notifier)
 {
 	
-	printk(KERN_INFO "!!!dgnet: v4l2_async_nf_init 0\n");
+	printk(KERN_INFO "!!!dgnet: v4l2-async.c: v4l2_async_nf_init 0\n");
 	
 	INIT_LIST_HEAD(&notifier->asd_list);
 }
@@ -547,7 +586,7 @@ EXPORT_SYMBOL(v4l2_async_nf_init);
 static int __v4l2_async_nf_register(struct v4l2_async_notifier *notifier)
 {
 	
-	printk(KERN_INFO "!!!dgnet: __v4l2_async_nf_registe 0\n");
+	printk(KERN_INFO "!!!dgnet: v4l2-async.c: __v4l2_async_nf_registe 0\n");
 	
 	struct v4l2_async_subdev *asd;
 	int ret, i = 0;
@@ -596,7 +635,7 @@ int v4l2_async_nf_register(struct v4l2_device *v4l2_dev,
 			   struct v4l2_async_notifier *notifier)
 {
 	
-	printk(KERN_INFO "!!!dgnet: v4l2_async_nf_register 0\n");
+	printk(KERN_INFO "!!!dgnet: v4l2-async.c: v4l2_async_nf_register 0\n");
 	
 	int ret;
 
@@ -617,7 +656,7 @@ int v4l2_async_subdev_nf_register(struct v4l2_subdev *sd,
 				  struct v4l2_async_notifier *notifier)
 {
 	
-	printk(KERN_INFO "!!!dgnet: v4l2_async_subdev_nf_register 0\n");
+	printk(KERN_INFO "!!!dgnet: v4l2-async.c: v4l2_async_subdev_nf_register 0\n");
 	
 	int ret;
 
@@ -694,7 +733,7 @@ int __v4l2_async_nf_add_subdev(struct v4l2_async_notifier *notifier,
 			       struct v4l2_async_subdev *asd)
 {
 	
-	printk(KERN_INFO "!!!dgnet: __v4l2_async_nf_add_subdev 0\n");
+	printk(KERN_INFO "!!!dgnet: v4l2-async.c: __v4l2_async_nf_add_subdev 0\n");
 	
 	
 	int ret;
@@ -789,7 +828,7 @@ EXPORT_SYMBOL_GPL(__v4l2_async_nf_add_i2c);
 int v4l2_async_register_subdev(struct v4l2_subdev *sd)
 {
 	
-	printk(KERN_INFO "!!!dgnet: v4l2_async_register_subdev 0\n");
+	printk(KERN_INFO "!!!dgnet: v4l2-async.c: v4l2_async_register_subdev 0\n");
 	
 	struct v4l2_async_notifier *subdev_notifier;
 	struct v4l2_async_notifier *notifier;
@@ -860,7 +899,7 @@ EXPORT_SYMBOL(v4l2_async_register_subdev);
 void v4l2_async_unregister_subdev(struct v4l2_subdev *sd)
 {
 	
-	printk(KERN_INFO "!!!dgnet: v4l2_async_unregister_subdev 0\n");
+	printk(KERN_INFO "!!!dgnet: v4l2-async.c: v4l2_async_unregister_subdev 0\n");
 	
 	if (!sd->async_list.next)
 		return;
@@ -890,7 +929,7 @@ static void print_waiting_subdev(struct seq_file *s,
 				 struct v4l2_async_subdev *asd)
 {
 	
-	printk(KERN_INFO "!!!dgnet: v4l2_async  print_waiting_subdev 0\n");
+	printk(KERN_INFO "!!!dgnet: v4l2-async.c:  print_waiting_subdev 0\n");
 
 	switch (asd->match_type) {
 	case V4L2_ASYNC_MATCH_I2C:
@@ -918,7 +957,7 @@ static const char *
 v4l2_async_nf_name(struct v4l2_async_notifier *notifier)
 {
 	
-	printk(KERN_INFO "!!!dgnet: v4l2_async_nf_name 0\n");
+	printk(KERN_INFO "!!!dgnet: v4l2-async.c: v4l2_async_nf_name 0\n");
 
 	
 	if (notifier->v4l2_dev)
@@ -953,7 +992,7 @@ static struct dentry *v4l2_async_debugfs_dir;
 static int __init v4l2_async_init(void)
 {
 	
-	printk(KERN_INFO "!!!dgnet: v4l2_async_init 0\n");
+	printk(KERN_INFO "!!!dgnet: v4l2-async.c: v4l2_async_init 0\n");
 	
 	v4l2_async_debugfs_dir = debugfs_create_dir("v4l2-async", NULL);
 	debugfs_create_file("pending_async_subdevices", 0444,

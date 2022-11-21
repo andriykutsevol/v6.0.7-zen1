@@ -32,6 +32,9 @@ static int __uvc_query_ctrl(struct uvc_device *dev, u8 query, u8 unit,
 			u8 intfnum, u8 cs, void *data, u16 size,
 			int timeout)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_video.c: __uvc_query_ctrl 0\n");
+	
 	u8 type = USB_TYPE_CLASS | USB_RECIP_INTERFACE;
 	unsigned int pipe;
 
@@ -70,6 +73,9 @@ static const char *uvc_query_name(u8 query)
 int uvc_query_ctrl(struct uvc_device *dev, u8 query, u8 unit,
 			u8 intfnum, u8 cs, void *data, u16 size)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_video.c: uvc_query_ctrl 0\n");
+	
 	int ret;
 	u8 error;
 	u8 tmp;
@@ -132,6 +138,9 @@ int uvc_query_ctrl(struct uvc_device *dev, u8 query, u8 unit,
 static void uvc_fixup_video_ctrl(struct uvc_streaming *stream,
 	struct uvc_streaming_control *ctrl)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_video.c: uvc_fixup_video_ctrl 0\n");
+	
 	static const struct usb_device_id elgato_cam_link_4k = {
 		USB_DEVICE(0x0fd9, 0x0066)
 	};
@@ -238,6 +247,9 @@ static void uvc_fixup_video_ctrl(struct uvc_streaming *stream,
 
 static size_t uvc_video_ctrl_size(struct uvc_streaming *stream)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_video.c: uvc_video_ctrl_size 0\n");
+	
 	/*
 	 * Return the size of the video probe and commit controls, which depends
 	 * on the protocol version.
@@ -253,6 +265,9 @@ static size_t uvc_video_ctrl_size(struct uvc_streaming *stream)
 static int uvc_get_video_ctrl(struct uvc_streaming *stream,
 	struct uvc_streaming_control *ctrl, int probe, u8 query)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_video.c: uvc_get_video_ctrl 0\n");
+	
 	u16 size = uvc_video_ctrl_size(stream);
 	u8 *data;
 	int ret;
@@ -275,6 +290,9 @@ static int uvc_get_video_ctrl(struct uvc_streaming *stream,
 		 * answer a GET_MIN or GET_MAX request with the wCompQuality
 		 * field only.
 		 */
+		
+		printk(KERN_INFO "!!!dgnet: uvc_video.c: UVC non compliance 2\n");
+		
 		uvc_warn_once(stream->dev, UVC_WARN_MINMAX, "UVC non "
 			"compliance - GET_MIN/MAX(PROBE) incorrectly "
 			"supported. Enabling workaround.\n");
@@ -288,6 +306,9 @@ static int uvc_get_video_ctrl(struct uvc_streaming *stream,
 		 * video probe control. Warn once and return, the caller will
 		 * fall back to GET_CUR.
 		 */
+		
+		printk(KERN_INFO "!!!dgnet: uvc_video.c: UVC non compliance 3\n");
+		
 		uvc_warn_once(stream->dev, UVC_WARN_PROBE_DEF, "UVC non "
 			"compliance - GET_DEF(PROBE) not supported. "
 			"Enabling workaround.\n");
@@ -343,6 +364,9 @@ out:
 static int uvc_set_video_ctrl(struct uvc_streaming *stream,
 	struct uvc_streaming_control *ctrl, int probe)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_video.c: uvc_set_video_ctrl 0\n");
+	
 	u16 size = uvc_video_ctrl_size(stream);
 	u8 *data;
 	int ret;
@@ -388,6 +412,10 @@ static int uvc_set_video_ctrl(struct uvc_streaming *stream,
 int uvc_probe_video(struct uvc_streaming *stream,
 	struct uvc_streaming_control *probe)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_video.c: uvc_probe_video 0\n");
+	
+	
 	struct uvc_streaming_control probe_min, probe_max;
 	unsigned int i;
 	int ret;
@@ -449,6 +477,9 @@ done:
 static int uvc_commit_video(struct uvc_streaming *stream,
 			    struct uvc_streaming_control *probe)
 {
+
+	printk(KERN_INFO "!!!dgnet: uvc_video.c: uvc_commit_video 0\n");
+
 	return uvc_set_video_ctrl(stream, probe, 0);
 }
 
@@ -458,6 +489,9 @@ static int uvc_commit_video(struct uvc_streaming *stream,
 
 static inline ktime_t uvc_video_get_time(void)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_video.c: uvc_commit_video 0\n");
+	
 	if (uvc_clock_param == CLOCK_MONOTONIC)
 		return ktime_get();
 	else
@@ -468,6 +502,10 @@ static void
 uvc_video_clock_decode(struct uvc_streaming *stream, struct uvc_buffer *buf,
 		       const u8 *data, int len)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_video.c: uvc_commit_video 0\n");
+
+	
 	struct uvc_clock_sample *sample;
 	unsigned int header_size;
 	bool has_pts = false;
@@ -576,6 +614,9 @@ uvc_video_clock_decode(struct uvc_streaming *stream, struct uvc_buffer *buf,
 
 static void uvc_video_clock_reset(struct uvc_streaming *stream)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_video.c: uvc_video_clock_reset 0\n");
+	
 	struct uvc_clock *clock = &stream->clock;
 
 	clock->head = 0;
@@ -586,6 +627,9 @@ static void uvc_video_clock_reset(struct uvc_streaming *stream)
 
 static int uvc_video_clock_init(struct uvc_streaming *stream)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_video.c: uvc_video_clock_init 0\n");
+	
 	struct uvc_clock *clock = &stream->clock;
 
 	spin_lock_init(&clock->lock);
@@ -603,6 +647,9 @@ static int uvc_video_clock_init(struct uvc_streaming *stream)
 
 static void uvc_video_clock_cleanup(struct uvc_streaming *stream)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_video.c: uvc_video_clock_cleanup 0\n");
+	
 	kfree(stream->clock.samples);
 	stream->clock.samples = NULL;
 }
@@ -626,6 +673,10 @@ static void uvc_video_clock_cleanup(struct uvc_streaming *stream)
  */
 static u16 uvc_video_clock_host_sof(const struct uvc_clock_sample *sample)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_video.c: uvc_video_clock_host_sof 0\n");
+	
+	
 	/* The delta value can be negative. */
 	s8 delta_sof;
 
@@ -699,6 +750,9 @@ void uvc_video_clock_update(struct uvc_streaming *stream,
 			    struct vb2_v4l2_buffer *vbuf,
 			    struct uvc_buffer *buf)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_video.c: uvc_video_clock_update 0\n");
+	
 	struct uvc_clock *clock = &stream->clock;
 	struct uvc_clock_sample *first;
 	struct uvc_clock_sample *last;
@@ -806,6 +860,9 @@ done:
 static void uvc_video_stats_decode(struct uvc_streaming *stream,
 		const u8 *data, int len)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_video.c: uvc_video_stats_decode 0\n");
+	
 	unsigned int header_size;
 	bool has_pts = false;
 	bool has_scr = false;
@@ -918,6 +975,9 @@ static void uvc_video_stats_decode(struct uvc_streaming *stream,
 
 static void uvc_video_stats_update(struct uvc_streaming *stream)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_video.c: uvc_video_stats_update 0\n");
+	
 	struct uvc_stats_frame *frame = &stream->stats.frame;
 
 	uvc_dbg(stream->dev, STATS,
@@ -953,6 +1013,9 @@ static void uvc_video_stats_update(struct uvc_streaming *stream)
 size_t uvc_video_stats_dump(struct uvc_streaming *stream, char *buf,
 			    size_t size)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_video.c: uvc_video_stats_dump 0\n");
+	
 	unsigned int scr_sof_freq;
 	unsigned int duration;
 	size_t count = 0;
@@ -997,12 +1060,19 @@ size_t uvc_video_stats_dump(struct uvc_streaming *stream, char *buf,
 
 static void uvc_video_stats_start(struct uvc_streaming *stream)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_video.c: uvc_video_stats_start 0\n");
+
+	
 	memset(&stream->stats, 0, sizeof(stream->stats));
 	stream->stats.stream.min_sof = 2048;
 }
 
 static void uvc_video_stats_stop(struct uvc_streaming *stream)
 {
+
+	printk(KERN_INFO "!!!dgnet: uvc_video.c: uvc_video_stats_stop 0\n");
+
 	stream->stats.stream.stop_ts = ktime_get();
 }
 
@@ -1050,7 +1120,7 @@ static int uvc_video_decode_start(struct uvc_streaming *stream,
 		struct uvc_buffer *buf, const u8 *data, int len)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_video_decode_start 0\n");
+	printk(KERN_INFO "!!!dgnet: uvc_video.c: uvc_video_decode_start 0\n");
 	
 	
 	u8 fid;
@@ -1155,6 +1225,9 @@ static int uvc_video_decode_start(struct uvc_streaming *stream,
 static inline enum dma_data_direction uvc_stream_dir(
 				struct uvc_streaming *stream)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_video.c: dma_data_direction 0\n");
+	
 	if (stream->type == V4L2_BUF_TYPE_VIDEO_CAPTURE)
 		return DMA_FROM_DEVICE;
 	else
@@ -1163,11 +1236,17 @@ static inline enum dma_data_direction uvc_stream_dir(
 
 static inline struct device *uvc_stream_to_dmadev(struct uvc_streaming *stream)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_video.c: uvc_stream_to_dmadev 0\n");
+	
 	return bus_to_hcd(stream->dev->udev->bus)->self.sysdev;
 }
 
 static int uvc_submit_urb(struct uvc_urb *uvc_urb, gfp_t mem_flags)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_video.c: uvc_submit_urb 0\n");
+	
 	/* Sync DMA. */
 	dma_sync_sgtable_for_device(uvc_stream_to_dmadev(uvc_urb->stream),
 				    uvc_urb->sgt,
@@ -1183,6 +1262,9 @@ static int uvc_submit_urb(struct uvc_urb *uvc_urb, gfp_t mem_flags)
  */
 static void uvc_video_copy_data_work(struct work_struct *work)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_video.c: uvc_video_copy_data_work 0\n");
+	
 	struct uvc_urb *uvc_urb = container_of(work, struct uvc_urb, work);
 	unsigned int i;
 	int ret;
@@ -1205,6 +1287,9 @@ static void uvc_video_copy_data_work(struct work_struct *work)
 static void uvc_video_decode_data(struct uvc_urb *uvc_urb,
 		struct uvc_buffer *buf, const u8 *data, int len)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_video.c: uvc_video_decode_data 0\n");
+	
 	unsigned int active_op = uvc_urb->async_operations;
 	struct uvc_copy_op *op = &uvc_urb->copy_operations[active_op];
 	unsigned int maxlen;
@@ -1238,6 +1323,9 @@ static void uvc_video_decode_data(struct uvc_urb *uvc_urb,
 static void uvc_video_decode_end(struct uvc_streaming *stream,
 		struct uvc_buffer *buf, const u8 *data, int len)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_video.c: uvc_video_decode_end 0\n");
+	
 	/* Mark the buffer as done if the EOF marker is set. */
 	if (data[1] & UVC_STREAM_EOF && buf->bytesused != 0) {
 		uvc_dbg(stream->dev, FRAME, "Frame complete (EOF found)\n");
@@ -1264,6 +1352,9 @@ static void uvc_video_decode_end(struct uvc_streaming *stream,
 static int uvc_video_encode_header(struct uvc_streaming *stream,
 		struct uvc_buffer *buf, u8 *data, int len)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_video.c: uvc_video_encode_header 0\n");
+	
 	data[0] = 2;	/* Header length */
 	data[1] = UVC_STREAM_EOH | UVC_STREAM_EOF
 		| (stream->last_fid & UVC_STREAM_FID);
@@ -1273,6 +1364,9 @@ static int uvc_video_encode_header(struct uvc_streaming *stream,
 static int uvc_video_encode_data(struct uvc_streaming *stream,
 		struct uvc_buffer *buf, u8 *data, int len)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_video.c: uvc_video_encode_data 0\n");
+	
 	struct uvc_video_queue *queue = &stream->queue;
 	unsigned int nbytes;
 	void *mem;
@@ -1308,6 +1402,9 @@ static void uvc_video_decode_meta(struct uvc_streaming *stream,
 				  struct uvc_buffer *meta_buf,
 				  const u8 *mem, unsigned int length)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_video.c: uvc_video_decode_meta 0\n");
+	
 	struct uvc_meta_buf *meta;
 	size_t len_std = 2;
 	bool has_pts, has_scr;
@@ -1378,6 +1475,10 @@ static void uvc_video_decode_meta(struct uvc_streaming *stream,
 static void uvc_video_validate_buffer(const struct uvc_streaming *stream,
 				      struct uvc_buffer *buf)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_video.c: uvc_video_validate_buffer 0\n");
+
+	
 	if (stream->ctrl.dwMaxVideoFrameSize != buf->bytesused &&
 	    !(stream->cur_format->flags & UVC_FMT_FLAG_COMPRESSED))
 		buf->error = 1;
@@ -1390,6 +1491,9 @@ static void uvc_video_validate_buffer(const struct uvc_streaming *stream,
 static void uvc_video_next_buffers(struct uvc_streaming *stream,
 		struct uvc_buffer **video_buf, struct uvc_buffer **meta_buf)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_video.c: uvc_video_next_buffers 0\n");
+	
 	uvc_video_validate_buffer(stream, *video_buf);
 
 	if (*meta_buf) {
@@ -1412,6 +1516,9 @@ static void uvc_video_next_buffers(struct uvc_streaming *stream,
 static void uvc_video_decode_isoc(struct uvc_urb *uvc_urb,
 			struct uvc_buffer *buf, struct uvc_buffer *meta_buf)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_video.c: uvc_video_decode_isoc 0\n");
+	
 	struct urb *urb = uvc_urb->urb;
 	struct uvc_streaming *stream = uvc_urb->stream;
 	u8 *mem;
@@ -1458,6 +1565,9 @@ static void uvc_video_decode_isoc(struct uvc_urb *uvc_urb,
 static void uvc_video_decode_bulk(struct uvc_urb *uvc_urb,
 			struct uvc_buffer *buf, struct uvc_buffer *meta_buf)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_video.c: uvc_video_decode_bulk 0\n");
+	
 	struct urb *urb = uvc_urb->urb;
 	struct uvc_streaming *stream = uvc_urb->stream;
 	u8 *mem;
@@ -1531,6 +1641,10 @@ static void uvc_video_decode_bulk(struct uvc_urb *uvc_urb,
 static void uvc_video_encode_bulk(struct uvc_urb *uvc_urb,
 	struct uvc_buffer *buf, struct uvc_buffer *meta_buf)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_video.c: uvc_video_encode_bulk 0\n");
+	
+	
 	struct urb *urb = uvc_urb->urb;
 	struct uvc_streaming *stream = uvc_urb->stream;
 
@@ -1576,6 +1690,10 @@ static void uvc_video_encode_bulk(struct uvc_urb *uvc_urb,
 
 static void uvc_video_complete(struct urb *urb)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_video.c: uvc_video_complete 0\n");
+	
+	
 	struct uvc_urb *uvc_urb = urb->context;
 	struct uvc_streaming *stream = uvc_urb->stream;
 	struct uvc_video_queue *queue = &stream->queue;
@@ -1649,6 +1767,9 @@ static void uvc_video_complete(struct urb *urb)
  */
 static void uvc_free_urb_buffers(struct uvc_streaming *stream)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_video.c: vc_free_urb_buffers 0\n");
+	
 	struct device *dma_dev = uvc_stream_to_dmadev(stream);
 	struct uvc_urb *uvc_urb;
 
@@ -1670,6 +1791,9 @@ static void uvc_free_urb_buffers(struct uvc_streaming *stream)
 static bool uvc_alloc_urb_buffer(struct uvc_streaming *stream,
 				 struct uvc_urb *uvc_urb, gfp_t gfp_flags)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_video.c: uvc_alloc_urb_buffer 0\n");
+	
 	struct device *dma_dev = uvc_stream_to_dmadev(stream);
 
 	uvc_urb->sgt = dma_alloc_noncontiguous(dma_dev, stream->urb_size,
@@ -1706,6 +1830,9 @@ static bool uvc_alloc_urb_buffer(struct uvc_streaming *stream,
 static int uvc_alloc_urb_buffers(struct uvc_streaming *stream,
 	unsigned int size, unsigned int psize, gfp_t gfp_flags)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_video.c: uvc_alloc_urb_buffers 0\n");
+	
 	unsigned int npackets;
 	unsigned int i;
 
@@ -1756,6 +1883,10 @@ static int uvc_alloc_urb_buffers(struct uvc_streaming *stream,
 static void uvc_video_stop_transfer(struct uvc_streaming *stream,
 				    int free_buffers)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_video.c: uvc_video_stop_transfer 0\n");
+	
+	
 	struct uvc_urb *uvc_urb;
 
 	uvc_video_stats_stop(stream);
@@ -1784,6 +1915,9 @@ static void uvc_video_stop_transfer(struct uvc_streaming *stream,
  */
 u16 uvc_endpoint_max_bpi(struct usb_device *dev, struct usb_host_endpoint *ep)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_video.c: uvc_endpoint_max_bpi 0\n");
+	
 	u16 psize;
 
 	switch (dev->speed) {
@@ -1805,7 +1939,7 @@ static int uvc_init_video_isoc(struct uvc_streaming *stream,
 	struct usb_host_endpoint *ep, gfp_t gfp_flags)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_init_video_isoc 0\n");
+	printk(KERN_INFO "!!!dgnet: uvc_video.c: uvc_init_video_isoc 0\n");
 	
 	struct urb *urb;
 	struct uvc_urb *uvc_urb;
@@ -1860,7 +1994,7 @@ static int uvc_init_video_bulk(struct uvc_streaming *stream,
 	struct usb_host_endpoint *ep, gfp_t gfp_flags)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_init_video_bulk 0\n");
+	printk(KERN_INFO "!!!dgnet: uvc_video.c: uvc_init_video_bulk 0\n");
 	
 	struct urb *urb;
 	struct uvc_urb *uvc_urb;
@@ -1913,7 +2047,7 @@ static int uvc_video_start_transfer(struct uvc_streaming *stream,
 				    gfp_t gfp_flags)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_video_start_transfer 0\n");
+	printk(KERN_INFO "!!!dgnet: uvc_video.c: uvc_video_start_transfer 0\n");
 	
 	struct usb_interface *intf = stream->intf;
 	struct usb_host_endpoint *ep;
@@ -2035,6 +2169,9 @@ static int uvc_video_start_transfer(struct uvc_streaming *stream,
  */
 int uvc_video_suspend(struct uvc_streaming *stream)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_video.c: uvc_video_suspend 0\n");
+	
 	if (!uvc_queue_streaming(&stream->queue))
 		return 0;
 
@@ -2054,6 +2191,10 @@ int uvc_video_suspend(struct uvc_streaming *stream)
  */
 int uvc_video_resume(struct uvc_streaming *stream, int reset)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_video.c: uuvc_video_resume 0\n");
+	
+	
 	int ret;
 
 	/*
@@ -2095,6 +2236,10 @@ int uvc_video_resume(struct uvc_streaming *stream, int reset)
  */
 int uvc_video_init(struct uvc_streaming *stream)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_video.c: uvc_video_init 0\n");
+
+	
 	struct uvc_streaming_control *probe = &stream->ctrl;
 	struct uvc_format *format = NULL;
 	struct uvc_frame *frame = NULL;
@@ -2199,6 +2344,10 @@ int uvc_video_init(struct uvc_streaming *stream)
 
 int uvc_video_start_streaming(struct uvc_streaming *stream)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_video.c: uvc_video_start_streaming 0\n");
+	
+	
 	int ret;
 
 	ret = uvc_video_clock_init(stream);
@@ -2226,6 +2375,9 @@ error_commit:
 
 void uvc_video_stop_streaming(struct uvc_streaming *stream)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_video.c: uvc_video_stop_streaming 0\n");
+	
 	uvc_video_stop_transfer(stream, 1);
 
 	if (stream->intf->num_altsetting > 1) {

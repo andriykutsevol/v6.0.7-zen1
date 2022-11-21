@@ -31,6 +31,9 @@
 static int uvc_ioctl_ctrl_map(struct uvc_video_chain *chain,
 	struct uvc_xu_control_mapping *xmap)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_v4l2.c: uvc_v4l2.c:  uvc_ioctl_ctrl_map 0\n");
+
 	struct uvc_control_mapping *map;
 	unsigned int size;
 	int ret;
@@ -111,6 +114,9 @@ free_map:
  */
 static u32 uvc_try_frame_interval(struct uvc_frame *frame, u32 interval)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_v4l2.c: uvc_try_frame_interval 0\n");
+	
 	unsigned int i;
 
 	if (frame->bFrameIntervalType) {
@@ -144,6 +150,9 @@ static u32 uvc_try_frame_interval(struct uvc_frame *frame, u32 interval)
 static u32 uvc_v4l2_get_bytesperline(const struct uvc_format *format,
 	const struct uvc_frame *frame)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_v4l2.c: uvc_v4l2_get_bytesperline 0\n");
+	
 	switch (format->fcc) {
 	case V4L2_PIX_FMT_NV12:
 	case V4L2_PIX_FMT_YVU420:
@@ -160,6 +169,9 @@ static int uvc_v4l2_try_format(struct uvc_streaming *stream,
 	struct v4l2_format *fmt, struct uvc_streaming_control *probe,
 	struct uvc_format **uvc_format, struct uvc_frame **uvc_frame)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_v4l2.c: uvc_v4l2_try_format 0\n");
+	
 	struct uvc_format *format = NULL;
 	struct uvc_frame *frame = NULL;
 	u16 rw, rh;
@@ -311,6 +323,9 @@ static int uvc_v4l2_try_format(struct uvc_streaming *stream,
 static int uvc_v4l2_get_format(struct uvc_streaming *stream,
 	struct v4l2_format *fmt)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_v4l2.c: uvc_v4l2_get_format 0\n");
+	
 	struct uvc_format *format;
 	struct uvc_frame *frame;
 	int ret = 0;
@@ -345,6 +360,9 @@ done:
 static int uvc_v4l2_set_format(struct uvc_streaming *stream,
 	struct v4l2_format *fmt)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_v4l2.c: uvc_v4l2_set_format 0\n");
+	
 	struct uvc_streaming_control probe;
 	struct uvc_format *format;
 	struct uvc_frame *frame;
@@ -377,7 +395,7 @@ static int uvc_v4l2_get_streamparm(struct uvc_streaming *stream,
 		struct v4l2_streamparm *parm)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_v4l2_get_streamparm 0\n");
+	printk(KERN_INFO "!!!dgnet: uvc_v4l2.c: uvc_v4l2_get_streamparm 0\n");
 	
 	u32 numerator, denominator;
 
@@ -415,7 +433,7 @@ static int uvc_v4l2_set_streamparm(struct uvc_streaming *stream,
 		struct v4l2_streamparm *parm)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_v4l2_set_streamparm 0\n");
+	printk(KERN_INFO "!!!dgnet: uvc_v4l2.c: uvc_v4l2_set_streamparm 0\n");
 	
 	struct uvc_streaming_control probe;
 	struct v4l2_fract timeperframe;
@@ -530,6 +548,9 @@ static int uvc_v4l2_set_streamparm(struct uvc_streaming *stream,
  */
 static int uvc_acquire_privileges(struct uvc_fh *handle)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_v4l2.c: uvc_acquire_privileges 0\n");
+	
 	/* Always succeed if the handle is already privileged. */
 	if (handle->state == UVC_HANDLE_ACTIVE)
 		return 0;
@@ -546,6 +567,9 @@ static int uvc_acquire_privileges(struct uvc_fh *handle)
 
 static void uvc_dismiss_privileges(struct uvc_fh *handle)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_v4l2.c: uvc_dismiss_privileges 0\n");
+	
 	if (handle->state == UVC_HANDLE_ACTIVE)
 		atomic_dec(&handle->stream->active);
 
@@ -554,6 +578,8 @@ static void uvc_dismiss_privileges(struct uvc_fh *handle)
 
 static int uvc_has_privileges(struct uvc_fh *handle)
 {
+	printk(KERN_INFO "!!!dgnet: uvc_v4l2.c: uvc_has_privileges 0\n");
+	
 	return handle->state == UVC_HANDLE_ACTIVE;
 }
 
@@ -564,7 +590,7 @@ static int uvc_has_privileges(struct uvc_fh *handle)
 static int uvc_v4l2_open(struct file *file)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_v4l2_open 0\n");
+	printk(KERN_INFO "!!!dgnet: uvc_v4l2.c: uvc_v4l2_open 0\n");
 	
 	struct uvc_streaming *stream;
 	struct uvc_fh *handle;
@@ -611,7 +637,7 @@ static int uvc_v4l2_open(struct file *file)
 static int uvc_v4l2_release(struct file *file)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_v4l2_release 0\n");
+	printk(KERN_INFO "!!!dgnet: uvc_v4l2.c: uvc_v4l2_release 0\n");
 	
 	struct uvc_fh *handle = file->private_data;
 	struct uvc_streaming *stream = handle->stream;
@@ -642,7 +668,7 @@ static int uvc_ioctl_querycap(struct file *file, void *fh,
 			      struct v4l2_capability *cap)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_ioctl_querycap 0\n");
+	printk(KERN_INFO "!!!dgnet: uvc_v4l2.c: uvc_ioctl_querycap 0\n");
 	
 	struct uvc_fh *handle = file->private_data;
 	struct uvc_video_chain *chain = handle->chain;
@@ -661,7 +687,7 @@ static int uvc_ioctl_enum_fmt(struct uvc_streaming *stream,
 			      struct v4l2_fmtdesc *fmt)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_ioctl_enum_fmt 0\n");
+	printk(KERN_INFO "!!!dgnet: uvc_v4l2.c: uvc_ioctl_enum_fmt 0\n");
 	
 	struct uvc_format *format;
 	enum v4l2_buf_type type = fmt->type;
@@ -687,6 +713,9 @@ static int uvc_ioctl_enum_fmt(struct uvc_streaming *stream,
 static int uvc_ioctl_enum_fmt_vid_cap(struct file *file, void *fh,
 				      struct v4l2_fmtdesc *fmt)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_v4l2.c: uvc_ioctl_enum_fmt_vid_cap 0\n");
+	
 	struct uvc_fh *handle = fh;
 	struct uvc_streaming *stream = handle->stream;
 
@@ -696,6 +725,9 @@ static int uvc_ioctl_enum_fmt_vid_cap(struct file *file, void *fh,
 static int uvc_ioctl_enum_fmt_vid_out(struct file *file, void *fh,
 				      struct v4l2_fmtdesc *fmt)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_v4l2.c: uvc_ioctl_enum_fmt_vid_out 0\n");
+	
 	struct uvc_fh *handle = fh;
 	struct uvc_streaming *stream = handle->stream;
 
@@ -705,6 +737,9 @@ static int uvc_ioctl_enum_fmt_vid_out(struct file *file, void *fh,
 static int uvc_ioctl_g_fmt_vid_cap(struct file *file, void *fh,
 				   struct v4l2_format *fmt)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_v4l2.c: uvc_ioctl_g_fmt_vid_cap 0\n");
+
 	struct uvc_fh *handle = fh;
 	struct uvc_streaming *stream = handle->stream;
 
@@ -714,6 +749,9 @@ static int uvc_ioctl_g_fmt_vid_cap(struct file *file, void *fh,
 static int uvc_ioctl_g_fmt_vid_out(struct file *file, void *fh,
 				   struct v4l2_format *fmt)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_v4l2.c: uvc_ioctl_g_fmt_vid_out 0\n");
+	
 	struct uvc_fh *handle = fh;
 	struct uvc_streaming *stream = handle->stream;
 
@@ -723,6 +761,9 @@ static int uvc_ioctl_g_fmt_vid_out(struct file *file, void *fh,
 static int uvc_ioctl_s_fmt_vid_cap(struct file *file, void *fh,
 				   struct v4l2_format *fmt)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_v4l2.c: uvc_ioctl_s_fmt_vid_cap 0\n");
+	
 	struct uvc_fh *handle = fh;
 	struct uvc_streaming *stream = handle->stream;
 	int ret;
@@ -737,6 +778,9 @@ static int uvc_ioctl_s_fmt_vid_cap(struct file *file, void *fh,
 static int uvc_ioctl_s_fmt_vid_out(struct file *file, void *fh,
 				   struct v4l2_format *fmt)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_v4l2.c: uvc_ioctl_s_fmt_vid_out 0\n");
+	
 	struct uvc_fh *handle = fh;
 	struct uvc_streaming *stream = handle->stream;
 	int ret;
@@ -751,6 +795,9 @@ static int uvc_ioctl_s_fmt_vid_out(struct file *file, void *fh,
 static int uvc_ioctl_try_fmt_vid_cap(struct file *file, void *fh,
 				     struct v4l2_format *fmt)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_v4l2.c: uvc_ioctl_try_fmt_vid_cap 0\n");
+	
 	struct uvc_fh *handle = fh;
 	struct uvc_streaming *stream = handle->stream;
 	struct uvc_streaming_control probe;
@@ -761,6 +808,9 @@ static int uvc_ioctl_try_fmt_vid_cap(struct file *file, void *fh,
 static int uvc_ioctl_try_fmt_vid_out(struct file *file, void *fh,
 				     struct v4l2_format *fmt)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_v4l2.c: uvc_ioctl_try_fmt_vid_out 0\n");
+	
 	struct uvc_fh *handle = fh;
 	struct uvc_streaming *stream = handle->stream;
 	struct uvc_streaming_control probe;
@@ -771,6 +821,9 @@ static int uvc_ioctl_try_fmt_vid_out(struct file *file, void *fh,
 static int uvc_ioctl_reqbufs(struct file *file, void *fh,
 			     struct v4l2_requestbuffers *rb)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_v4l2.c: uvc_ioctl_reqbufs 0\n");
+	
 	struct uvc_fh *handle = fh;
 	struct uvc_streaming *stream = handle->stream;
 	int ret;
@@ -795,7 +848,7 @@ static int uvc_ioctl_querybuf(struct file *file, void *fh,
 			      struct v4l2_buffer *buf)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_ioctl_querybuf\n");
+	printk(KERN_INFO "!!!dgnet: uvc_v4l2.c: uvc_ioctl_querybuf\n");
 	
 	struct uvc_fh *handle = fh;
 	struct uvc_streaming *stream = handle->stream;
@@ -809,7 +862,7 @@ static int uvc_ioctl_querybuf(struct file *file, void *fh,
 static int uvc_ioctl_qbuf(struct file *file, void *fh, struct v4l2_buffer *buf)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_ioctl_qbuf\n");
+	printk(KERN_INFO "!!!dgnet: uvc_v4l2.c: uvc_ioctl_qbuf\n");
 
 	struct uvc_fh *handle = fh;
 	struct uvc_streaming *stream = handle->stream;
@@ -824,6 +877,9 @@ static int uvc_ioctl_qbuf(struct file *file, void *fh, struct v4l2_buffer *buf)
 static int uvc_ioctl_expbuf(struct file *file, void *fh,
 			    struct v4l2_exportbuffer *exp)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_v4l2.c: uvc_ioctl_expbuf 0\n");
+	
 	struct uvc_fh *handle = fh;
 	struct uvc_streaming *stream = handle->stream;
 
@@ -835,6 +891,9 @@ static int uvc_ioctl_expbuf(struct file *file, void *fh,
 
 static int uvc_ioctl_dqbuf(struct file *file, void *fh, struct v4l2_buffer *buf)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_v4l2.c: uvc_ioctl_dqbuf 0\n");
+	
 	struct uvc_fh *handle = fh;
 	struct uvc_streaming *stream = handle->stream;
 
@@ -848,6 +907,9 @@ static int uvc_ioctl_dqbuf(struct file *file, void *fh, struct v4l2_buffer *buf)
 static int uvc_ioctl_create_bufs(struct file *file, void *fh,
 				  struct v4l2_create_buffers *cb)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_v4l2.c: uvc_ioctl_dqbuf 0\n");
+	
 	struct uvc_fh *handle = fh;
 	struct uvc_streaming *stream = handle->stream;
 	int ret;
@@ -862,6 +924,9 @@ static int uvc_ioctl_create_bufs(struct file *file, void *fh,
 static int uvc_ioctl_streamon(struct file *file, void *fh,
 			      enum v4l2_buf_type type)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_v4l2.c: uvc_ioctl_streamon 0\n");
+	
 	struct uvc_fh *handle = fh;
 	struct uvc_streaming *stream = handle->stream;
 	int ret;
@@ -879,6 +944,9 @@ static int uvc_ioctl_streamon(struct file *file, void *fh,
 static int uvc_ioctl_streamoff(struct file *file, void *fh,
 			       enum v4l2_buf_type type)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_v4l2.c: uvc_ioctl_streamoff 0\n");
+	
 	struct uvc_fh *handle = fh;
 	struct uvc_streaming *stream = handle->stream;
 
@@ -895,6 +963,9 @@ static int uvc_ioctl_streamoff(struct file *file, void *fh,
 static int uvc_ioctl_enum_input(struct file *file, void *fh,
 				struct v4l2_input *input)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_v4l2.c: uvc_ioctl_enum_input 0\n");
+	
 	struct uvc_fh *handle = fh;
 	struct uvc_video_chain *chain = handle->chain;
 	const struct uvc_entity *selector = chain->selector;
@@ -937,6 +1008,9 @@ static int uvc_ioctl_enum_input(struct file *file, void *fh,
 
 static int uvc_ioctl_g_input(struct file *file, void *fh, unsigned int *input)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_v4l2.c: uvc_ioctl_g_input 0\n");
+	
 	struct uvc_fh *handle = fh;
 	struct uvc_video_chain *chain = handle->chain;
 	u8 *buf;
@@ -965,6 +1039,9 @@ static int uvc_ioctl_g_input(struct file *file, void *fh, unsigned int *input)
 
 static int uvc_ioctl_s_input(struct file *file, void *fh, unsigned int input)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_v4l2.c: uvc_ioctl_s_input 0\n");
+	
 	struct uvc_fh *handle = fh;
 	struct uvc_video_chain *chain = handle->chain;
 	u8 *buf;
@@ -1000,6 +1077,9 @@ static int uvc_ioctl_s_input(struct file *file, void *fh, unsigned int input)
 static int uvc_ioctl_queryctrl(struct file *file, void *fh,
 			       struct v4l2_queryctrl *qc)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_v4l2.c: uvc_ioctl_queryctrl 0\n");
+	
 	struct uvc_fh *handle = fh;
 	struct uvc_video_chain *chain = handle->chain;
 
@@ -1009,6 +1089,9 @@ static int uvc_ioctl_queryctrl(struct file *file, void *fh,
 static int uvc_ioctl_query_ext_ctrl(struct file *file, void *fh,
 				    struct v4l2_query_ext_ctrl *qec)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_v4l2.c: uvc_ioctl_query_ext_ctrl 0\n");
+	
 	struct uvc_fh *handle = fh;
 	struct uvc_video_chain *chain = handle->chain;
 	struct v4l2_queryctrl qc = { qec->id };
@@ -1039,6 +1122,10 @@ static int uvc_ctrl_check_access(struct uvc_video_chain *chain,
 				 struct v4l2_ext_controls *ctrls,
 				 unsigned long ioctl)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_v4l2.c: uvc_ctrl_check_access 0\n");
+	
+	
 	struct v4l2_ext_control *ctrl = ctrls->controls;
 	unsigned int i;
 	int ret = 0;
@@ -1058,6 +1145,11 @@ static int uvc_ctrl_check_access(struct uvc_video_chain *chain,
 static int uvc_ioctl_g_ext_ctrls(struct file *file, void *fh,
 				 struct v4l2_ext_controls *ctrls)
 {
+	
+	
+	printk(KERN_INFO "!!!dgnet: uvc_v4l2.c: uvc_ioctl_g_ext_ctrls 0\n");
+	
+	
 	struct uvc_fh *handle = fh;
 	struct uvc_video_chain *chain = handle->chain;
 	struct v4l2_ext_control *ctrl = ctrls->controls;
@@ -1106,6 +1198,10 @@ static int uvc_ioctl_s_try_ext_ctrls(struct uvc_fh *handle,
 				     struct v4l2_ext_controls *ctrls,
 				     unsigned long ioctl)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_v4l2.c: uvc_ioctl_s_try_ext_ctrls 0\n");
+	
+	
 	struct v4l2_ext_control *ctrl = ctrls->controls;
 	struct uvc_video_chain *chain = handle->chain;
 	unsigned int i;
@@ -1140,6 +1236,9 @@ static int uvc_ioctl_s_try_ext_ctrls(struct uvc_fh *handle,
 static int uvc_ioctl_s_ext_ctrls(struct file *file, void *fh,
 				 struct v4l2_ext_controls *ctrls)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_v4l2.c: uvc_ioctl_s_ext_ctrls 0\n");
+	
 	struct uvc_fh *handle = fh;
 
 	return uvc_ioctl_s_try_ext_ctrls(handle, ctrls, VIDIOC_S_EXT_CTRLS);
@@ -1148,6 +1247,9 @@ static int uvc_ioctl_s_ext_ctrls(struct file *file, void *fh,
 static int uvc_ioctl_try_ext_ctrls(struct file *file, void *fh,
 				   struct v4l2_ext_controls *ctrls)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_v4l2.c: uvc_ioctl_try_ext_ctrls 0\n");
+	
 	struct uvc_fh *handle = fh;
 
 	return uvc_ioctl_s_try_ext_ctrls(handle, ctrls, VIDIOC_TRY_EXT_CTRLS);
@@ -1156,6 +1258,9 @@ static int uvc_ioctl_try_ext_ctrls(struct file *file, void *fh,
 static int uvc_ioctl_querymenu(struct file *file, void *fh,
 			       struct v4l2_querymenu *qm)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_v4l2.c: uvc_ioctl_querymenu 0\n");
+	
 	struct uvc_fh *handle = fh;
 	struct uvc_video_chain *chain = handle->chain;
 
@@ -1165,6 +1270,9 @@ static int uvc_ioctl_querymenu(struct file *file, void *fh,
 static int uvc_ioctl_g_selection(struct file *file, void *fh,
 				 struct v4l2_selection *sel)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_v4l2.c: uvc_ioctl_g_selection 0\n");
+	
 	struct uvc_fh *handle = fh;
 	struct uvc_streaming *stream = handle->stream;
 
@@ -1199,6 +1307,9 @@ static int uvc_ioctl_g_selection(struct file *file, void *fh,
 static int uvc_ioctl_g_parm(struct file *file, void *fh,
 			    struct v4l2_streamparm *parm)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_v4l2.c: uvc_ioctl_g_parm 0\n");
+	
 	struct uvc_fh *handle = fh;
 	struct uvc_streaming *stream = handle->stream;
 
@@ -1208,6 +1319,9 @@ static int uvc_ioctl_g_parm(struct file *file, void *fh,
 static int uvc_ioctl_s_parm(struct file *file, void *fh,
 			    struct v4l2_streamparm *parm)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_v4l2.c: uvc_ioctl_s_parm 0\n");
+	
 	struct uvc_fh *handle = fh;
 	struct uvc_streaming *stream = handle->stream;
 	int ret;
@@ -1222,6 +1336,9 @@ static int uvc_ioctl_s_parm(struct file *file, void *fh,
 static int uvc_ioctl_enum_framesizes(struct file *file, void *fh,
 				     struct v4l2_frmsizeenum *fsize)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_v4l2.c: uvc_ioctl_enum_framesizes 0\n");
+	
 	struct uvc_fh *handle = fh;
 	struct uvc_streaming *stream = handle->stream;
 	struct uvc_format *format = NULL;
@@ -1262,6 +1379,9 @@ static int uvc_ioctl_enum_framesizes(struct file *file, void *fh,
 static int uvc_ioctl_enum_frameintervals(struct file *file, void *fh,
 					 struct v4l2_frmivalenum *fival)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_v4l2.c: uvc_ioctl_enum_frameintervals 0\n");
+	
 	struct uvc_fh *handle = fh;
 	struct uvc_streaming *stream = handle->stream;
 	struct uvc_format *format = NULL;
@@ -1323,6 +1443,9 @@ static int uvc_ioctl_enum_frameintervals(struct file *file, void *fh,
 static int uvc_ioctl_subscribe_event(struct v4l2_fh *fh,
 				     const struct v4l2_event_subscription *sub)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_v4l2.c: uvc_ioctl_subscribe_event 0\n");
+	
 	switch (sub->type) {
 	case V4L2_EVENT_CTRL:
 		return v4l2_event_subscribe(fh, sub, 0, &uvc_ctrl_sub_ev_ops);
@@ -1334,6 +1457,9 @@ static int uvc_ioctl_subscribe_event(struct v4l2_fh *fh,
 static long uvc_ioctl_default(struct file *file, void *fh, bool valid_prio,
 			      unsigned int cmd, void *arg)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_v4l2.c: uvc_ioctl_default 0\n");
+
 	struct uvc_fh *handle = fh;
 	struct uvc_video_chain *chain = handle->chain;
 
@@ -1371,6 +1497,9 @@ struct uvc_xu_control_mapping32 {
 static int uvc_v4l2_get_xu_mapping(struct uvc_xu_control_mapping *kp,
 			const struct uvc_xu_control_mapping32 __user *up)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_v4l2.c: uvc_v4l2_get_xu_mapping 0\n");
+	
 	struct uvc_xu_control_mapping32 *p = (void *)kp;
 	compat_caddr_t info;
 	u32 count;
@@ -1390,6 +1519,9 @@ static int uvc_v4l2_get_xu_mapping(struct uvc_xu_control_mapping *kp,
 static int uvc_v4l2_put_xu_mapping(const struct uvc_xu_control_mapping *kp,
 			struct uvc_xu_control_mapping32 __user *up)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_v4l2.c: uvc_v4l2_put_xu_mapping 0\n");
+	
 	if (copy_to_user(up, kp, offsetof(typeof(*up), menu_info)) ||
 	    put_user(kp->menu_count, &up->menu_count))
 		return -EFAULT;
@@ -1411,6 +1543,9 @@ struct uvc_xu_control_query32 {
 static int uvc_v4l2_get_xu_query(struct uvc_xu_control_query *kp,
 			const struct uvc_xu_control_query32 __user *up)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_v4l2.c: uvc_v4l2_get_xu_query 0\n");
+	
 	struct uvc_xu_control_query32 v;
 
 	if (copy_from_user(&v, up, sizeof(v)))
@@ -1429,6 +1564,9 @@ static int uvc_v4l2_get_xu_query(struct uvc_xu_control_query *kp,
 static int uvc_v4l2_put_xu_query(const struct uvc_xu_control_query *kp,
 			struct uvc_xu_control_query32 __user *up)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_v4l2.c: uvc_v4l2_put_xu_query 0\n");
+	
 	if (copy_to_user(up, kp, offsetof(typeof(*up), data)))
 		return -EFAULT;
 	return 0;
@@ -1440,6 +1578,9 @@ static int uvc_v4l2_put_xu_query(const struct uvc_xu_control_query *kp,
 static long uvc_v4l2_compat_ioctl32(struct file *file,
 		     unsigned int cmd, unsigned long arg)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_v4l2.c: uvc_v4l2_compat_ioctl32 0\n");
+	
 	struct uvc_fh *handle = file->private_data;
 	union {
 		struct uvc_xu_control_mapping xmap;
@@ -1486,7 +1627,7 @@ static ssize_t uvc_v4l2_read(struct file *file, char __user *data,
 		    size_t count, loff_t *ppos)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_v4l2_read 0\n");
+	printk(KERN_INFO "!!!dgnet: uvc_v4l2.c: uvc_v4l2_read 0\n");
 	
 	struct uvc_fh *handle = file->private_data;
 	struct uvc_streaming *stream = handle->stream;
@@ -1498,7 +1639,7 @@ static ssize_t uvc_v4l2_read(struct file *file, char __user *data,
 static int uvc_v4l2_mmap(struct file *file, struct vm_area_struct *vma)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_v4l2_mmap 0\n");
+	printk(KERN_INFO "!!!dgnet: uvc_v4l2.c: uvc_v4l2_mmap 0\n");
 
 	struct uvc_fh *handle = file->private_data;
 	struct uvc_streaming *stream = handle->stream;
@@ -1511,7 +1652,7 @@ static int uvc_v4l2_mmap(struct file *file, struct vm_area_struct *vma)
 static __poll_t uvc_v4l2_poll(struct file *file, poll_table *wait)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_v4l2_poll 0\n");
+	printk(KERN_INFO "!!!dgnet: uvc_v4l2.c: uvc_v4l2_poll 0\n");
 	
 	struct uvc_fh *handle = file->private_data;
 	struct uvc_streaming *stream = handle->stream;

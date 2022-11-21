@@ -92,6 +92,9 @@ struct uvc_control_status {
 static void uvc_event_streaming(struct uvc_device *dev,
 				struct uvc_streaming_status *status, int len)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_status.c: uvc_event_streaming 0\n");
+	
 	if (len < 3) {
 		uvc_dbg(dev, STATUS,
 			"Invalid streaming status event received\n");
@@ -120,6 +123,9 @@ static void uvc_event_streaming(struct uvc_device *dev,
 static struct uvc_control *uvc_event_entity_find_ctrl(struct uvc_entity *entity,
 						      u8 selector)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_status.c: uvc_event_entity_find_ctrl 0\n");
+	
 	struct uvc_control *ctrl;
 	unsigned int i;
 
@@ -134,6 +140,9 @@ static struct uvc_control *uvc_event_find_ctrl(struct uvc_device *dev,
 					const struct uvc_control_status *status,
 					struct uvc_video_chain **chain)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_status.c: uvc_event_find_ctrl 0\n");
+	
 	list_for_each_entry((*chain), &dev->chains, list) {
 		struct uvc_entity *entity;
 		struct uvc_control *ctrl;
@@ -155,6 +164,10 @@ static struct uvc_control *uvc_event_find_ctrl(struct uvc_device *dev,
 static bool uvc_event_control(struct urb *urb,
 			      const struct uvc_control_status *status, int len)
 {
+	
+	
+	printk(KERN_INFO "!!!dgnet: uvc_status.c: uvc_event_control 0\n");
+	
 	static const char *attrs[] = { "value", "info", "failure", "min", "max" };
 	struct uvc_device *dev = urb->context;
 	struct uvc_video_chain *chain;
@@ -192,6 +205,9 @@ static bool uvc_event_control(struct urb *urb,
 
 static void uvc_status_complete(struct urb *urb)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_status.c: uvc_status_complete 0\n");
+	
 	struct uvc_device *dev = urb->context;
 	int len, ret;
 
@@ -250,6 +266,9 @@ static void uvc_status_complete(struct urb *urb)
 
 int uvc_status_init(struct uvc_device *dev)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_status.c: uvc_status_init 0\n");
+	
 	struct usb_host_endpoint *ep = dev->int_ep;
 	unsigned int pipe;
 	int interval;
@@ -289,18 +308,26 @@ int uvc_status_init(struct uvc_device *dev)
 
 void uvc_status_unregister(struct uvc_device *dev)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_status.c: uvc_status_unregister 0\n");
+	
 	usb_kill_urb(dev->int_urb);
 	uvc_input_unregister(dev);
 }
 
 void uvc_status_cleanup(struct uvc_device *dev)
 {
+	printk(KERN_INFO "!!!dgnet: uvc_status.c: uvc_status_cleanup 0\n");
+	
 	usb_free_urb(dev->int_urb);
 	kfree(dev->status);
 }
 
 int uvc_status_start(struct uvc_device *dev, gfp_t flags)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_status.c: uvc_status_start 0\n");
+	
 	if (dev->int_urb == NULL)
 		return 0;
 
@@ -309,5 +336,8 @@ int uvc_status_start(struct uvc_device *dev, gfp_t flags)
 
 void uvc_status_stop(struct uvc_device *dev)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_status.c: uvc_status_stop 0\n");
+	
 	usb_kill_urb(dev->int_urb);
 }

@@ -234,7 +234,7 @@ struct usb_host_endpoint *uvc_find_endpoint(struct usb_host_interface *alts,
 		u8 epaddr)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_find_endpoint 0\n");
+	printk(KERN_INFO "!!!dgnet: uvc_driver.c: uvc_find_endpoint 0\n");
 
 	struct usb_host_endpoint *ep;
 	unsigned int i;
@@ -250,7 +250,7 @@ struct usb_host_endpoint *uvc_find_endpoint(struct usb_host_interface *alts,
 
 static struct uvc_format_desc *uvc_format_by_guid(const u8 guid[16])
 {
-	printk(KERN_INFO "!!!dgnet: uvc_format_by_guid 0\n");
+	printk(KERN_INFO "!!!dgnet: uvc_driver.c: uvc_format_by_guid 0\n");
 	
 	unsigned int len = ARRAY_SIZE(uvc_fmts);
 	unsigned int i;
@@ -265,6 +265,9 @@ static struct uvc_format_desc *uvc_format_by_guid(const u8 guid[16])
 
 static enum v4l2_colorspace uvc_colorspace(const u8 primaries)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_driver.c: uvc_colorspace 0\n");
+	
 	static const enum v4l2_colorspace colorprimaries[] = {
 		V4L2_COLORSPACE_SRGB,  /* Unspecified */
 		V4L2_COLORSPACE_SRGB,
@@ -283,7 +286,7 @@ static enum v4l2_colorspace uvc_colorspace(const u8 primaries)
 static enum v4l2_xfer_func uvc_xfer_func(const u8 transfer_characteristics)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_xfer_func 0\n");
+	printk(KERN_INFO "!!!dgnet: uvc_driver.c: uvc_xfer_func 0\n");
 	
 	/*
 	 * V4L2 does not currently have definitions for all possible values of
@@ -312,6 +315,9 @@ static enum v4l2_xfer_func uvc_xfer_func(const u8 transfer_characteristics)
 
 static enum v4l2_ycbcr_encoding uvc_ycbcr_enc(const u8 matrix_coefficients)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_driver.c: uvc_ycbcr_enc 0\n");
+	
 	/*
 	 * V4L2 does not currently have definitions for all possible values of
 	 * UVC matrix coefficients. If v4l2_ycbcr_encoding is extended with new
@@ -348,6 +354,9 @@ static enum v4l2_ycbcr_encoding uvc_ycbcr_enc(const u8 matrix_coefficients)
 void uvc_simplify_fraction(u32 *numerator, u32 *denominator,
 		unsigned int n_terms, unsigned int threshold)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_driver.c: uvc_simplify_fraction 0\n");
+	
 	u32 *an;
 	u32 x, y, r;
 	unsigned int i, n;
@@ -400,6 +409,9 @@ void uvc_simplify_fraction(u32 *numerator, u32 *denominator,
  */
 u32 uvc_fraction_to_interval(u32 numerator, u32 denominator)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_driver.c: uvc_fraction_to_interval 0\n");
+	
 	u32 multiplier;
 
 	/* Saturate the result if the operation would overflow. */
@@ -427,6 +439,9 @@ u32 uvc_fraction_to_interval(u32 numerator, u32 denominator)
 
 struct uvc_entity *uvc_entity_by_id(struct uvc_device *dev, int id)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_driver.c: uvc_entity_by_id 0\n");
+	
 	struct uvc_entity *entity;
 
 	list_for_each_entry(entity, &dev->entities, list) {
@@ -440,6 +455,9 @@ struct uvc_entity *uvc_entity_by_id(struct uvc_device *dev, int id)
 static struct uvc_entity *uvc_entity_by_reference(struct uvc_device *dev,
 	int id, struct uvc_entity *entity)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_driver.c: uvc_entity_by_reference 0\n");
+	
 	unsigned int i;
 
 	if (entity == NULL)
@@ -457,7 +475,7 @@ static struct uvc_entity *uvc_entity_by_reference(struct uvc_device *dev,
 static struct uvc_streaming *uvc_stream_by_id(struct uvc_device *dev, int id)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_stream_by_id 0\n");
+	printk(KERN_INFO "!!!dgnet: uvc_driver.c: uvc_stream_by_id 0\n");
 
 	struct uvc_streaming *stream;
 
@@ -476,6 +494,9 @@ static struct uvc_streaming *uvc_stream_by_id(struct uvc_device *dev, int id)
 static void uvc_stream_delete(struct uvc_streaming *stream)
 {
 	
+	printk(KERN_INFO "!!!dgnet: uvc_driver.c: uvc_stream_delete 0\n");
+	
+	
 	if (stream->async_wq)
 		destroy_workqueue(stream->async_wq);
 
@@ -492,7 +513,7 @@ static struct uvc_streaming *uvc_stream_new(struct uvc_device *dev,
 					    struct usb_interface *intf)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_stream_new 0\n");
+	printk(KERN_INFO "!!!dgnet: uvc_driver.c: uvc_stream_new 0\n");
 	
 	struct uvc_streaming *stream;
 
@@ -526,7 +547,7 @@ static int uvc_parse_format(struct uvc_device *dev,
 	u32 **intervals, unsigned char *buffer, int buflen)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_parse_format: dev->udev->devnum: %d, buflen: %d\n", dev->udev->devnum, buflen);
+	printk(KERN_INFO "!!!dgnet: uvc_driver.c: uvc_parse_format: dev->udev->devnum: %d, buflen: %d\n", dev->udev->devnum, buflen);
 	dev_info(&dev->udev->dev, "!!!dgnet: uvc_parse_format: dev->udev->devnum: %d, buflen: %d\n", dev->udev->devnum, buflen);
 
 	struct usb_interface *intf = streaming->intf;
@@ -544,9 +565,9 @@ static int uvc_parse_format(struct uvc_device *dev,
 
 	switch (buffer[2]) {
 	case UVC_VS_FORMAT_UNCOMPRESSED:
-		printk(KERN_INFO "!!!dgnet: uvc_parse_format: UVC_VS_FORMAT_UNCOMPRESSED\n");
+		printk(KERN_INFO "!!!dgnet: uvc_driver.c: uvc_parse_format: UVC_VS_FORMAT_UNCOMPRESSED\n");
 	case UVC_VS_FORMAT_FRAME_BASED:
-		printk(KERN_INFO "!!!dgnet: uvc_parse_format: UVC_VS_FORMAT_FRAME_BASED\n");
+		printk(KERN_INFO "!!!dgnet: uvc_driver.c: uvc_parse_format: UVC_VS_FORMAT_FRAME_BASED\n");
 		n = buffer[2] == UVC_VS_FORMAT_UNCOMPRESSED ? 27 : 28;
 		if (buflen < n) {
 			uvc_dbg(dev, DESCR,
@@ -613,7 +634,7 @@ static int uvc_parse_format(struct uvc_device *dev,
 		break;
 
 	case UVC_VS_FORMAT_MJPEG:
-		printk(KERN_INFO "!!!dgnet: uvc_parse_format: UVC_VS_FORMAT_MJPEGn");
+		printk(KERN_INFO "!!!dgnet: uvc_driver.c: uvc_parse_format: UVC_VS_FORMAT_MJPEGn");
 		if (buflen < 11) {
 			uvc_dbg(dev, DESCR,
 				"device %d videostreaming interface %d FORMAT error\n",
@@ -630,7 +651,7 @@ static int uvc_parse_format(struct uvc_device *dev,
 		break;
 
 	case UVC_VS_FORMAT_DV:
-		printk(KERN_INFO "!!!dgnet: uvc_parse_format: UVC_VS_FORMAT_DV");
+		printk(KERN_INFO "!!!dgnet: uvc_driver.c: uvc_parse_format: UVC_VS_FORMAT_DV");
 		if (buflen < 9) {
 			uvc_dbg(dev, DESCR,
 				"device %d videostreaming interface %d FORMAT error\n",
@@ -676,12 +697,12 @@ static int uvc_parse_format(struct uvc_device *dev,
 		break;
 
 	case UVC_VS_FORMAT_MPEG2TS:
-		printk(KERN_INFO "!!!dgnet: uvc_parse_format: UVC_VS_FORMAT_MPEG2TS");
+		printk(KERN_INFO "!!!dgnet: uvc_driver.c: uvc_parse_format: UVC_VS_FORMAT_MPEG2TS");
 	case UVC_VS_FORMAT_STREAM_BASED:
-		printk(KERN_INFO "!!!dgnet: UVC_VS_FORMAT_STREAM_BASED");
+		printk(KERN_INFO "!!!dgnet: uvc_driver.c: UVC_VS_FORMAT_STREAM_BASED");
 		/* Not supported yet. */
 	default:
-		printk(KERN_INFO "!!!dgnet: UNSUPPORTED FORMAT");
+		printk(KERN_INFO "!!!dgnet: uvc_driver.c: UNSUPPORTED FORMAT");
 		uvc_dbg(dev, DESCR,
 			"device %d videostreaming interface %d unsupported format %u\n",
 			dev->udev->devnum, alts->desc.bInterfaceNumber,
@@ -722,7 +743,7 @@ static int uvc_parse_format(struct uvc_device *dev,
 			      * width_multiplier;
 		frame->wHeight = get_unaligned_le16(&buffer[7]);
 
-		printk(KERN_INFO "!!!dgnet: uvc_parse_format: frame->wWidth: %d, frame->wHeight: %d\n", frame->wWidth, frame->wHeight );
+		printk(KERN_INFO "!!!dgnet: uvc_driver.c: uvc_parse_format: frame->wWidth: %d, frame->wHeight: %d\n", frame->wWidth, frame->wHeight );
 		
 
 
@@ -732,7 +753,7 @@ static int uvc_parse_format(struct uvc_device *dev,
 
 		if (ftype != UVC_VS_FRAME_FRAME_BASED) {
 
-			printk(KERN_INFO "!!!dgnet: uvc_parse_format: frame type: FRAME_BASED\n");
+			printk(KERN_INFO "!!!dgnet: uvc_driver.c: uvc_parse_format: frame type: FRAME_BASED\n");
 
 			frame->dwMaxVideoFrameBufferSize =
 				get_unaligned_le32(&buffer[17]);
@@ -744,7 +765,7 @@ static int uvc_parse_format(struct uvc_device *dev,
 
 		} else {
 
-			printk(KERN_INFO "!!!dgnet: uvc_parse_format: frame type: NOT FRAME_BASED\n");
+			printk(KERN_INFO "!!!dgnet: uvc_driver.c: uvc_parse_format: frame type: NOT FRAME_BASED\n");
 
 			frame->dwMaxVideoFrameBufferSize = 0;
 
@@ -756,7 +777,7 @@ static int uvc_parse_format(struct uvc_device *dev,
 		frame->dwFrameInterval = *intervals;
 
 
-		printk(KERN_INFO "!!!dgnet: uvc_parse_format: frame->dwMaxVideoFrameBufferSize 1: %d\n",frame->dwMaxVideoFrameBufferSize);
+		printk(KERN_INFO "!!!dgnet: uvc_driver.c: uvc_parse_format: frame->dwMaxVideoFrameBufferSize 1: %d\n",frame->dwMaxVideoFrameBufferSize);
 
 		/*
 		 * Several UVC chipsets screw up dwMaxVideoFrameBufferSize
@@ -769,14 +790,14 @@ static int uvc_parse_format(struct uvc_device *dev,
 		 */
 		if (!(format->flags & UVC_FMT_FLAG_COMPRESSED)){
 
-			printk(KERN_INFO "!!!dgnet: uvc_parse_format: !(format->flags & UVC_FMT_FLAG_COMPRESSED) \n");
+			printk(KERN_INFO "!!!dgnet: uvc_driver.c: uvc_parse_format: !(format->flags & UVC_FMT_FLAG_COMPRESSED) \n");
 
 			frame->dwMaxVideoFrameBufferSize = format->bpp * frame->wWidth * frame->wHeight / 8;
 		
 		}
 
 
-		printk(KERN_INFO "!!!dgnet: uvc_parse_format: frame->dwMaxVideoFrameBufferSize 2: %d\n",frame->dwMaxVideoFrameBufferSize);
+		printk(KERN_INFO "!!!dgnet: uvc_driver.c: uvc_parse_format: frame->dwMaxVideoFrameBufferSize 2: %d\n",frame->dwMaxVideoFrameBufferSize);
 			
 
 		/*
@@ -850,7 +871,7 @@ static int uvc_parse_streaming(struct uvc_device *dev,
 {
 	
 	
-	printk(KERN_INFO "!!!dgnet: uvc_parse_streaming 0\n");
+	printk(KERN_INFO "!!!dgnet: uvc_driver.c: uvc_parse_streaming 0\n");
 	
 	struct uvc_streaming *streaming = NULL;
 	struct uvc_format *format;
@@ -1108,7 +1129,7 @@ static struct uvc_entity *uvc_alloc_entity(u16 type, u16 id,
 		unsigned int num_pads, unsigned int extra_size)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_alloc_entity 0\n");
+	printk(KERN_INFO "!!!dgnet: uvc_driver.c: uvc_alloc_entity 0\n");
 	
 	struct uvc_entity *entity;
 	unsigned int num_inputs;
@@ -1168,7 +1189,7 @@ static int uvc_parse_vendor_control(struct uvc_device *dev,
 	const unsigned char *buffer, int buflen)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_parse_vendor_control 0\n");
+	printk(KERN_INFO "!!!dgnet: uvc_driver.c: uvc_parse_vendor_control 0\n");
 	
 	struct usb_device *udev = dev->udev;
 	struct usb_host_interface *alts = dev->intf->cur_altsetting;
@@ -1250,7 +1271,7 @@ static int uvc_parse_standard_control(struct uvc_device *dev,
 	const unsigned char *buffer, int buflen)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_parse_standard_control 0\n");
+	printk(KERN_INFO "!!!dgnet: uvc_driver.c: uvc_parse_standard_control 0\n");
 	
 	struct usb_device *udev = dev->udev;
 	struct uvc_entity *unit, *term;
@@ -1514,7 +1535,7 @@ static int uvc_parse_standard_control(struct uvc_device *dev,
 static int uvc_parse_control(struct uvc_device *dev)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_parse_control 0\n");
+	printk(KERN_INFO "!!!dgnet: uvc_driver.c: uvc_parse_control 0\n");
 	
 	struct usb_host_interface *alts = dev->intf->cur_altsetting;
 	unsigned char *buffer = alts->extra;
@@ -1570,6 +1591,9 @@ next_descriptor:
 
 static void uvc_gpio_event(struct uvc_device *dev)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_driver.c: uvc_gpio_event 0\n");
+	
 	struct uvc_entity *unit = dev->gpio_unit;
 	struct uvc_video_chain *chain;
 	u8 new_val;
@@ -1587,6 +1611,9 @@ static void uvc_gpio_event(struct uvc_device *dev)
 static int uvc_gpio_get_cur(struct uvc_device *dev, struct uvc_entity *entity,
 			    u8 cs, void *data, u16 size)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_driver.c: uvc_gpio_get_cur 0\n");
+	
 	if (cs != UVC_CT_PRIVACY_CONTROL || size < 1)
 		return -EINVAL;
 
@@ -1598,6 +1625,9 @@ static int uvc_gpio_get_cur(struct uvc_device *dev, struct uvc_entity *entity,
 static int uvc_gpio_get_info(struct uvc_device *dev, struct uvc_entity *entity,
 			     u8 cs, u8 *caps)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_driver.c: uvc_gpio_get_info 0\n");
+	
 	if (cs != UVC_CT_PRIVACY_CONTROL)
 		return -EINVAL;
 
@@ -1607,6 +1637,9 @@ static int uvc_gpio_get_info(struct uvc_device *dev, struct uvc_entity *entity,
 
 static irqreturn_t uvc_gpio_irq(int irq, void *data)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_driver.c: uvc_gpio_irq 0\n");
+	
 	struct uvc_device *dev = data;
 
 	uvc_gpio_event(dev);
@@ -1615,6 +1648,9 @@ static irqreturn_t uvc_gpio_irq(int irq, void *data)
 
 static int uvc_gpio_parse(struct uvc_device *dev)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_driver.c: uvc_gpio_parse 0\n");
+	
 	struct uvc_entity *unit;
 	struct gpio_desc *gpio_privacy;
 	int irq;
@@ -1654,6 +1690,9 @@ static int uvc_gpio_parse(struct uvc_device *dev)
 
 static int uvc_gpio_init_irq(struct uvc_device *dev)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_driver.c: uvc_gpio_init_irq 0\n");
+	
 	struct uvc_entity *unit = dev->gpio_unit;
 
 	if (!unit || unit->gpio.irq < 0)
@@ -1699,6 +1738,9 @@ static int uvc_gpio_init_irq(struct uvc_device *dev)
 static int uvc_scan_chain_entity(struct uvc_video_chain *chain,
 	struct uvc_entity *entity)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_driver.c: uvc_scan_chain_entity 0\n");
+	
 	switch (UVC_ENTITY_TYPE(entity)) {
 	case UVC_VC_EXTENSION_UNIT:
 		uvc_dbg_cont(PROBE, " <- XU %d", entity->id);
@@ -1776,6 +1818,9 @@ static int uvc_scan_chain_entity(struct uvc_video_chain *chain,
 static int uvc_scan_chain_forward(struct uvc_video_chain *chain,
 	struct uvc_entity *entity, struct uvc_entity *prev)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_driver.c: uvc_scan_chain_forward 0\n");
+	
 	struct uvc_entity *forward;
 	int found;
 
@@ -1875,6 +1920,9 @@ static int uvc_scan_chain_forward(struct uvc_video_chain *chain,
 static int uvc_scan_chain_backward(struct uvc_video_chain *chain,
 	struct uvc_entity **_entity)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_driver.c: uuvc_scan_chain_backward 0\n");
+	
 	struct uvc_entity *entity = *_entity;
 	struct uvc_entity *term;
 	int id = -EINVAL, i;
@@ -1953,6 +2001,10 @@ static int uvc_scan_chain_backward(struct uvc_video_chain *chain,
 static int uvc_scan_chain(struct uvc_video_chain *chain,
 			  struct uvc_entity *term)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_driver.c: uvc_scan_chain 0\n");
+	
+	
 	struct uvc_entity *entity, *prev;
 
 	uvc_dbg(chain->dev, PROBE, "Scanning UVC chain:");
@@ -1989,6 +2041,9 @@ static int uvc_scan_chain(struct uvc_video_chain *chain,
 static unsigned int uvc_print_terms(struct list_head *terms, u16 dir,
 		char *buffer)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_driver.c: uvc_print_terms 0\n");
+	
 	struct uvc_entity *term;
 	unsigned int nterms = 0;
 	char *p = buffer;
@@ -2012,6 +2067,9 @@ static unsigned int uvc_print_terms(struct list_head *terms, u16 dir,
 
 static const char *uvc_print_chain(struct uvc_video_chain *chain)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_driver.c: uvc_print_chain 0\n");
+	
 	static char buffer[43];
 	char *p = buffer;
 
@@ -2025,7 +2083,7 @@ static const char *uvc_print_chain(struct uvc_video_chain *chain)
 static struct uvc_video_chain *uvc_alloc_chain(struct uvc_device *dev)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_alloc_chain 0\n");
+	printk(KERN_INFO "!!!dgnet: uvc_driver.c: uvc_alloc_chain 0\n");
 	
 	struct uvc_video_chain *chain;
 
@@ -2056,6 +2114,10 @@ static struct uvc_video_chain *uvc_alloc_chain(struct uvc_device *dev)
  */
 static int uvc_scan_fallback(struct uvc_device *dev)
 {
+	
+	
+	printk(KERN_INFO "!!!dgnet: uvc_driver.c: uvc_scan_fallback 0\n");
+	
 	struct uvc_video_chain *chain;
 	struct uvc_entity *iterm = NULL;
 	struct uvc_entity *oterm = NULL;
@@ -2139,6 +2201,9 @@ error:
  */
 static int uvc_scan_device(struct uvc_device *dev)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_driver.c: uvc_scan_device 0\n");
+	
 	struct uvc_video_chain *chain;
 	struct uvc_entity *term;
 
@@ -2206,6 +2271,9 @@ static int uvc_scan_device(struct uvc_device *dev)
  */
 static void uvc_delete(struct kref *kref)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_driver.c: uvc_delete 0\n");
+	
 	struct uvc_device *dev = container_of(kref, struct uvc_device, ref);
 	struct list_head *p, *n;
 
@@ -2247,6 +2315,9 @@ static void uvc_delete(struct kref *kref)
 
 static void uvc_release(struct video_device *vdev)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_driver.c: uvc_release 0\n");
+	
 	struct uvc_streaming *stream = video_get_drvdata(vdev);
 	struct uvc_device *dev = stream->dev;
 
@@ -2258,6 +2329,9 @@ static void uvc_release(struct video_device *vdev)
  */
 static void uvc_unregister_video(struct uvc_device *dev)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_driver.c: uvc_unregister_video 0\n");
+	
 	struct uvc_streaming *stream;
 
 	list_for_each_entry(stream, &dev->streams, list) {
@@ -2288,6 +2362,9 @@ int uvc_register_video_device(struct uvc_device *dev,
 			      const struct v4l2_file_operations *fops,
 			      const struct v4l2_ioctl_ops *ioctl_ops)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_driver.c: uvc_register_video_device 0\n");
+	
 	int ret;
 
 	/* Initialize the video buffers queue. */
@@ -2348,6 +2425,9 @@ int uvc_register_video_device(struct uvc_device *dev,
 static int uvc_register_video(struct uvc_device *dev,
 		struct uvc_streaming *stream)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_driver.c: uvc_register_video 0\n");
+	
 	int ret;
 
 	/* Initialize the streaming interface with default parameters. */
@@ -2380,6 +2460,9 @@ static int uvc_register_video(struct uvc_device *dev,
 static int uvc_register_terms(struct uvc_device *dev,
 	struct uvc_video_chain *chain)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_driver.c: uvc_register_terms 0\n");
+	
 	struct uvc_streaming *stream;
 	struct uvc_entity *term;
 	int ret;
@@ -2415,6 +2498,9 @@ static int uvc_register_terms(struct uvc_device *dev,
 
 static int uvc_register_chains(struct uvc_device *dev)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_driver.c: uvc_register_chains 0\n");
+	
 	struct uvc_video_chain *chain;
 	int ret;
 
@@ -2443,6 +2529,9 @@ static const struct uvc_device_info uvc_quirk_none = { 0 };
 static int uvc_probe(struct usb_interface *intf,
 		     const struct usb_device_id *id)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_driver.c: uvc_probe 0\n");
+	
 	struct usb_device *udev = interface_to_usbdev(intf);
 	struct uvc_device *dev;
 	const struct uvc_device_info *info =
@@ -2598,6 +2687,9 @@ error:
 
 static void uvc_disconnect(struct usb_interface *intf)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_driver.c: uvc_disconnect 0\n");
+	
 	struct uvc_device *dev = usb_get_intfdata(intf);
 
 	/*
@@ -2616,6 +2708,9 @@ static void uvc_disconnect(struct usb_interface *intf)
 
 static int uvc_suspend(struct usb_interface *intf, pm_message_t message)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_driver.c: uvc_suspend 0\n");
+	
 	struct uvc_device *dev = usb_get_intfdata(intf);
 	struct uvc_streaming *stream;
 
@@ -2644,6 +2739,9 @@ static int uvc_suspend(struct usb_interface *intf, pm_message_t message)
 
 static int __uvc_resume(struct usb_interface *intf, int reset)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_driver.c: __uvc_resume 0\n");
+	
 	struct uvc_device *dev = usb_get_intfdata(intf);
 	struct uvc_streaming *stream;
 	int ret = 0;
@@ -2684,11 +2782,15 @@ static int __uvc_resume(struct usb_interface *intf, int reset)
 
 static int uvc_resume(struct usb_interface *intf)
 {
+	printk(KERN_INFO "!!!dgnet: uvc_driver.c: uvc_resume 0\n");
+	
 	return __uvc_resume(intf, 0);
 }
 
 static int uvc_reset_resume(struct usb_interface *intf)
 {
+	printk(KERN_INFO "!!!dgnet: uvc_driver.c: uvc_reset_resume 0\n");
+	
 	return __uvc_resume(intf, 1);
 }
 
@@ -2698,6 +2800,9 @@ static int uvc_reset_resume(struct usb_interface *intf)
 
 static int uvc_clock_param_get(char *buffer, const struct kernel_param *kp)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_driver.c: uvc_clock_param_get 0\n");
+	
 	if (uvc_clock_param == CLOCK_MONOTONIC)
 		return sprintf(buffer, "CLOCK_MONOTONIC");
 	else
@@ -2706,6 +2811,9 @@ static int uvc_clock_param_get(char *buffer, const struct kernel_param *kp)
 
 static int uvc_clock_param_set(const char *val, const struct kernel_param *kp)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_driver.c: uvc_clock_param_set 0\n");
+	
 	if (strncasecmp(val, "clock_", strlen("clock_")) == 0)
 		val += strlen("clock_");
 

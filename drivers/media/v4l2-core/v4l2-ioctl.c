@@ -82,6 +82,9 @@ static const struct std_descr standards[] = {
  */
 const char *v4l2_norm_to_name(v4l2_std_id id)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: videobuf_mmap_mapper 0\n");
+	
 	u32 myid = id;
 	int i;
 
@@ -101,6 +104,9 @@ EXPORT_SYMBOL(v4l2_norm_to_name);
 /* Returns frame period for the given standard */
 void v4l2_video_std_frame_period(int id, struct v4l2_fract *frameperiod)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l2_video_std_frame_period 0\n");
+	
 	if (id & V4L2_STD_525_60) {
 		frameperiod->numerator = 1001;
 		frameperiod->denominator = 30000;
@@ -116,6 +122,9 @@ EXPORT_SYMBOL(v4l2_video_std_frame_period);
 int v4l2_video_std_construct(struct v4l2_standard *vs,
 			     int id, const char *name)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l2_video_std_construct 0\n");
+	
 	vs->id = id;
 	v4l2_video_std_frame_period(id, &vs->frameperiod);
 	vs->framelines = (id & V4L2_STD_525_60) ? 525 : 625;
@@ -128,6 +137,9 @@ EXPORT_SYMBOL(v4l2_video_std_construct);
  * 'id' and 'vs->index' parameters. Returns negative on error. */
 int v4l_video_std_enumstd(struct v4l2_standard *vs, v4l2_std_id id)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_video_std_enumstd 0\n");
+	
 	v4l2_std_id curr_id = 0;
 	unsigned int index = vs->index, i, j = 0;
 	const char *descr = "";
@@ -210,6 +222,9 @@ static const char *v4l2_memory_names[] = {
 
 static void v4l_print_querycap(const void *arg, bool write_only)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_print_querycap 0\n");
+	
 	const struct v4l2_capability *p = arg;
 
 	pr_cont("driver=%.*s, card=%.*s, bus=%.*s, version=0x%08x, capabilities=0x%08x, device_caps=0x%08x\n",
@@ -221,6 +236,9 @@ static void v4l_print_querycap(const void *arg, bool write_only)
 
 static void v4l_print_enuminput(const void *arg, bool write_only)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_print_enuminput 0\n");
+	
 	const struct v4l2_input *p = arg;
 
 	pr_cont("index=%u, name=%.*s, type=%u, audioset=0x%x, tuner=%u, std=0x%08Lx, status=0x%x, capabilities=0x%x\n",
@@ -231,6 +249,9 @@ static void v4l_print_enuminput(const void *arg, bool write_only)
 
 static void v4l_print_enumoutput(const void *arg, bool write_only)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_print_enumoutput 0\n");
+	
 	const struct v4l2_output *p = arg;
 
 	pr_cont("index=%u, name=%.*s, type=%u, audioset=0x%x, modulator=%u, std=0x%08Lx, capabilities=0x%x\n",
@@ -240,6 +261,9 @@ static void v4l_print_enumoutput(const void *arg, bool write_only)
 
 static void v4l_print_audio(const void *arg, bool write_only)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_print_audio 0\n");
+	
 	const struct v4l2_audio *p = arg;
 
 	if (write_only)
@@ -252,6 +276,9 @@ static void v4l_print_audio(const void *arg, bool write_only)
 
 static void v4l_print_audioout(const void *arg, bool write_only)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_print_audioout 0\n");
+	
 	const struct v4l2_audioout *p = arg;
 
 	if (write_only)
@@ -264,6 +291,9 @@ static void v4l_print_audioout(const void *arg, bool write_only)
 
 static void v4l_print_fmtdesc(const void *arg, bool write_only)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_print_fmtdesc 0\n");
+	
 	const struct v4l2_fmtdesc *p = arg;
 
 	pr_cont("index=%u, type=%s, flags=0x%x, pixelformat=%p4cc, mbus_code=0x%04x, description='%.*s'\n",
@@ -274,6 +304,9 @@ static void v4l_print_fmtdesc(const void *arg, bool write_only)
 
 static void v4l_print_format(const void *arg, bool write_only)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_print_format 0\n");
+	
 	const struct v4l2_format *p = arg;
 	const struct v4l2_pix_format *pix;
 	const struct v4l2_pix_format_mplane *mp;
@@ -360,6 +393,10 @@ static void v4l_print_format(const void *arg, bool write_only)
 
 static void v4l_print_framebuffer(const void *arg, bool write_only)
 {
+	
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_print_framebuffer 0\n");
+	
 	const struct v4l2_framebuffer *p = arg;
 
 	pr_cont("capability=0x%x, flags=0x%x, base=0x%p, width=%u, height=%u, pixelformat=%p4cc, bytesperline=%u, sizeimage=%u, colorspace=%d\n",
@@ -370,11 +407,16 @@ static void v4l_print_framebuffer(const void *arg, bool write_only)
 
 static void v4l_print_buftype(const void *arg, bool write_only)
 {
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_print_buftype 0\n");
+	
 	pr_cont("type=%s\n", prt_names(*(u32 *)arg, v4l2_type_names));
 }
 
 static void v4l_print_modulator(const void *arg, bool write_only)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_print_modulator 0\n");
+	
 	const struct v4l2_modulator *p = arg;
 
 	if (write_only)
@@ -387,6 +429,9 @@ static void v4l_print_modulator(const void *arg, bool write_only)
 
 static void v4l_print_tuner(const void *arg, bool write_only)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_print_tuner 0\n");
+	
 	const struct v4l2_tuner *p = arg;
 
 	if (write_only)
@@ -401,6 +446,9 @@ static void v4l_print_tuner(const void *arg, bool write_only)
 
 static void v4l_print_frequency(const void *arg, bool write_only)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_print_frequency 0\n");
+	
 	const struct v4l2_frequency *p = arg;
 
 	pr_cont("tuner=%u, type=%u, frequency=%u\n",
@@ -409,6 +457,9 @@ static void v4l_print_frequency(const void *arg, bool write_only)
 
 static void v4l_print_standard(const void *arg, bool write_only)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_print_standard 0\n");
+	
 	const struct v4l2_standard *p = arg;
 
 	pr_cont("index=%u, id=0x%Lx, name=%.*s, fps=%u/%u, framelines=%u\n",
@@ -421,11 +472,17 @@ static void v4l_print_standard(const void *arg, bool write_only)
 
 static void v4l_print_std(const void *arg, bool write_only)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_print_std 0\n");
+	
 	pr_cont("std=0x%08Lx\n", *(const long long unsigned *)arg);
 }
 
 static void v4l_print_hw_freq_seek(const void *arg, bool write_only)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_print_hw_freq_seek 0\n");
+
 	const struct v4l2_hw_freq_seek *p = arg;
 
 	pr_cont("tuner=%u, type=%u, seek_upward=%u, wrap_around=%u, spacing=%u, rangelow=%u, rangehigh=%u\n",
@@ -435,6 +492,9 @@ static void v4l_print_hw_freq_seek(const void *arg, bool write_only)
 
 static void v4l_print_requestbuffers(const void *arg, bool write_only)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_print_requestbuffers 0\n");
+	
 	const struct v4l2_requestbuffers *p = arg;
 
 	pr_cont("count=%d, type=%s, memory=%s\n",
@@ -445,6 +505,9 @@ static void v4l_print_requestbuffers(const void *arg, bool write_only)
 
 static void v4l_print_buffer(const void *arg, bool write_only)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_print_buffer 0\n");
+	
 	const struct v4l2_buffer *p = arg;
 	const struct v4l2_timecode *tc = &p->timecode;
 	const struct v4l2_plane *plane;
@@ -481,6 +544,9 @@ static void v4l_print_buffer(const void *arg, bool write_only)
 
 static void v4l_print_exportbuffer(const void *arg, bool write_only)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_print_exportbuffer 0\n");
+	
 	const struct v4l2_exportbuffer *p = arg;
 
 	pr_cont("fd=%d, type=%s, index=%u, plane=%u, flags=0x%08x\n",
@@ -490,6 +556,9 @@ static void v4l_print_exportbuffer(const void *arg, bool write_only)
 
 static void v4l_print_create_buffers(const void *arg, bool write_only)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_print_create_buffers 0\n");
+	
 	const struct v4l2_create_buffers *p = arg;
 
 	pr_cont("index=%d, count=%d, memory=%s, capabilities=0x%08x, ",
@@ -500,6 +569,9 @@ static void v4l_print_create_buffers(const void *arg, bool write_only)
 
 static void v4l_print_streamparm(const void *arg, bool write_only)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_print_streamparm 0\n");
+	
 	const struct v4l2_streamparm *p = arg;
 
 	pr_cont("type=%s", prt_names(p->type, v4l2_type_names));
@@ -527,6 +599,9 @@ static void v4l_print_streamparm(const void *arg, bool write_only)
 
 static void v4l_print_queryctrl(const void *arg, bool write_only)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_print_queryctrl 0\n");
+	
 	const struct v4l2_queryctrl *p = arg;
 
 	pr_cont("id=0x%x, type=%d, name=%.*s, min/max=%d/%d, step=%d, default=%d, flags=0x%08x\n",
@@ -537,6 +612,9 @@ static void v4l_print_queryctrl(const void *arg, bool write_only)
 
 static void v4l_print_query_ext_ctrl(const void *arg, bool write_only)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_print_query_ext_ctrl 0\n");
+	
 	const struct v4l2_query_ext_ctrl *p = arg;
 
 	pr_cont("id=0x%x, type=%d, name=%.*s, min/max=%lld/%lld, step=%lld, default=%lld, flags=0x%08x, elem_size=%u, elems=%u, nr_of_dims=%u, dims=%u,%u,%u,%u\n",
@@ -549,6 +627,9 @@ static void v4l_print_query_ext_ctrl(const void *arg, bool write_only)
 
 static void v4l_print_querymenu(const void *arg, bool write_only)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_print_querymenu 0\n");
+	
 	const struct v4l2_querymenu *p = arg;
 
 	pr_cont("id=0x%x, index=%d\n", p->id, p->index);
@@ -556,6 +637,9 @@ static void v4l_print_querymenu(const void *arg, bool write_only)
 
 static void v4l_print_control(const void *arg, bool write_only)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_print_control 0\n");
+	
 	const struct v4l2_control *p = arg;
 	const char *name = v4l2_ctrl_get_name(p->id);
 
@@ -566,6 +650,9 @@ static void v4l_print_control(const void *arg, bool write_only)
 
 static void v4l_print_ext_controls(const void *arg, bool write_only)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_print_ext_controls 0\n");
+	
 	const struct v4l2_ext_controls *p = arg;
 	int i;
 
@@ -587,6 +674,9 @@ static void v4l_print_ext_controls(const void *arg, bool write_only)
 
 static void v4l_print_cropcap(const void *arg, bool write_only)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_print_cropcap 0\n");
+	
 	const struct v4l2_cropcap *p = arg;
 
 	pr_cont("type=%s, bounds wxh=%dx%d, x,y=%d,%d, defrect wxh=%dx%d, x,y=%d,%d, pixelaspect %d/%d\n",
@@ -600,6 +690,9 @@ static void v4l_print_cropcap(const void *arg, bool write_only)
 
 static void v4l_print_crop(const void *arg, bool write_only)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_print_crop 0\n");
+	
 	const struct v4l2_crop *p = arg;
 
 	pr_cont("type=%s, wxh=%dx%d, x,y=%d,%d\n",
@@ -610,6 +703,9 @@ static void v4l_print_crop(const void *arg, bool write_only)
 
 static void v4l_print_selection(const void *arg, bool write_only)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_print_selection 0\n");
+	
 	const struct v4l2_selection *p = arg;
 
 	pr_cont("type=%s, target=%d, flags=0x%x, wxh=%dx%d, x,y=%d,%d\n",
@@ -620,6 +716,9 @@ static void v4l_print_selection(const void *arg, bool write_only)
 
 static void v4l_print_jpegcompression(const void *arg, bool write_only)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_print_jpegcompression 0\n");
+	
 	const struct v4l2_jpegcompression *p = arg;
 
 	pr_cont("quality=%d, APPn=%d, APP_len=%d, COM_len=%d, jpeg_markers=0x%x\n",
@@ -629,6 +728,9 @@ static void v4l_print_jpegcompression(const void *arg, bool write_only)
 
 static void v4l_print_enc_idx(const void *arg, bool write_only)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_print_enc_idx 0\n");
+	
 	const struct v4l2_enc_idx *p = arg;
 
 	pr_cont("entries=%d, entries_cap=%d\n",
@@ -637,6 +739,9 @@ static void v4l_print_enc_idx(const void *arg, bool write_only)
 
 static void v4l_print_encoder_cmd(const void *arg, bool write_only)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_print_encoder_cmd 0\n");
+	
 	const struct v4l2_encoder_cmd *p = arg;
 
 	pr_cont("cmd=%d, flags=0x%x\n",
@@ -645,6 +750,9 @@ static void v4l_print_encoder_cmd(const void *arg, bool write_only)
 
 static void v4l_print_decoder_cmd(const void *arg, bool write_only)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_print_decoder_cmd 0\n");
+	
 	const struct v4l2_decoder_cmd *p = arg;
 
 	pr_cont("cmd=%d, flags=0x%x\n", p->cmd, p->flags);
@@ -658,6 +766,9 @@ static void v4l_print_decoder_cmd(const void *arg, bool write_only)
 
 static void v4l_print_dbg_chip_info(const void *arg, bool write_only)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_print_dbg_chip_info 0\n");
+	
 	const struct v4l2_dbg_chip_info *p = arg;
 
 	pr_cont("type=%u, ", p->match.type);
@@ -671,6 +782,9 @@ static void v4l_print_dbg_chip_info(const void *arg, bool write_only)
 
 static void v4l_print_dbg_register(const void *arg, bool write_only)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_print_dbg_register 0\n");
+	
 	const struct v4l2_dbg_register *p = arg;
 
 	pr_cont("type=%u, ", p->match.type);
@@ -685,6 +799,9 @@ static void v4l_print_dbg_register(const void *arg, bool write_only)
 
 static void v4l_print_dv_timings(const void *arg, bool write_only)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_print_dv_timings 0\n");
+	
 	const struct v4l2_dv_timings *p = arg;
 
 	switch (p->type) {
@@ -707,6 +824,10 @@ static void v4l_print_dv_timings(const void *arg, bool write_only)
 
 static void v4l_print_enum_dv_timings(const void *arg, bool write_only)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_print_enum_dv_timings 0\n");
+	
+	
 	const struct v4l2_enum_dv_timings *p = arg;
 
 	pr_cont("index=%u, ", p->index);
@@ -715,6 +836,9 @@ static void v4l_print_enum_dv_timings(const void *arg, bool write_only)
 
 static void v4l_print_dv_timings_cap(const void *arg, bool write_only)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_print_dv_timings_cap 0\n");
+	
 	const struct v4l2_dv_timings_cap *p = arg;
 
 	switch (p->type) {
@@ -733,6 +857,9 @@ static void v4l_print_dv_timings_cap(const void *arg, bool write_only)
 
 static void v4l_print_frmsizeenum(const void *arg, bool write_only)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_print_frmsizeenum 0\n");
+	
 	const struct v4l2_frmsizeenum *p = arg;
 
 	pr_cont("index=%u, pixelformat=%p4cc, type=%u",
@@ -760,6 +887,10 @@ static void v4l_print_frmsizeenum(const void *arg, bool write_only)
 
 static void v4l_print_frmivalenum(const void *arg, bool write_only)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_print_frmivalenum 0\n");
+	
+	
 	const struct v4l2_frmivalenum *p = arg;
 
 	pr_cont("index=%u, pixelformat=%p4cc, wxh=%ux%u, type=%u",
@@ -788,6 +919,9 @@ static void v4l_print_frmivalenum(const void *arg, bool write_only)
 
 static void v4l_print_event(const void *arg, bool write_only)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_print_event 0\n");
+	
 	const struct v4l2_event *p = arg;
 	const struct v4l2_event_ctrl *c;
 
@@ -820,6 +954,9 @@ static void v4l_print_event(const void *arg, bool write_only)
 
 static void v4l_print_event_subscription(const void *arg, bool write_only)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_print_event_subscription 0\n");
+	
 	const struct v4l2_event_subscription *p = arg;
 
 	pr_cont("type=0x%x, id=0x%x, flags=0x%x\n",
@@ -828,6 +965,9 @@ static void v4l_print_event_subscription(const void *arg, bool write_only)
 
 static void v4l_print_sliced_vbi_cap(const void *arg, bool write_only)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_print_sliced_vbi_cap 0\n");
+	
 	const struct v4l2_sliced_vbi_cap *p = arg;
 	int i;
 
@@ -841,6 +981,9 @@ static void v4l_print_sliced_vbi_cap(const void *arg, bool write_only)
 
 static void v4l_print_freq_band(const void *arg, bool write_only)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_print_freq_band 0\n");
+	
 	const struct v4l2_frequency_band *p = arg;
 
 	pr_cont("tuner=%u, type=%u, index=%u, capability=0x%x, rangelow=%u, rangehigh=%u, modulation=0x%x\n",
@@ -851,6 +994,9 @@ static void v4l_print_freq_band(const void *arg, bool write_only)
 
 static void v4l_print_edid(const void *arg, bool write_only)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_print_edid 0\n");
+	
 	const struct v4l2_edid *p = arg;
 
 	pr_cont("pad=%u, start_block=%u, blocks=%u\n",
@@ -859,21 +1005,31 @@ static void v4l_print_edid(const void *arg, bool write_only)
 
 static void v4l_print_u32(const void *arg, bool write_only)
 {
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_print_u32 0\n");
+	
 	pr_cont("value=%u\n", *(const u32 *)arg);
 }
 
 static void v4l_print_newline(const void *arg, bool write_only)
 {
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_print_newline 0\n");
+	
 	pr_cont("\n");
 }
 
 static void v4l_print_default(const void *arg, bool write_only)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_print_default 0\n");
+	
 	pr_cont("driver-specific ioctl\n");
 }
 
 static bool check_ext_ctrls(struct v4l2_ext_controls *c, unsigned long ioctl)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: check_ext_ctrls 0\n");
+	
 	__u32 i;
 
 	/* zero the reserved fields */
@@ -920,6 +1076,9 @@ static bool check_ext_ctrls(struct v4l2_ext_controls *c, unsigned long ioctl)
 
 static int check_fmt(struct file *file, enum v4l2_buf_type type)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: check_fmt 0\n");
+	
 	const u32 vid_caps = V4L2_CAP_VIDEO_CAPTURE |
 			     V4L2_CAP_VIDEO_CAPTURE_MPLANE |
 			     V4L2_CAP_VIDEO_OUTPUT |
@@ -1011,6 +1170,10 @@ static void v4l_sanitize_colorspace(u32 pixelformat, u32 *colorspace,
 				    u32 *encoding, u32 *quantization,
 				    u32 *xfer_func)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_sanitize_colorspace 0\n");
+	
+	
 	bool is_hsv = pixelformat == V4L2_PIX_FMT_HSV24 ||
 		      pixelformat == V4L2_PIX_FMT_HSV32;
 
@@ -1034,6 +1197,10 @@ static void v4l_sanitize_colorspace(u32 pixelformat, u32 *colorspace,
 
 static void v4l_sanitize_format(struct v4l2_format *fmt)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_sanitize_format 0\n");
+	
+	
 	unsigned int offset;
 
 	/* Make sure num_planes is not bogus */
@@ -1090,6 +1257,9 @@ static void v4l_sanitize_format(struct v4l2_format *fmt)
 static int v4l_querycap(const struct v4l2_ioctl_ops *ops,
 				struct file *file, void *fh, void *arg)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_querycap 0\n");
+	
 	struct v4l2_capability *cap = (struct v4l2_capability *)arg;
 	struct video_device *vfd = video_devdata(file);
 	int ret;
@@ -1124,6 +1294,9 @@ static int v4l_querycap(const struct v4l2_ioctl_ops *ops,
 static int v4l_g_input(const struct v4l2_ioctl_ops *ops,
 		       struct file *file, void *fh, void *arg)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_g_input 0\n");
+	
 	struct video_device *vfd = video_devdata(file);
 
 	if (vfd->device_caps & V4L2_CAP_IO_MC) {
@@ -1137,6 +1310,9 @@ static int v4l_g_input(const struct v4l2_ioctl_ops *ops,
 static int v4l_g_output(const struct v4l2_ioctl_ops *ops,
 			struct file *file, void *fh, void *arg)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_g_output 0\n");
+	
 	struct video_device *vfd = video_devdata(file);
 
 	if (vfd->device_caps & V4L2_CAP_IO_MC) {
@@ -1150,6 +1326,9 @@ static int v4l_g_output(const struct v4l2_ioctl_ops *ops,
 static int v4l_s_input(const struct v4l2_ioctl_ops *ops,
 				struct file *file, void *fh, void *arg)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_s_input 0\n");
+	
 	struct video_device *vfd = video_devdata(file);
 	int ret;
 
@@ -1166,6 +1345,9 @@ static int v4l_s_input(const struct v4l2_ioctl_ops *ops,
 static int v4l_s_output(const struct v4l2_ioctl_ops *ops,
 				struct file *file, void *fh, void *arg)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_s_output 0\n");
+	
 	struct video_device *vfd = video_devdata(file);
 
 	if (vfd->device_caps & V4L2_CAP_IO_MC)
@@ -1177,6 +1359,9 @@ static int v4l_s_output(const struct v4l2_ioctl_ops *ops,
 static int v4l_g_priority(const struct v4l2_ioctl_ops *ops,
 				struct file *file, void *fh, void *arg)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_g_priority 0\n");
+	
 	struct video_device *vfd;
 	u32 *p = arg;
 
@@ -1188,6 +1373,9 @@ static int v4l_g_priority(const struct v4l2_ioctl_ops *ops,
 static int v4l_s_priority(const struct v4l2_ioctl_ops *ops,
 				struct file *file, void *fh, void *arg)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_s_priority 0\n");
+	
 	struct video_device *vfd;
 	struct v4l2_fh *vfh;
 	u32 *p = arg;
@@ -1202,6 +1390,9 @@ static int v4l_s_priority(const struct v4l2_ioctl_ops *ops,
 static int v4l_enuminput(const struct v4l2_ioctl_ops *ops,
 				struct file *file, void *fh, void *arg)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_enuminput 0\n");
+	
 	struct video_device *vfd = video_devdata(file);
 	struct v4l2_input *p = arg;
 
@@ -1228,6 +1419,9 @@ static int v4l_enuminput(const struct v4l2_ioctl_ops *ops,
 static int v4l_enumoutput(const struct v4l2_ioctl_ops *ops,
 				struct file *file, void *fh, void *arg)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_enumoutput 0\n");
+	
 	struct video_device *vfd = video_devdata(file);
 	struct v4l2_output *p = arg;
 
@@ -1253,6 +1447,9 @@ static int v4l_enumoutput(const struct v4l2_ioctl_ops *ops,
 
 static void v4l_fill_fmtdesc(struct v4l2_fmtdesc *fmt)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_fill_fmtdesc 0\n");
+	
 	const unsigned sz = sizeof(fmt->description);
 	const char *descr = NULL;
 	u32 flags = 0;
@@ -1516,6 +1713,9 @@ static void v4l_fill_fmtdesc(struct v4l2_fmtdesc *fmt)
 static int v4l_enum_fmt(const struct v4l2_ioctl_ops *ops,
 				struct file *file, void *fh, void *arg)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_enum_fmt 0\n");
+	
 	struct video_device *vdev = video_devdata(file);
 	struct v4l2_fmtdesc *p = arg;
 	int ret = check_fmt(file, p->type);
@@ -1591,6 +1791,9 @@ static int v4l_enum_fmt(const struct v4l2_ioctl_ops *ops,
 
 static void v4l_pix_format_touch(struct v4l2_pix_format *p)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_pix_format_touch 0\n");
+	
 	/*
 	 * The v4l2_pix_format structure contains fields that make no sense for
 	 * touch. Set them to default values in this case.
@@ -1607,6 +1810,9 @@ static void v4l_pix_format_touch(struct v4l2_pix_format *p)
 static int v4l_g_fmt(const struct v4l2_ioctl_ops *ops,
 				struct file *file, void *fh, void *arg)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_g_fmt 0\n");
+	
 	struct v4l2_format *p = arg;
 	struct video_device *vfd = video_devdata(file);
 	int ret = check_fmt(file, p->type);
@@ -1688,6 +1894,9 @@ static int v4l_g_fmt(const struct v4l2_ioctl_ops *ops,
 static int v4l_s_fmt(const struct v4l2_ioctl_ops *ops,
 				struct file *file, void *fh, void *arg)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_s_fmt 0\n");
+	
 	struct v4l2_format *p = arg;
 	struct video_device *vfd = video_devdata(file);
 	int ret = check_fmt(file, p->type);
@@ -1793,6 +2002,9 @@ static int v4l_s_fmt(const struct v4l2_ioctl_ops *ops,
 static int v4l_try_fmt(const struct v4l2_ioctl_ops *ops,
 				struct file *file, void *fh, void *arg)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_try_fmt 0\n");
+	
 	struct v4l2_format *p = arg;
 	struct video_device *vfd = video_devdata(file);
 	int ret = check_fmt(file, p->type);
@@ -1895,18 +2107,26 @@ static int v4l_try_fmt(const struct v4l2_ioctl_ops *ops,
 static int v4l_streamon(const struct v4l2_ioctl_ops *ops,
 				struct file *file, void *fh, void *arg)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_streamon 0\n");
+	
 	return ops->vidioc_streamon(file, fh, *(unsigned int *)arg);
 }
 
 static int v4l_streamoff(const struct v4l2_ioctl_ops *ops,
 				struct file *file, void *fh, void *arg)
 {
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_streamoff 0\n");
+	
 	return ops->vidioc_streamoff(file, fh, *(unsigned int *)arg);
 }
 
 static int v4l_g_tuner(const struct v4l2_ioctl_ops *ops,
 				struct file *file, void *fh, void *arg)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_g_tuner 0\n");
+	
 	struct video_device *vfd = video_devdata(file);
 	struct v4l2_tuner *p = arg;
 	int err;
@@ -1922,6 +2142,9 @@ static int v4l_g_tuner(const struct v4l2_ioctl_ops *ops,
 static int v4l_s_tuner(const struct v4l2_ioctl_ops *ops,
 				struct file *file, void *fh, void *arg)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_s_tuner 0\n");
+	
 	struct video_device *vfd = video_devdata(file);
 	struct v4l2_tuner *p = arg;
 	int ret;
@@ -1937,6 +2160,9 @@ static int v4l_s_tuner(const struct v4l2_ioctl_ops *ops,
 static int v4l_g_modulator(const struct v4l2_ioctl_ops *ops,
 				struct file *file, void *fh, void *arg)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_g_modulator 0\n");
+	
 	struct video_device *vfd = video_devdata(file);
 	struct v4l2_modulator *p = arg;
 	int err;
@@ -1953,6 +2179,9 @@ static int v4l_g_modulator(const struct v4l2_ioctl_ops *ops,
 static int v4l_s_modulator(const struct v4l2_ioctl_ops *ops,
 				struct file *file, void *fh, void *arg)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_s_modulator 0\n");
+	
 	struct video_device *vfd = video_devdata(file);
 	struct v4l2_modulator *p = arg;
 
@@ -1965,6 +2194,9 @@ static int v4l_s_modulator(const struct v4l2_ioctl_ops *ops,
 static int v4l_g_frequency(const struct v4l2_ioctl_ops *ops,
 				struct file *file, void *fh, void *arg)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_g_frequency 0\n");
+	
 	struct video_device *vfd = video_devdata(file);
 	struct v4l2_frequency *p = arg;
 
@@ -1979,6 +2211,9 @@ static int v4l_g_frequency(const struct v4l2_ioctl_ops *ops,
 static int v4l_s_frequency(const struct v4l2_ioctl_ops *ops,
 				struct file *file, void *fh, void *arg)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_s_frequency 0\n");
+	
 	struct video_device *vfd = video_devdata(file);
 	const struct v4l2_frequency *p = arg;
 	enum v4l2_tuner_type type;
@@ -2002,6 +2237,9 @@ static int v4l_s_frequency(const struct v4l2_ioctl_ops *ops,
 static int v4l_enumstd(const struct v4l2_ioctl_ops *ops,
 				struct file *file, void *fh, void *arg)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_enumstd 0\n");
+	
 	struct video_device *vfd = video_devdata(file);
 	struct v4l2_standard *p = arg;
 
@@ -2011,6 +2249,9 @@ static int v4l_enumstd(const struct v4l2_ioctl_ops *ops,
 static int v4l_s_std(const struct v4l2_ioctl_ops *ops,
 				struct file *file, void *fh, void *arg)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_s_std 0\n");
+	
 	struct video_device *vfd = video_devdata(file);
 	v4l2_std_id id = *(v4l2_std_id *)arg, norm;
 	int ret;
@@ -2029,6 +2270,10 @@ static int v4l_s_std(const struct v4l2_ioctl_ops *ops,
 static int v4l_querystd(const struct v4l2_ioctl_ops *ops,
 				struct file *file, void *fh, void *arg)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_querystd 0\n");
+	
+	
 	struct video_device *vfd = video_devdata(file);
 	v4l2_std_id *p = arg;
 	int ret;
@@ -2051,6 +2296,9 @@ static int v4l_querystd(const struct v4l2_ioctl_ops *ops,
 static int v4l_s_hw_freq_seek(const struct v4l2_ioctl_ops *ops,
 				struct file *file, void *fh, void *arg)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_s_hw_freq_seek 0\n");
+	
 	struct video_device *vfd = video_devdata(file);
 	struct v4l2_hw_freq_seek *p = arg;
 	enum v4l2_tuner_type type;
@@ -2073,12 +2321,18 @@ static int v4l_s_hw_freq_seek(const struct v4l2_ioctl_ops *ops,
 static int v4l_overlay(const struct v4l2_ioctl_ops *ops,
 				struct file *file, void *fh, void *arg)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_overlay 0\n");
+	
 	return ops->vidioc_overlay(file, fh, *(unsigned int *)arg);
 }
 
 static int v4l_reqbufs(const struct v4l2_ioctl_ops *ops,
 				struct file *file, void *fh, void *arg)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_reqbufs 0\n");
+	
 	struct v4l2_requestbuffers *p = arg;
 	int ret = check_fmt(file, p->type);
 
@@ -2093,6 +2347,9 @@ static int v4l_reqbufs(const struct v4l2_ioctl_ops *ops,
 static int v4l_querybuf(const struct v4l2_ioctl_ops *ops,
 				struct file *file, void *fh, void *arg)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_querybuf 0\n");
+	
 	struct v4l2_buffer *p = arg;
 	int ret = check_fmt(file, p->type);
 
@@ -2102,6 +2359,9 @@ static int v4l_querybuf(const struct v4l2_ioctl_ops *ops,
 static int v4l_qbuf(const struct v4l2_ioctl_ops *ops,
 				struct file *file, void *fh, void *arg)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_qbuf 0\n");
+	
 	struct v4l2_buffer *p = arg;
 	int ret = check_fmt(file, p->type);
 
@@ -2111,6 +2371,9 @@ static int v4l_qbuf(const struct v4l2_ioctl_ops *ops,
 static int v4l_dqbuf(const struct v4l2_ioctl_ops *ops,
 				struct file *file, void *fh, void *arg)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_dqbuf 0\n");
+	
 	struct v4l2_buffer *p = arg;
 	int ret = check_fmt(file, p->type);
 
@@ -2120,6 +2383,9 @@ static int v4l_dqbuf(const struct v4l2_ioctl_ops *ops,
 static int v4l_create_bufs(const struct v4l2_ioctl_ops *ops,
 				struct file *file, void *fh, void *arg)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_create_bufs 0\n");
+	
 	struct v4l2_create_buffers *create = arg;
 	int ret = check_fmt(file, create->format.type);
 
@@ -2142,6 +2408,9 @@ static int v4l_create_bufs(const struct v4l2_ioctl_ops *ops,
 static int v4l_prepare_buf(const struct v4l2_ioctl_ops *ops,
 				struct file *file, void *fh, void *arg)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_prepare_buf 0\n");
+	
 	struct v4l2_buffer *b = arg;
 	int ret = check_fmt(file, b->type);
 
@@ -2151,6 +2420,9 @@ static int v4l_prepare_buf(const struct v4l2_ioctl_ops *ops,
 static int v4l_g_parm(const struct v4l2_ioctl_ops *ops,
 				struct file *file, void *fh, void *arg)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_g_parm 0\n");
+	
 	struct video_device *vfd = video_devdata(file);
 	struct v4l2_streamparm *p = arg;
 	v4l2_std_id std;
@@ -2174,6 +2446,9 @@ static int v4l_g_parm(const struct v4l2_ioctl_ops *ops,
 static int v4l_s_parm(const struct v4l2_ioctl_ops *ops,
 				struct file *file, void *fh, void *arg)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_s_parm 0\n");
+	
 	struct v4l2_streamparm *p = arg;
 	int ret = check_fmt(file, p->type);
 
@@ -2198,6 +2473,9 @@ static int v4l_s_parm(const struct v4l2_ioctl_ops *ops,
 static int v4l_queryctrl(const struct v4l2_ioctl_ops *ops,
 				struct file *file, void *fh, void *arg)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_queryctrl 0\n");
+	
 	struct video_device *vfd = video_devdata(file);
 	struct v4l2_queryctrl *p = arg;
 	struct v4l2_fh *vfh =
@@ -2215,6 +2493,9 @@ static int v4l_queryctrl(const struct v4l2_ioctl_ops *ops,
 static int v4l_query_ext_ctrl(const struct v4l2_ioctl_ops *ops,
 				struct file *file, void *fh, void *arg)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_query_ext_ctrl 0\n");
+	
 	struct video_device *vfd = video_devdata(file);
 	struct v4l2_query_ext_ctrl *p = arg;
 	struct v4l2_fh *vfh =
@@ -2232,6 +2513,9 @@ static int v4l_query_ext_ctrl(const struct v4l2_ioctl_ops *ops,
 static int v4l_querymenu(const struct v4l2_ioctl_ops *ops,
 				struct file *file, void *fh, void *arg)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_querymenu 0\n");
+	
 	struct video_device *vfd = video_devdata(file);
 	struct v4l2_querymenu *p = arg;
 	struct v4l2_fh *vfh =
@@ -2249,6 +2533,9 @@ static int v4l_querymenu(const struct v4l2_ioctl_ops *ops,
 static int v4l_g_ctrl(const struct v4l2_ioctl_ops *ops,
 				struct file *file, void *fh, void *arg)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_g_ctrl 0\n");
+	
 	struct video_device *vfd = video_devdata(file);
 	struct v4l2_control *p = arg;
 	struct v4l2_fh *vfh =
@@ -2283,6 +2570,9 @@ static int v4l_g_ctrl(const struct v4l2_ioctl_ops *ops,
 static int v4l_s_ctrl(const struct v4l2_ioctl_ops *ops,
 				struct file *file, void *fh, void *arg)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_s_ctrl 0\n");
+	
 	struct video_device *vfd = video_devdata(file);
 	struct v4l2_control *p = arg;
 	struct v4l2_fh *vfh =
@@ -2315,6 +2605,9 @@ static int v4l_s_ctrl(const struct v4l2_ioctl_ops *ops,
 static int v4l_g_ext_ctrls(const struct v4l2_ioctl_ops *ops,
 				struct file *file, void *fh, void *arg)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_g_ext_ctrls 0\n");
+	
 	struct video_device *vfd = video_devdata(file);
 	struct v4l2_ext_controls *p = arg;
 	struct v4l2_fh *vfh =
@@ -2336,6 +2629,9 @@ static int v4l_g_ext_ctrls(const struct v4l2_ioctl_ops *ops,
 static int v4l_s_ext_ctrls(const struct v4l2_ioctl_ops *ops,
 				struct file *file, void *fh, void *arg)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_s_ext_ctrls 0\n");
+	
 	struct video_device *vfd = video_devdata(file);
 	struct v4l2_ext_controls *p = arg;
 	struct v4l2_fh *vfh =
@@ -2357,6 +2653,9 @@ static int v4l_s_ext_ctrls(const struct v4l2_ioctl_ops *ops,
 static int v4l_try_ext_ctrls(const struct v4l2_ioctl_ops *ops,
 				struct file *file, void *fh, void *arg)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_try_ext_ctrls 0\n");
+	
 	struct video_device *vfd = video_devdata(file);
 	struct v4l2_ext_controls *p = arg;
 	struct v4l2_fh *vfh =
@@ -2387,6 +2686,9 @@ static int v4l_try_ext_ctrls(const struct v4l2_ioctl_ops *ops,
 static int v4l_g_selection(const struct v4l2_ioctl_ops *ops,
 			   struct file *file, void *fh, void *arg)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_g_selection 0\n");
+	
 	struct v4l2_selection *p = arg;
 	u32 old_type = p->type;
 	int ret;
@@ -2403,6 +2705,9 @@ static int v4l_g_selection(const struct v4l2_ioctl_ops *ops,
 static int v4l_s_selection(const struct v4l2_ioctl_ops *ops,
 			   struct file *file, void *fh, void *arg)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_s_selection 0\n");
+	
 	struct v4l2_selection *p = arg;
 	u32 old_type = p->type;
 	int ret;
@@ -2419,6 +2724,9 @@ static int v4l_s_selection(const struct v4l2_ioctl_ops *ops,
 static int v4l_g_crop(const struct v4l2_ioctl_ops *ops,
 				struct file *file, void *fh, void *arg)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_g_crop 0\n");
+	
 	struct video_device *vfd = video_devdata(file);
 	struct v4l2_crop *p = arg;
 	struct v4l2_selection s = {
@@ -2449,6 +2757,9 @@ static int v4l_g_crop(const struct v4l2_ioctl_ops *ops,
 static int v4l_s_crop(const struct v4l2_ioctl_ops *ops,
 				struct file *file, void *fh, void *arg)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_s_crop 0\n");
+	
 	struct video_device *vfd = video_devdata(file);
 	struct v4l2_crop *p = arg;
 	struct v4l2_selection s = {
@@ -2474,6 +2785,9 @@ static int v4l_s_crop(const struct v4l2_ioctl_ops *ops,
 static int v4l_cropcap(const struct v4l2_ioctl_ops *ops,
 				struct file *file, void *fh, void *arg)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_cropcap 0\n");
+	
 	struct video_device *vfd = video_devdata(file);
 	struct v4l2_cropcap *p = arg;
 	struct v4l2_selection s = { .type = p->type };
@@ -2540,6 +2854,9 @@ static int v4l_cropcap(const struct v4l2_ioctl_ops *ops,
 static int v4l_log_status(const struct v4l2_ioctl_ops *ops,
 				struct file *file, void *fh, void *arg)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_log_status 0\n");
+	
 	struct video_device *vfd = video_devdata(file);
 	int ret;
 
@@ -2556,6 +2873,9 @@ static int v4l_log_status(const struct v4l2_ioctl_ops *ops,
 static int v4l_dbg_g_register(const struct v4l2_ioctl_ops *ops,
 				struct file *file, void *fh, void *arg)
 {
+
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_dbg_g_register 0\n");
+
 #ifdef CONFIG_VIDEO_ADV_DEBUG
 	struct v4l2_dbg_register *p = arg;
 	struct video_device *vfd = video_devdata(file);
@@ -2584,6 +2904,9 @@ static int v4l_dbg_g_register(const struct v4l2_ioctl_ops *ops,
 static int v4l_dbg_s_register(const struct v4l2_ioctl_ops *ops,
 				struct file *file, void *fh, void *arg)
 {
+
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_dbg_s_register 0\n");
+
 #ifdef CONFIG_VIDEO_ADV_DEBUG
 	const struct v4l2_dbg_register *p = arg;
 	struct video_device *vfd = video_devdata(file);
@@ -2612,6 +2935,9 @@ static int v4l_dbg_s_register(const struct v4l2_ioctl_ops *ops,
 static int v4l_dbg_g_chip_info(const struct v4l2_ioctl_ops *ops,
 				struct file *file, void *fh, void *arg)
 {
+
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_dbg_g_chip_info 0\n");
+
 #ifdef CONFIG_VIDEO_ADV_DEBUG
 	struct video_device *vfd = video_devdata(file);
 	struct v4l2_dbg_chip_info *p = arg;
@@ -2655,24 +2981,36 @@ static int v4l_dbg_g_chip_info(const struct v4l2_ioctl_ops *ops,
 static int v4l_dqevent(const struct v4l2_ioctl_ops *ops,
 				struct file *file, void *fh, void *arg)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_dqevent 0\n");
+	
 	return v4l2_event_dequeue(fh, arg, file->f_flags & O_NONBLOCK);
 }
 
 static int v4l_subscribe_event(const struct v4l2_ioctl_ops *ops,
 				struct file *file, void *fh, void *arg)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_subscribe_event 0\n");
+	
 	return ops->vidioc_subscribe_event(fh, arg);
 }
 
 static int v4l_unsubscribe_event(const struct v4l2_ioctl_ops *ops,
 				struct file *file, void *fh, void *arg)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_unsubscribe_event 0\n");
+	
 	return ops->vidioc_unsubscribe_event(fh, arg);
 }
 
 static int v4l_g_sliced_vbi_cap(const struct v4l2_ioctl_ops *ops,
 				struct file *file, void *fh, void *arg)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_g_sliced_vbi_cap 0\n");
+	
 	struct v4l2_sliced_vbi_cap *p = arg;
 	int ret = check_fmt(file, p->type);
 
@@ -2688,6 +3026,9 @@ static int v4l_g_sliced_vbi_cap(const struct v4l2_ioctl_ops *ops,
 static int v4l_enum_freq_bands(const struct v4l2_ioctl_ops *ops,
 				struct file *file, void *fh, void *arg)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l_enum_freq_bands 0\n");
+	
 	struct video_device *vfd = video_devdata(file);
 	struct v4l2_frequency_band *p = arg;
 	enum v4l2_tuner_type type;
@@ -2965,6 +3306,9 @@ EXPORT_SYMBOL(v4l_printk_ioctl);
 static long __video_do_ioctl(struct file *file,
 		unsigned int cmd, void *arg)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: __video_do_ioctl 0\n");
+	
 	struct video_device *vfd = video_devdata(file);
 	struct mutex *req_queue_lock = NULL;
 	struct mutex *lock; /* ioctl serialization mutex */
@@ -3073,6 +3417,9 @@ unlock:
 static int check_array_args(unsigned int cmd, void *parg, size_t *array_size,
 			    void __user **user_ptr, void ***kernel_ptr)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: check_array_args 0\n");
+	
 	int ret = 0;
 
 	switch (cmd) {
@@ -3182,6 +3529,9 @@ static int video_get_user(void __user *arg, void *parg,
 			  unsigned int real_cmd, unsigned int cmd,
 			  bool *always_copy)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: video_get_user 0\n");
+	
 	unsigned int n = _IOC_SIZE(real_cmd);
 	int err = 0;
 
@@ -3256,6 +3606,9 @@ static int video_get_user(void __user *arg, void *parg,
 static int video_put_user(void __user *arg, void *parg,
 			  unsigned int real_cmd, unsigned int cmd)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: video_put_user 0\n");
+	
 	if (!(_IOC_DIR(cmd) & _IOC_READ))
 		return 0;
 
@@ -3328,6 +3681,9 @@ long
 video_usercopy(struct file *file, unsigned int orig_cmd, unsigned long arg,
 	       v4l2_kioctl func)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: video_usercopy 0\n");
+	
 	char	sbuf[128];
 	void    *mbuf = NULL, *array_buf = NULL;
 	void	*parg = (void *)arg;
@@ -3428,6 +3784,9 @@ out:
 long video_ioctl2(struct file *file,
 	       unsigned int cmd, unsigned long arg)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: video_ioctl2 0\n");
+	
 	return video_usercopy(file, cmd, arg, __video_do_ioctl);
 }
 EXPORT_SYMBOL(video_ioctl2);

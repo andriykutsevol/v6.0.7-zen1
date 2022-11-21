@@ -754,16 +754,24 @@ static const struct uvc_control_mapping uvc_ctrl_mappings_uvc15[] = {
 
 static inline u8 *uvc_ctrl_data(struct uvc_control *ctrl, int id)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_ctrl_data 0\n");
+	
 	return ctrl->uvc_data + id * ctrl->info.size;
 }
 
 static inline int uvc_test_bit(const u8 *data, int bit)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_test_bit 0\n");
+	
 	return (data[bit >> 3] >> (bit & 7)) & 1;
 }
 
 static inline void uvc_clear_bit(u8 *data, int bit)
 {
+	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_clear_bit 0\n");
+	
 	data[bit >> 3] &= ~(1 << (bit & 7));
 }
 
@@ -811,6 +819,9 @@ static s32 uvc_get_le_value(struct uvc_control_mapping *mapping,
 static void uvc_set_le_value(struct uvc_control_mapping *mapping,
 	s32 value, u8 *data)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_set_le_value 0\n");
+	
 	int bits = mapping->size;
 	int offset = mapping->offset;
 	u8 mask;
@@ -843,6 +854,9 @@ static void uvc_set_le_value(struct uvc_control_mapping *mapping,
 static int uvc_entity_match_guid(const struct uvc_entity *entity,
 				 const u8 guid[16])
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_entity_match_guid 0\n");
+	
 	return memcmp(entity->guid, guid, sizeof(entity->guid)) == 0;
 }
 
@@ -854,6 +868,9 @@ static void __uvc_find_control(struct uvc_entity *entity, u32 v4l2_id,
 	struct uvc_control_mapping **mapping, struct uvc_control **control,
 	int next)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: __uvc_find_control 0\n");
+	
 	struct uvc_control *ctrl;
 	struct uvc_control_mapping *map;
 	unsigned int i;
@@ -885,6 +902,9 @@ static void __uvc_find_control(struct uvc_entity *entity, u32 v4l2_id,
 static struct uvc_control *uvc_find_control(struct uvc_video_chain *chain,
 	u32 v4l2_id, struct uvc_control_mapping **mapping)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_find_control 0\n");
+	
 	struct uvc_control *ctrl = NULL;
 	struct uvc_entity *entity;
 	int next = v4l2_id & V4L2_CTRL_FLAG_NEXT_CTRL;
@@ -911,6 +931,9 @@ static struct uvc_control *uvc_find_control(struct uvc_video_chain *chain,
 static int uvc_ctrl_populate_cache(struct uvc_video_chain *chain,
 	struct uvc_control *ctrl)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_ctrl_populate_cache 0\n");
+	
 	int ret;
 
 	if (ctrl->info.flags & UVC_CTRL_FLAG_GET_DEF) {
@@ -953,6 +976,9 @@ static int uvc_ctrl_populate_cache(struct uvc_video_chain *chain,
 			 * cameras still choke on it. Ignore errors and set the
 			 * resolution value to zero.
 			 */
+
+			printk(KERN_INFO "!!!dgnet: uvc_video.c: UVC non compliance 1\n");
+
 			uvc_warn_once(chain->dev, UVC_WARN_XU_GET_RES,
 				      "UVC non compliance - GET_RES failed on "
 				      "an XU control. Enabling workaround.\n");
@@ -968,6 +994,9 @@ static int uvc_ctrl_populate_cache(struct uvc_video_chain *chain,
 static s32 __uvc_ctrl_get_value(struct uvc_control_mapping *mapping,
 				const u8 *data)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c:  __uvc_ctrl_get_value 0\n");
+	
 	s32 value = mapping->get(mapping, UVC_GET_CUR, data);
 
 	if (mapping->v4l2_type == V4L2_CTRL_TYPE_MENU) {
@@ -988,6 +1017,9 @@ static s32 __uvc_ctrl_get_value(struct uvc_control_mapping *mapping,
 static int __uvc_ctrl_load_cur(struct uvc_video_chain *chain,
 			       struct uvc_control *ctrl)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c:  __uvc_ctrl_load_cur 0\n");
+	
 	u8 *data;
 	int ret;
 
@@ -1026,6 +1058,9 @@ static int __uvc_ctrl_get(struct uvc_video_chain *chain,
 			  struct uvc_control_mapping *mapping,
 			  s32 *value)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: __uvc_ctrl_get 0\n");
+	
 	int ret;
 
 	if ((ctrl->info.flags & UVC_CTRL_FLAG_GET_CUR) == 0)
@@ -1044,6 +1079,10 @@ static int __uvc_ctrl_get(struct uvc_video_chain *chain,
 static int __uvc_query_v4l2_class(struct uvc_video_chain *chain, u32 req_id,
 				  u32 found_id)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: __uvc_query_v4l2_class 0\n");
+	
+	
 	bool find_next = req_id & V4L2_CTRL_FLAG_NEXT_CTRL;
 	unsigned int i;
 
@@ -1068,6 +1107,10 @@ static int __uvc_query_v4l2_class(struct uvc_video_chain *chain, u32 req_id,
 static int uvc_query_v4l2_class(struct uvc_video_chain *chain, u32 req_id,
 				u32 found_id, struct v4l2_queryctrl *v4l2_ctrl)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_query_v4l2_class 0\n");
+	
+	
 	int idx;
 
 	idx = __uvc_query_v4l2_class(chain, req_id, found_id);
@@ -1087,6 +1130,10 @@ static int uvc_query_v4l2_class(struct uvc_video_chain *chain, u32 req_id,
 int uvc_ctrl_is_accessible(struct uvc_video_chain *chain, u32 v4l2_id,
 			   bool read)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_ctrl_is_accessible 0\n");
+	
+	
 	struct uvc_control_mapping *mapping;
 	struct uvc_control *ctrl;
 
@@ -1108,6 +1155,9 @@ int uvc_ctrl_is_accessible(struct uvc_video_chain *chain, u32 v4l2_id,
 
 static const char *uvc_map_get_name(const struct uvc_control_mapping *map)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_map_get_name 0\n");
+	
 	const char *name;
 
 	if (map->name)
@@ -1125,6 +1175,9 @@ static int __uvc_query_v4l2_ctrl(struct uvc_video_chain *chain,
 	struct uvc_control_mapping *mapping,
 	struct v4l2_queryctrl *v4l2_ctrl)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: __uvc_query_v4l2_ctrl 0\n");
+	
 	struct uvc_control_mapping *master_map = NULL;
 	struct uvc_control *master_ctrl = NULL;
 	const struct uvc_menu_info *menu;
@@ -1216,6 +1269,9 @@ static int __uvc_query_v4l2_ctrl(struct uvc_video_chain *chain,
 int uvc_query_v4l2_ctrl(struct uvc_video_chain *chain,
 	struct v4l2_queryctrl *v4l2_ctrl)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_query_v4l2_ctrl 0\n");
+	
 	struct uvc_control *ctrl;
 	struct uvc_control_mapping *mapping;
 	int ret;
@@ -1267,6 +1323,9 @@ done:
 int uvc_query_v4l2_menu(struct uvc_video_chain *chain,
 	struct v4l2_querymenu *query_menu)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_query_v4l2_menu 0\n");
+	
 	const struct uvc_menu_info *menu_info;
 	struct uvc_control_mapping *mapping;
 	struct uvc_control *ctrl;
@@ -1330,6 +1389,10 @@ static void uvc_ctrl_fill_event(struct uvc_video_chain *chain,
 	struct uvc_control_mapping *mapping,
 	s32 value, u32 changes)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_ctrl_fill_event 0\n");
+	
+	
 	struct v4l2_queryctrl v4l2_ctrl;
 
 	__uvc_query_v4l2_ctrl(chain, ctrl, mapping, &v4l2_ctrl);
@@ -1358,6 +1421,9 @@ static void uvc_ctrl_send_event(struct uvc_video_chain *chain,
 	struct uvc_fh *handle, struct uvc_control *ctrl,
 	struct uvc_control_mapping *mapping, s32 value, u32 changes)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_ctrl_send_event 0\n");
+	
 	struct v4l2_fh *originator = handle ? &handle->vfh : NULL;
 	struct v4l2_subscribed_event *sev;
 	struct v4l2_event ev;
@@ -1383,6 +1449,9 @@ static void uvc_ctrl_send_event(struct uvc_video_chain *chain,
 static void uvc_ctrl_send_slave_event(struct uvc_video_chain *chain,
 	struct uvc_fh *handle, struct uvc_control *master, u32 slave_id)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_ctrl_send_slave_event 0\n");
+	
 	struct uvc_control_mapping *mapping = NULL;
 	struct uvc_control *ctrl = NULL;
 	u32 changes = V4L2_EVENT_CTRL_CH_FLAGS;
@@ -1401,6 +1470,9 @@ static void uvc_ctrl_send_slave_event(struct uvc_video_chain *chain,
 void uvc_ctrl_status_event(struct uvc_video_chain *chain,
 			   struct uvc_control *ctrl, const u8 *data)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_ctrl_status_event 0\n");
+	
 	struct uvc_control_mapping *mapping;
 	struct uvc_fh *handle;
 	unsigned int i;
@@ -1434,6 +1506,9 @@ void uvc_ctrl_status_event(struct uvc_video_chain *chain,
 
 static void uvc_ctrl_status_event_work(struct work_struct *work)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_ctrl_status_event_work 0\n");
+	
 	struct uvc_device *dev = container_of(work, struct uvc_device,
 					      async_ctrl.work);
 	struct uvc_ctrl_work *w = &dev->async_ctrl;
@@ -1452,6 +1527,9 @@ static void uvc_ctrl_status_event_work(struct work_struct *work)
 bool uvc_ctrl_status_event_async(struct urb *urb, struct uvc_video_chain *chain,
 				 struct uvc_control *ctrl, const u8 *data)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_ctrl_status_event_async 0\n");
+	
 	struct uvc_device *dev = chain->dev;
 	struct uvc_ctrl_work *w = &dev->async_ctrl;
 
@@ -1473,6 +1551,9 @@ bool uvc_ctrl_status_event_async(struct urb *urb, struct uvc_video_chain *chain,
 static bool uvc_ctrl_xctrls_has_control(const struct v4l2_ext_control *xctrls,
 					unsigned int xctrls_count, u32 id)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_ctrl_xctrls_has_control 0\n");
+	
 	unsigned int i;
 
 	for (i = 0; i < xctrls_count; ++i) {
@@ -1486,6 +1567,9 @@ static bool uvc_ctrl_xctrls_has_control(const struct v4l2_ext_control *xctrls,
 static void uvc_ctrl_send_events(struct uvc_fh *handle,
 	const struct v4l2_ext_control *xctrls, unsigned int xctrls_count)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_ctrl_send_events 0\n");
+	
 	struct uvc_control_mapping *mapping;
 	struct uvc_control *ctrl;
 	u32 changes = V4L2_EVENT_CTRL_CH_VALUE;
@@ -1533,6 +1617,9 @@ static void uvc_ctrl_send_events(struct uvc_fh *handle,
 
 static int uvc_ctrl_add_event(struct v4l2_subscribed_event *sev, unsigned elems)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_ctrl_add_event 0\n");
+	
 	struct uvc_fh *handle = container_of(sev->fh, struct uvc_fh, vfh);
 	struct uvc_control_mapping *mapping;
 	struct uvc_control *ctrl;
@@ -1579,6 +1666,10 @@ done:
 
 static void uvc_ctrl_del_event(struct v4l2_subscribed_event *sev)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_ctrl_del_event 0\n");
+
+	
 	struct uvc_fh *handle = container_of(sev->fh, struct uvc_fh, vfh);
 
 	mutex_lock(&handle->chain->ctrl_mutex);
@@ -1622,12 +1713,18 @@ const struct v4l2_subscribed_event_ops uvc_ctrl_sub_ev_ops = {
  */
 int uvc_ctrl_begin(struct uvc_video_chain *chain)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_ctrl_begin 0\n");
+	
 	return mutex_lock_interruptible(&chain->ctrl_mutex) ? -ERESTARTSYS : 0;
 }
 
 static int uvc_ctrl_commit_entity(struct uvc_device *dev,
 	struct uvc_entity *entity, int rollback, struct uvc_control **err_ctrl)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_ctrl_commit_entity 0\n");
+	
 	struct uvc_control *ctrl;
 	unsigned int i;
 	int ret;
@@ -1683,6 +1780,9 @@ static int uvc_ctrl_find_ctrl_idx(struct uvc_entity *entity,
 				  struct v4l2_ext_controls *ctrls,
 				  struct uvc_control *uvc_control)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_ctrl_find_ctrl_idx 0\n");
+	
 	struct uvc_control_mapping *mapping = NULL;
 	struct uvc_control *ctrl_found = NULL;
 	unsigned int i;
@@ -1703,6 +1803,9 @@ static int uvc_ctrl_find_ctrl_idx(struct uvc_entity *entity,
 int __uvc_ctrl_commit(struct uvc_fh *handle, int rollback,
 		      struct v4l2_ext_controls *ctrls)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: __uvc_ctrl_commit 0\n");
+	
 	struct uvc_video_chain *chain = handle->chain;
 	struct uvc_control *err_ctrl;
 	struct uvc_entity *entity;
@@ -1729,6 +1832,9 @@ done:
 int uvc_ctrl_get(struct uvc_video_chain *chain,
 	struct v4l2_ext_control *xctrl)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_ctrl_get 0\n");
+	
 	struct uvc_control *ctrl;
 	struct uvc_control_mapping *mapping;
 
@@ -1745,6 +1851,9 @@ int uvc_ctrl_get(struct uvc_video_chain *chain,
 int uvc_ctrl_set(struct uvc_fh *handle,
 	struct v4l2_ext_control *xctrl)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_ctrl_set 0\n");
+	
 	struct uvc_video_chain *chain = handle->chain;
 	struct uvc_control *ctrl;
 	struct uvc_control_mapping *mapping;
@@ -1865,6 +1974,10 @@ static int uvc_ctrl_get_flags(struct uvc_device *dev,
 			      const struct uvc_control *ctrl,
 			      struct uvc_control_info *info)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_ctrl_get_flags 0\n");
+	
+	
 	u8 *data;
 	int ret;
 
@@ -1895,6 +2008,9 @@ static int uvc_ctrl_get_flags(struct uvc_device *dev,
 static void uvc_ctrl_fixup_xu_info(struct uvc_device *dev,
 	const struct uvc_control *ctrl, struct uvc_control_info *info)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_ctrl_fixup_xu_info 0\n");
+	
 	struct uvc_ctrl_fixup {
 		struct usb_device_id id;
 		u8 entity;
@@ -1937,6 +2053,9 @@ static void uvc_ctrl_fixup_xu_info(struct uvc_device *dev,
 static int uvc_ctrl_fill_xu_info(struct uvc_device *dev,
 	const struct uvc_control *ctrl, struct uvc_control_info *info)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_ctrl_fill_xu_info 0\n");
+	
 	u8 *data;
 	int ret;
 
@@ -1991,6 +2110,9 @@ static int uvc_ctrl_add_info(struct uvc_device *dev, struct uvc_control *ctrl,
 static int uvc_ctrl_init_xu_ctrl(struct uvc_device *dev,
 	struct uvc_control *ctrl)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_ctrl_init_xu_ctrl 0\n");
+	
 	struct uvc_control_info info;
 	int ret;
 
@@ -2014,6 +2136,10 @@ static int uvc_ctrl_init_xu_ctrl(struct uvc_device *dev,
 int uvc_xu_ctrl_query(struct uvc_video_chain *chain,
 	struct uvc_xu_control_query *xqry)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_xu_ctrl_query 0\n");
+	
+	
 	struct uvc_entity *entity;
 	struct uvc_control *ctrl;
 	unsigned int i;
@@ -2149,6 +2275,10 @@ done:
  */
 int uvc_ctrl_restore_values(struct uvc_device *dev)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_ctrl_restore_values 0\n");
+	
+	
 	struct uvc_control *ctrl;
 	struct uvc_entity *entity;
 	unsigned int i;
@@ -2188,6 +2318,9 @@ int uvc_ctrl_restore_values(struct uvc_device *dev)
 static int uvc_ctrl_add_info(struct uvc_device *dev, struct uvc_control *ctrl,
 	const struct uvc_control_info *info)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_ctrl_add_info 0\n");
+	
 	ctrl->info = *info;
 	INIT_LIST_HEAD(&ctrl->info.mappings);
 
@@ -2212,6 +2345,10 @@ static int uvc_ctrl_add_info(struct uvc_device *dev, struct uvc_control *ctrl,
 static int __uvc_ctrl_add_mapping(struct uvc_video_chain *chain,
 	struct uvc_control *ctrl, const struct uvc_control_mapping *mapping)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: __uvc_ctrl_add_mapping 0\n");
+	
+	
 	struct uvc_control_mapping *map;
 	unsigned int size;
 	unsigned int i;
@@ -2268,6 +2405,9 @@ static int __uvc_ctrl_add_mapping(struct uvc_video_chain *chain,
 int uvc_ctrl_add_mapping(struct uvc_video_chain *chain,
 	const struct uvc_control_mapping *mapping)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_ctrl_add_mapping 0\n");
+	
 	struct uvc_device *dev = chain->dev;
 	struct uvc_control_mapping *map;
 	struct uvc_entity *entity;
@@ -2358,6 +2498,9 @@ done:
 static void uvc_ctrl_prune_entity(struct uvc_device *dev,
 	struct uvc_entity *entity)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_ctrl_prune_entity 0\n");
+	
 	struct uvc_ctrl_blacklist {
 		struct usb_device_id id;
 		u8 index;
@@ -2420,6 +2563,9 @@ static void uvc_ctrl_prune_entity(struct uvc_device *dev,
 static void uvc_ctrl_init_ctrl(struct uvc_video_chain *chain,
 			       struct uvc_control *ctrl)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_ctrl_init_ctrl 0\n");
+	
 	const struct uvc_control_info *info = uvc_ctrls;
 	const struct uvc_control_info *iend = info + ARRAY_SIZE(uvc_ctrls);
 	const struct uvc_control_mapping *mapping;
@@ -2506,6 +2652,9 @@ static void uvc_ctrl_init_ctrl(struct uvc_video_chain *chain,
  */
 static int uvc_ctrl_init_chain(struct uvc_video_chain *chain)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_ctrl_init_chain 0\n");
+	
 	struct uvc_entity *entity;
 	unsigned int i;
 
@@ -2562,6 +2711,9 @@ static int uvc_ctrl_init_chain(struct uvc_video_chain *chain)
 
 int uvc_ctrl_init_device(struct uvc_device *dev)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_ctrl_init_device 0\n");
+	
 	struct uvc_video_chain *chain;
 	int ret;
 
@@ -2582,6 +2734,9 @@ int uvc_ctrl_init_device(struct uvc_device *dev)
 static void uvc_ctrl_cleanup_mappings(struct uvc_device *dev,
 	struct uvc_control *ctrl)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_ctrl_cleanup_mappings 0\n");
+	
 	struct uvc_control_mapping *mapping, *nm;
 
 	list_for_each_entry_safe(mapping, nm, &ctrl->info.mappings, list) {
@@ -2594,6 +2749,9 @@ static void uvc_ctrl_cleanup_mappings(struct uvc_device *dev,
 
 void uvc_ctrl_cleanup_device(struct uvc_device *dev)
 {
+	
+	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_ctrl_cleanup_device 0\n");
+	
 	struct uvc_entity *entity;
 	unsigned int i;
 
