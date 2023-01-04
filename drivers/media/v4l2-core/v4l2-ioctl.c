@@ -83,7 +83,7 @@ static const struct std_descr standards[] = {
 const char *v4l2_norm_to_name(v4l2_std_id id)
 {
 
-	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: videobuf_mmap_mapper 0\n");
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l2_norm_to_name 0\n");
 
 	u32 myid = id;
 	int i;
