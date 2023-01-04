@@ -104,6 +104,9 @@ EXPORT_SYMBOL(v4l2_norm_to_name);
 /* Returns frame period for the given standard */
 void v4l2_video_std_frame_period(int id, struct v4l2_fract *frameperiod)
 {
+
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l2_video_std_frame_period 0\n");
+
 	if (id & V4L2_STD_525_60) {
 		frameperiod->numerator = 1001;
 		frameperiod->denominator = 30000;
