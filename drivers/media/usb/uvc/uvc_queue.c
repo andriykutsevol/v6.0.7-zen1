@@ -34,6 +34,9 @@
 
 static inline struct uvc_buffer *uvc_vbuf_to_buffer(struct vb2_v4l2_buffer *buf)
 {
+	
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_queue.c: uvc_vbuf_to_buffer 0\n");
+	
 	return container_of(buf, struct uvc_buffer, buf);
 }
 
@@ -45,6 +48,9 @@ static inline struct uvc_buffer *uvc_vbuf_to_buffer(struct vb2_v4l2_buffer *buf)
 static void uvc_queue_return_buffers(struct uvc_video_queue *queue,
 			       enum uvc_buffer_state state)
 {
+	
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_queue.c: uvc_queue_return_buffers 0\n");
+	
 	enum vb2_buffer_state vb2_state = state == UVC_BUF_STATE_ERROR
 					? VB2_BUF_STATE_ERROR
 					: VB2_BUF_STATE_QUEUED;
@@ -67,6 +73,9 @@ static int uvc_queue_setup(struct vb2_queue *vq,
 			   unsigned int *nbuffers, unsigned int *nplanes,
 			   unsigned int sizes[], struct device *alloc_devs[])
 {
+	
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_queue.c: uvc_queue_setup 0\n");
+	
 	struct uvc_video_queue *queue = vb2_get_drv_priv(vq);
 	struct uvc_streaming *stream;
 	unsigned int size;
@@ -97,6 +106,9 @@ static int uvc_queue_setup(struct vb2_queue *vq,
 
 static int uvc_buffer_prepare(struct vb2_buffer *vb)
 {
+	
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_queue.c: uvc_buffer_prepare 0\n");
+	
 	struct vb2_v4l2_buffer *vbuf = to_vb2_v4l2_buffer(vb);
 	struct uvc_video_queue *queue = vb2_get_drv_priv(vb->vb2_queue);
 	struct uvc_buffer *buf = uvc_vbuf_to_buffer(vbuf);
@@ -125,6 +137,9 @@ static int uvc_buffer_prepare(struct vb2_buffer *vb)
 
 static void uvc_buffer_queue(struct vb2_buffer *vb)
 {
+	
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_queue.c: uvc_buffer_queue 0\n");
+	
 	struct vb2_v4l2_buffer *vbuf = to_vb2_v4l2_buffer(vb);
 	struct uvc_video_queue *queue = vb2_get_drv_priv(vb->vb2_queue);
 	struct uvc_buffer *buf = uvc_vbuf_to_buffer(vbuf);
@@ -147,6 +162,9 @@ static void uvc_buffer_queue(struct vb2_buffer *vb)
 
 static void uvc_buffer_finish(struct vb2_buffer *vb)
 {
+	
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_queue.c: uvc_buffer_finish 0\n");
+	
 	struct vb2_v4l2_buffer *vbuf = to_vb2_v4l2_buffer(vb);
 	struct uvc_video_queue *queue = vb2_get_drv_priv(vb->vb2_queue);
 	struct uvc_streaming *stream = uvc_queue_to_stream(queue);
@@ -158,6 +176,9 @@ static void uvc_buffer_finish(struct vb2_buffer *vb)
 
 static int uvc_start_streaming(struct vb2_queue *vq, unsigned int count)
 {
+	
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_queue.c: uvc_start_streaming 0\n");
+	
 	struct uvc_video_queue *queue = vb2_get_drv_priv(vq);
 	struct uvc_streaming *stream = uvc_queue_to_stream(queue);
 	int ret;
@@ -179,6 +200,9 @@ static int uvc_start_streaming(struct vb2_queue *vq, unsigned int count)
 
 static void uvc_stop_streaming(struct vb2_queue *vq)
 {
+	
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_queue.c: uvc_stop_streaming 0\n");
+	
 	struct uvc_video_queue *queue = vb2_get_drv_priv(vq);
 
 	lockdep_assert_irqs_enabled();
@@ -214,6 +238,9 @@ static const struct vb2_ops uvc_meta_queue_qops = {
 int uvc_queue_init(struct uvc_video_queue *queue, enum v4l2_buf_type type,
 		    int drop_corrupted)
 {
+	
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_queue.c: uvc_queue_init 0\n");
+	
 	int ret;
 
 	queue->queue.type = type;
@@ -249,6 +276,9 @@ int uvc_queue_init(struct uvc_video_queue *queue, enum v4l2_buf_type type,
 
 void uvc_queue_release(struct uvc_video_queue *queue)
 {
+	
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_queue.c: uvc_queue_release 0\n");
+	
 	mutex_lock(&queue->mutex);
 	vb2_queue_release(&queue->queue);
 	mutex_unlock(&queue->mutex);
@@ -261,6 +291,9 @@ void uvc_queue_release(struct uvc_video_queue *queue)
 int uvc_request_buffers(struct uvc_video_queue *queue,
 			struct v4l2_requestbuffers *rb)
 {
+	
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_queue.c: uvc_request_buffers 0\n");
+	
 	int ret;
 
 	mutex_lock(&queue->mutex);
@@ -272,6 +305,9 @@ int uvc_request_buffers(struct uvc_video_queue *queue,
 
 int uvc_query_buffer(struct uvc_video_queue *queue, struct v4l2_buffer *buf)
 {
+	
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_queue.c: uvc_query_buffer 0\n");
+	
 	int ret;
 
 	mutex_lock(&queue->mutex);
@@ -284,6 +320,9 @@ int uvc_query_buffer(struct uvc_video_queue *queue, struct v4l2_buffer *buf)
 int uvc_create_buffers(struct uvc_video_queue *queue,
 		       struct v4l2_create_buffers *cb)
 {
+	
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_queue.c: uvc_create_buffers 0\n");
+	
 	int ret;
 
 	mutex_lock(&queue->mutex);
@@ -296,6 +335,9 @@ int uvc_create_buffers(struct uvc_video_queue *queue,
 int uvc_queue_buffer(struct uvc_video_queue *queue,
 		     struct media_device *mdev, struct v4l2_buffer *buf)
 {
+	
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_queue.c: uvc_queue_buffer 0\n");
+	
 	int ret;
 
 	mutex_lock(&queue->mutex);
@@ -308,6 +350,9 @@ int uvc_queue_buffer(struct uvc_video_queue *queue,
 int uvc_export_buffer(struct uvc_video_queue *queue,
 		      struct v4l2_exportbuffer *exp)
 {
+	
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_queue.c: uvc_export_buffer 0\n");
+	
 	int ret;
 
 	mutex_lock(&queue->mutex);
@@ -320,6 +365,9 @@ int uvc_export_buffer(struct uvc_video_queue *queue,
 int uvc_dequeue_buffer(struct uvc_video_queue *queue, struct v4l2_buffer *buf,
 		       int nonblocking)
 {
+	
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_queue.c: uvc_dequeue_buffer 0\n");
+	
 	int ret;
 
 	mutex_lock(&queue->mutex);
@@ -331,6 +379,9 @@ int uvc_dequeue_buffer(struct uvc_video_queue *queue, struct v4l2_buffer *buf,
 
 int uvc_queue_streamon(struct uvc_video_queue *queue, enum v4l2_buf_type type)
 {
+	
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_queue.c: uvc_queue_streamon 0\n");
+	
 	int ret;
 
 	mutex_lock(&queue->mutex);
@@ -342,6 +393,9 @@ int uvc_queue_streamon(struct uvc_video_queue *queue, enum v4l2_buf_type type)
 
 int uvc_queue_streamoff(struct uvc_video_queue *queue, enum v4l2_buf_type type)
 {
+	
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_queue.c: uvc_queue_streamoff 0\n");
+	
 	int ret;
 
 	mutex_lock(&queue->mutex);
@@ -353,6 +407,9 @@ int uvc_queue_streamoff(struct uvc_video_queue *queue, enum v4l2_buf_type type)
 
 int uvc_queue_mmap(struct uvc_video_queue *queue, struct vm_area_struct *vma)
 {
+	
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_queue.c: uvc_queue_mmap 0\n");
+	
 	return vb2_mmap(&queue->queue, vma);
 }
 
@@ -360,6 +417,8 @@ int uvc_queue_mmap(struct uvc_video_queue *queue, struct vm_area_struct *vma)
 unsigned long uvc_queue_get_unmapped_area(struct uvc_video_queue *queue,
 		unsigned long pgoff)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_queue.c: uvc_queue_get_unmapped_area 0\n");
+	
 	return vb2_get_unmapped_area(&queue->queue, 0, 0, pgoff, 0);
 }
 #endif
@@ -385,6 +444,9 @@ __poll_t uvc_queue_poll(struct uvc_video_queue *queue, struct file *file,
  */
 int uvc_queue_allocated(struct uvc_video_queue *queue)
 {
+	
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_queue.c: uvc_queue_allocated 0\n");
+	
 	int allocated;
 
 	mutex_lock(&queue->mutex);
@@ -408,6 +470,9 @@ int uvc_queue_allocated(struct uvc_video_queue *queue)
  */
 void uvc_queue_cancel(struct uvc_video_queue *queue, int disconnect)
 {
+	
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_queue.c: uvc_queue_cancel 0\n");
+	
 	unsigned long flags;
 
 	spin_lock_irqsave(&queue->irqlock, flags);
@@ -440,6 +505,10 @@ __uvc_queue_get_current_buffer(struct uvc_video_queue *queue)
 
 struct uvc_buffer *uvc_queue_get_current_buffer(struct uvc_video_queue *queue)
 {
+	
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_queue.c: uvc_queue_get_current_buffer 0\n");
+	
+	
 	struct uvc_buffer *nextbuf;
 	unsigned long flags;
 
@@ -460,6 +529,9 @@ struct uvc_buffer *uvc_queue_get_current_buffer(struct uvc_video_queue *queue)
 static void uvc_queue_buffer_requeue(struct uvc_video_queue *queue,
 		struct uvc_buffer *buf)
 {
+	
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_queue.c: uvc_queue_buffer_requeue 0\n");
+	
 	buf->error = 0;
 	buf->state = UVC_BUF_STATE_QUEUED;
 	buf->bytesused = 0;
@@ -470,6 +542,9 @@ static void uvc_queue_buffer_requeue(struct uvc_video_queue *queue,
 
 static void uvc_queue_buffer_complete(struct kref *ref)
 {
+	
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_queue.c: uvc_queue_buffer_complete 0\n");
+	
 	struct uvc_buffer *buf = container_of(ref, struct uvc_buffer, ref);
 	struct vb2_buffer *vb = &buf->buf.vb2_buf;
 	struct uvc_video_queue *queue = vb2_get_drv_priv(vb->vb2_queue);
@@ -490,6 +565,9 @@ static void uvc_queue_buffer_complete(struct kref *ref)
  */
 void uvc_queue_buffer_release(struct uvc_buffer *buf)
 {
+	
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_queue.c: uvc_queue_buffer_release 0\n");
+	
 	kref_put(&buf->ref, uvc_queue_buffer_complete);
 }
 
@@ -501,6 +579,9 @@ void uvc_queue_buffer_release(struct uvc_buffer *buf)
 struct uvc_buffer *uvc_queue_next_buffer(struct uvc_video_queue *queue,
 		struct uvc_buffer *buf)
 {
+	
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_queue.c: uvc_queue_next_buffer 0\n");
+	
 	struct uvc_buffer *nextbuf;
 	unsigned long flags;
 

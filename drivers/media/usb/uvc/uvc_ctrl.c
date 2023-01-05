@@ -737,7 +737,7 @@ static const struct uvc_control_mapping uvc_ctrl_mappings[] = {
 static inline u8 *uvc_ctrl_data(struct uvc_control *ctrl, int id)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_ctrl_data 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_ctrl.c: uvc_ctrl_data 0\n");
 	
 	return ctrl->uvc_data + id * ctrl->info.size;
 }
@@ -745,14 +745,14 @@ static inline u8 *uvc_ctrl_data(struct uvc_control *ctrl, int id)
 static inline int uvc_test_bit(const u8 *data, int bit)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_test_bit 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_ctrl.c: uvc_test_bit 0\n");
 	
 	return (data[bit >> 3] >> (bit & 7)) & 1;
 }
 
 static inline void uvc_clear_bit(u8 *data, int bit)
 {
-	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_clear_bit 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_ctrl.c: uvc_clear_bit 0\n");
 	
 	data[bit >> 3] &= ~(1 << (bit & 7));
 }
@@ -800,7 +800,7 @@ static void uvc_set_le_value(struct uvc_control_mapping *mapping,
 	s32 value, u8 *data)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_set_le_value 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_ctrl.c: uvc_set_le_value 0\n");
 	
 	int bits = mapping->size;
 	int offset = mapping->offset;
@@ -834,7 +834,7 @@ static int uvc_entity_match_guid(const struct uvc_entity *entity,
 				 const u8 guid[16])
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_entity_match_guid 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_ctrl.c: uvc_entity_match_guid 0\n");
 	
 	return memcmp(entity->guid, guid, sizeof(entity->guid)) == 0;
 }
@@ -848,7 +848,7 @@ static void __uvc_find_control(struct uvc_entity *entity, u32 v4l2_id,
 	int next)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: __uvc_find_control 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_ctrl.c: __uvc_find_control 0\n");
 	
 	struct uvc_control *ctrl;
 	struct uvc_control_mapping *map;
@@ -882,7 +882,7 @@ static struct uvc_control *uvc_find_control(struct uvc_video_chain *chain,
 	u32 v4l2_id, struct uvc_control_mapping **mapping)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_find_control 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_ctrl.c: uvc_find_control 0\n");
 	
 	struct uvc_control *ctrl = NULL;
 	struct uvc_entity *entity;
@@ -911,7 +911,7 @@ static int uvc_ctrl_populate_cache(struct uvc_video_chain *chain,
 	struct uvc_control *ctrl)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_ctrl_populate_cache 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_ctrl.c: uvc_ctrl_populate_cache 0\n");
 	
 	int ret;
 
@@ -955,7 +955,7 @@ static int uvc_ctrl_populate_cache(struct uvc_video_chain *chain,
 			 * resolution value to zero.
 			 */
 
-			printk(KERN_INFO "!!!dgnet: uvc_video.c: UVC non compliance 1\n");
+			printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_video.c: UVC non compliance 1\n");
 
 			uvc_warn_once(chain->dev, UVC_WARN_XU_GET_RES,
 				      "UVC non compliance - GET_RES failed on "
@@ -973,7 +973,7 @@ static s32 __uvc_ctrl_get_value(struct uvc_control_mapping *mapping,
 				const u8 *data)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c:  __uvc_ctrl_get_value 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_ctrl.c:  __uvc_ctrl_get_value 0\n");
 	
 	s32 value = mapping->get(mapping, UVC_GET_CUR, data);
 
@@ -997,7 +997,7 @@ static int __uvc_ctrl_get(struct uvc_video_chain *chain,
 	s32 *value)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: __uvc_ctrl_get 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_ctrl.c: __uvc_ctrl_get 0\n");
 	
 	int ret;
 
@@ -1035,7 +1035,7 @@ static int __uvc_query_v4l2_class(struct uvc_video_chain *chain, u32 req_id,
 				  u32 found_id)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: __uvc_query_v4l2_class 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_ctrl.c: __uvc_query_v4l2_class 0\n");
 	
 	
 	bool find_next = req_id & V4L2_CTRL_FLAG_NEXT_CTRL;
@@ -1063,7 +1063,7 @@ static int uvc_query_v4l2_class(struct uvc_video_chain *chain, u32 req_id,
 				u32 found_id, struct v4l2_queryctrl *v4l2_ctrl)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_query_v4l2_class 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_ctrl.c: uvc_query_v4l2_class 0\n");
 	
 	
 	int idx;
@@ -1086,7 +1086,7 @@ int uvc_ctrl_is_accessible(struct uvc_video_chain *chain, u32 v4l2_id,
 			   bool read)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_ctrl_is_accessible 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_ctrl.c: uvc_ctrl_is_accessible 0\n");
 	
 	
 	struct uvc_control_mapping *mapping;
@@ -1111,7 +1111,7 @@ int uvc_ctrl_is_accessible(struct uvc_video_chain *chain, u32 v4l2_id,
 static const char *uvc_map_get_name(const struct uvc_control_mapping *map)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_map_get_name 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_ctrl.c: uvc_map_get_name 0\n");
 	
 	const char *name;
 
@@ -1131,7 +1131,7 @@ static int __uvc_query_v4l2_ctrl(struct uvc_video_chain *chain,
 	struct v4l2_queryctrl *v4l2_ctrl)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: __uvc_query_v4l2_ctrl 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_ctrl.c: __uvc_query_v4l2_ctrl 0\n");
 	
 	struct uvc_control_mapping *master_map = NULL;
 	struct uvc_control *master_ctrl = NULL;
@@ -1225,7 +1225,7 @@ int uvc_query_v4l2_ctrl(struct uvc_video_chain *chain,
 	struct v4l2_queryctrl *v4l2_ctrl)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_query_v4l2_ctrl 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_ctrl.c: uvc_query_v4l2_ctrl 0\n");
 	
 	struct uvc_control *ctrl;
 	struct uvc_control_mapping *mapping;
@@ -1342,7 +1342,7 @@ static void uvc_ctrl_fill_event(struct uvc_video_chain *chain,
 	s32 value, u32 changes)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_ctrl_fill_event 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_ctrl.c: uvc_ctrl_fill_event 0\n");
 	
 	
 	struct v4l2_queryctrl v4l2_ctrl;
@@ -1374,7 +1374,7 @@ static void uvc_ctrl_send_event(struct uvc_video_chain *chain,
 	struct uvc_control_mapping *mapping, s32 value, u32 changes)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_ctrl_send_event 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_ctrl.c: uvc_ctrl_send_event 0\n");
 	
 	struct v4l2_fh *originator = handle ? &handle->vfh : NULL;
 	struct v4l2_subscribed_event *sev;
@@ -1402,7 +1402,7 @@ static void uvc_ctrl_send_slave_event(struct uvc_video_chain *chain,
 	struct uvc_fh *handle, struct uvc_control *master, u32 slave_id)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_ctrl_send_slave_event 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_ctrl.c: uvc_ctrl_send_slave_event 0\n");
 	
 	struct uvc_control_mapping *mapping = NULL;
 	struct uvc_control *ctrl = NULL;
@@ -1456,7 +1456,7 @@ void uvc_ctrl_status_event(struct uvc_video_chain *chain,
 static void uvc_ctrl_status_event_work(struct work_struct *work)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_ctrl_status_event_work 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_ctrl.c: uvc_ctrl_status_event_work 0\n");
 	
 	struct uvc_device *dev = container_of(work, struct uvc_device,
 					      async_ctrl.work);
@@ -1477,7 +1477,7 @@ bool uvc_ctrl_status_event_async(struct urb *urb, struct uvc_video_chain *chain,
 				 struct uvc_control *ctrl, const u8 *data)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_ctrl_status_event_async 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_ctrl.c: uvc_ctrl_status_event_async 0\n");
 	
 	struct uvc_device *dev = chain->dev;
 	struct uvc_ctrl_work *w = &dev->async_ctrl;
@@ -1501,7 +1501,7 @@ static bool uvc_ctrl_xctrls_has_control(const struct v4l2_ext_control *xctrls,
 					unsigned int xctrls_count, u32 id)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_ctrl_xctrls_has_control 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_ctrl.c: uvc_ctrl_xctrls_has_control 0\n");
 	
 	unsigned int i;
 
@@ -1517,7 +1517,7 @@ static void uvc_ctrl_send_events(struct uvc_fh *handle,
 	const struct v4l2_ext_control *xctrls, unsigned int xctrls_count)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_ctrl_send_events 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_ctrl.c: uvc_ctrl_send_events 0\n");
 	
 	struct uvc_control_mapping *mapping;
 	struct uvc_control *ctrl;
@@ -1567,7 +1567,7 @@ static void uvc_ctrl_send_events(struct uvc_fh *handle,
 static int uvc_ctrl_add_event(struct v4l2_subscribed_event *sev, unsigned elems)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_ctrl_add_event 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_ctrl.c: uvc_ctrl_add_event 0\n");
 	
 	struct uvc_fh *handle = container_of(sev->fh, struct uvc_fh, vfh);
 	struct uvc_control_mapping *mapping;
@@ -1614,7 +1614,7 @@ done:
 static void uvc_ctrl_del_event(struct v4l2_subscribed_event *sev)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_ctrl_del_event 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_ctrl.c: uvc_ctrl_del_event 0\n");
 
 	
 	struct uvc_fh *handle = container_of(sev->fh, struct uvc_fh, vfh);
@@ -1661,7 +1661,7 @@ const struct v4l2_subscribed_event_ops uvc_ctrl_sub_ev_ops = {
 int uvc_ctrl_begin(struct uvc_video_chain *chain)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_ctrl_begin 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_ctrl.c: uvc_ctrl_begin 0\n");
 	
 	return mutex_lock_interruptible(&chain->ctrl_mutex) ? -ERESTARTSYS : 0;
 }
@@ -1670,7 +1670,7 @@ static int uvc_ctrl_commit_entity(struct uvc_device *dev,
 	struct uvc_entity *entity, int rollback, struct uvc_control **err_ctrl)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_ctrl_commit_entity 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_ctrl.c: uvc_ctrl_commit_entity 0\n");
 	
 	struct uvc_control *ctrl;
 	unsigned int i;
@@ -1727,7 +1727,7 @@ static int uvc_ctrl_find_ctrl_idx(struct uvc_entity *entity,
 				  struct uvc_control *uvc_control)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_ctrl_find_ctrl_idx 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_ctrl.c: uvc_ctrl_find_ctrl_idx 0\n");
 	
 	struct uvc_control_mapping *mapping = NULL;
 	struct uvc_control *ctrl_found = NULL;
@@ -1776,7 +1776,7 @@ int uvc_ctrl_get(struct uvc_video_chain *chain,
 	struct v4l2_ext_control *xctrl)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_ctrl_get 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_ctrl.c: uvc_ctrl_get 0\n");
 	
 	struct uvc_control *ctrl;
 	struct uvc_control_mapping *mapping;
@@ -1795,7 +1795,7 @@ int uvc_ctrl_set(struct uvc_fh *handle,
 	struct v4l2_ext_control *xctrl)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_ctrl_set 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_ctrl.c: uvc_ctrl_set 0\n");
 	
 	struct uvc_video_chain *chain = handle->chain;
 	struct uvc_control *ctrl;
@@ -1927,7 +1927,7 @@ static int uvc_ctrl_get_flags(struct uvc_device *dev,
 			      struct uvc_control_info *info)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_ctrl_get_flags 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_ctrl.c: uvc_ctrl_get_flags 0\n");
 	
 	
 	u8 *data;
@@ -1961,7 +1961,7 @@ static void uvc_ctrl_fixup_xu_info(struct uvc_device *dev,
 	const struct uvc_control *ctrl, struct uvc_control_info *info)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_ctrl_fixup_xu_info 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_ctrl.c: uvc_ctrl_fixup_xu_info 0\n");
 	
 	struct uvc_ctrl_fixup {
 		struct usb_device_id id;
@@ -2060,7 +2060,7 @@ static int uvc_ctrl_init_xu_ctrl(struct uvc_device *dev,
 	struct uvc_control *ctrl)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_ctrl_init_xu_ctrl 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_ctrl.c: uvc_ctrl_init_xu_ctrl 0\n");
 	
 	struct uvc_control_info info;
 	int ret;
@@ -2086,7 +2086,7 @@ int uvc_xu_ctrl_query(struct uvc_video_chain *chain,
 	struct uvc_xu_control_query *xqry)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_xu_ctrl_query 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_ctrl.c: uvc_xu_ctrl_query 0\n");
 	
 	
 	struct uvc_entity *entity;
@@ -2225,7 +2225,7 @@ done:
 int uvc_ctrl_restore_values(struct uvc_device *dev)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_ctrl_restore_values 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_ctrl.c: uvc_ctrl_restore_values 0\n");
 	
 	
 	struct uvc_control *ctrl;
@@ -2268,7 +2268,7 @@ static int uvc_ctrl_add_info(struct uvc_device *dev, struct uvc_control *ctrl,
 	const struct uvc_control_info *info)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_ctrl_add_info 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_ctrl.c: uvc_ctrl_add_info 0\n");
 	
 	ctrl->info = *info;
 	INIT_LIST_HEAD(&ctrl->info.mappings);
@@ -2295,7 +2295,7 @@ static int __uvc_ctrl_add_mapping(struct uvc_video_chain *chain,
 	struct uvc_control *ctrl, const struct uvc_control_mapping *mapping)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: __uvc_ctrl_add_mapping 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_ctrl.c: __uvc_ctrl_add_mapping 0\n");
 	
 	
 	struct uvc_control_mapping *map;
@@ -2354,7 +2354,7 @@ int uvc_ctrl_add_mapping(struct uvc_video_chain *chain,
 	const struct uvc_control_mapping *mapping)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_ctrl_add_mapping 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_ctrl.c: uvc_ctrl_add_mapping 0\n");
 	
 	struct uvc_device *dev = chain->dev;
 	struct uvc_control_mapping *map;
@@ -2509,7 +2509,7 @@ static void uvc_ctrl_init_ctrl(struct uvc_video_chain *chain,
 			       struct uvc_control *ctrl)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_ctrl_init_ctrl 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_ctrl.c: uvc_ctrl_init_ctrl 0\n");
 	
 	const struct uvc_control_info *info = uvc_ctrls;
 	const struct uvc_control_info *iend = info + ARRAY_SIZE(uvc_ctrls);
@@ -2556,7 +2556,7 @@ static void uvc_ctrl_init_ctrl(struct uvc_video_chain *chain,
 static int uvc_ctrl_init_chain(struct uvc_video_chain *chain)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_ctrl_init_chain 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_ctrl.c: uvc_ctrl_init_chain 0\n");
 	
 	struct uvc_entity *entity;
 	unsigned int i;
@@ -2615,7 +2615,7 @@ static int uvc_ctrl_init_chain(struct uvc_video_chain *chain)
 int uvc_ctrl_init_device(struct uvc_device *dev)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_ctrl_init_device 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_ctrl.c: uvc_ctrl_init_device 0\n");
 	
 	struct uvc_video_chain *chain;
 	int ret;
@@ -2638,7 +2638,7 @@ static void uvc_ctrl_cleanup_mappings(struct uvc_device *dev,
 	struct uvc_control *ctrl)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_ctrl_cleanup_mappings 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_ctrl.c: uvc_ctrl_cleanup_mappings 0\n");
 	
 	struct uvc_control_mapping *mapping, *nm;
 
@@ -2653,7 +2653,7 @@ static void uvc_ctrl_cleanup_mappings(struct uvc_device *dev,
 void uvc_ctrl_cleanup_device(struct uvc_device *dev)
 {
 	
-	printk(KERN_INFO "!!!dgnet: uvc_ctrl.c: uvc_ctrl_cleanup_device 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_ctrl.c: uvc_ctrl_cleanup_device 0\n");
 	
 	struct uvc_entity *entity;
 	unsigned int i;
