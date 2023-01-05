@@ -122,6 +122,9 @@ EXPORT_SYMBOL(v4l2_video_std_frame_period);
 int v4l2_video_std_construct(struct v4l2_standard *vs,
 			     int id, const char *name)
 {
+	
+	printk(KERN_INFO "!!!dgnet: v4l2-ioctl.c: v4l2_video_std_construct 0\n");
+	
 	vs->id = id;
 	v4l2_video_std_frame_period(id, &vs->frameperiod);
 	vs->framelines = (id & V4L2_STD_525_60) ? 525 : 625;
