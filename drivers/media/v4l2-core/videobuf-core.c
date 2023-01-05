@@ -55,7 +55,7 @@ MODULE_LICENSE("GPL");
 struct videobuf_buffer *videobuf_alloc_vb(struct videobuf_queue *q)
 {
 	
-	printk(KERN_INFO "!!!dgnet: videobuf-core.c: videobuf_alloc_vb 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-core.c: videobuf_alloc_vb 0\n");
 	
 	struct videobuf_buffer *vb;
 
@@ -80,7 +80,7 @@ static int state_neither_active_nor_queued(struct videobuf_queue *q,
 					   struct videobuf_buffer *vb)
 {
 	
-	printk(KERN_INFO "!!!dgnet: videobuf-core.c: state_neither_active_nor_queued 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-core.c: state_neither_active_nor_queued 0\n");
 	
 	unsigned long flags;
 	bool rc;
@@ -95,7 +95,7 @@ int videobuf_waiton(struct videobuf_queue *q, struct videobuf_buffer *vb,
 		int non_blocking, int intr)
 {
 	
-	printk(KERN_INFO "!!!dgnet: videobuf-core.c: videobuf_waiton 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-core.c: videobuf_waiton 0\n");
 	
 	bool is_ext_locked;
 	int ret = 0;
@@ -130,7 +130,7 @@ EXPORT_SYMBOL_GPL(videobuf_waiton);
 int videobuf_iolock(struct videobuf_queue *q, struct videobuf_buffer *vb,
 		    struct v4l2_framebuffer *fbuf)
 {
-	printk(KERN_INFO "!!!dgnet: videobuf-core.c: videobuf_iolock 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-core.c: videobuf_iolock 0\n");
 	
 	MAGIC_CHECK(vb->magic, MAGIC_BUFFER);
 	MAGIC_CHECK(q->int_ops->magic, MAGIC_QTYPE_OPS);
@@ -142,7 +142,7 @@ EXPORT_SYMBOL_GPL(videobuf_iolock);
 void *videobuf_queue_to_vaddr(struct videobuf_queue *q,
 			      struct videobuf_buffer *buf)
 {
-	printk(KERN_INFO "!!!dgnet: videobuf-core.c: videobuf_queue_to_vaddr 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-core.c: videobuf_queue_to_vaddr 0\n");
 	
 	if (q->int_ops->vaddr)
 		return q->int_ops->vaddr(buf);
@@ -165,7 +165,7 @@ void videobuf_queue_core_init(struct videobuf_queue *q,
 			 struct mutex *ext_lock)
 {
 	
-	printk(KERN_INFO "!!!dgnet: videobuf-core.c: videobuf_queue_core_init 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-core.c: videobuf_queue_core_init 0\n");
 	
 	BUG_ON(!q);
 	memset(q, 0, sizeof(*q));
@@ -201,7 +201,7 @@ EXPORT_SYMBOL_GPL(videobuf_queue_core_init);
 int videobuf_queue_is_busy(struct videobuf_queue *q)
 {
 	
-	printk(KERN_INFO "!!!dgnet: videobuf-core.c: videobuf_queue_is_busy 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-core.c: videobuf_queue_is_busy 0\n");
 	
 	int i;
 
@@ -249,7 +249,7 @@ EXPORT_SYMBOL_GPL(videobuf_queue_is_busy);
 static int __videobuf_free(struct videobuf_queue *q)
 {
 	
-	printk(KERN_INFO "!!!dgnet: videobuf-core.c: __videobuf_free 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-core.c: __videobuf_free 0\n");
 	
 	int i;
 
@@ -285,7 +285,7 @@ static int __videobuf_free(struct videobuf_queue *q)
 void videobuf_queue_cancel(struct videobuf_queue *q)
 {
 	
-	printk(KERN_INFO "!!!dgnet: videobuf-core.c: videobuf_queue_cancel 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-core.c: videobuf_queue_cancel 0\n");
 	
 	unsigned long flags = 0;
 	int i;
@@ -323,7 +323,7 @@ EXPORT_SYMBOL_GPL(videobuf_queue_cancel);
 enum v4l2_field videobuf_next_field(struct videobuf_queue *q)
 {
 	
-	printk(KERN_INFO "!!!dgnet: videobuf-core.c: videobuf_next_field 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-core.c: videobuf_next_field 0\n");
 	
 	enum v4l2_field field = q->field;
 
@@ -347,7 +347,7 @@ static void videobuf_status(struct videobuf_queue *q, struct v4l2_buffer *b,
 			    struct videobuf_buffer *vb, enum v4l2_buf_type type)
 {
 	
-	printk(KERN_INFO "!!!dgnet: videobuf-core.c: videobuf_status 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-core.c: videobuf_status 0\n");
 	
 	MAGIC_CHECK(vb->magic, MAGIC_BUFFER);
 	MAGIC_CHECK(q->int_ops->magic, MAGIC_QTYPE_OPS);
@@ -404,7 +404,7 @@ static void videobuf_status(struct videobuf_queue *q, struct v4l2_buffer *b,
 int videobuf_mmap_free(struct videobuf_queue *q)
 {
 	
-	printk(KERN_INFO "!!!dgnet: videobuf-core.c: videobuf_mmap_free 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-core.c: videobuf_mmap_free 0\n");
 	
 	int ret;
 	videobuf_queue_lock(q);
@@ -420,7 +420,7 @@ int __videobuf_mmap_setup(struct videobuf_queue *q,
 			enum v4l2_memory memory)
 {
 	
-	printk(KERN_INFO "!!!dgnet: videobuf-core.c: __videobuf_mmap_setup 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-core.c: __videobuf_mmap_setup 0\n");
 	
 	unsigned int i;
 	int err;
@@ -467,7 +467,7 @@ int videobuf_mmap_setup(struct videobuf_queue *q,
 			enum v4l2_memory memory)
 {
 	
-	printk(KERN_INFO "!!!dgnet: videobuf-core.c: videobuf_mmap_setup 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-core.c: videobuf_mmap_setup 0\n");
 	
 	int ret;
 	videobuf_queue_lock(q);
@@ -481,7 +481,7 @@ int videobuf_reqbufs(struct videobuf_queue *q,
 		 struct v4l2_requestbuffers *req)
 {
 	
-	printk(KERN_INFO "!!!dgnet: videobuf-core.c: videobuf_reqbufs 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-core.c: videobuf_reqbufs 0\n");
 	
 	unsigned int size, count;
 	int retval;
@@ -571,7 +571,7 @@ EXPORT_SYMBOL_GPL(videobuf_querybuf);
 int videobuf_qbuf(struct videobuf_queue *q, struct v4l2_buffer *b)
 {
 	
-	printk(KERN_INFO "!!!dgnet: videobuf-core.c: videobuf_qbuf 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-core.c: videobuf_qbuf 0\n");
 	
 	struct videobuf_buffer *buf;
 	enum v4l2_field field;
@@ -722,7 +722,7 @@ static int stream_next_buffer(struct videobuf_queue *q,
 			struct videobuf_buffer **vb, int nonblocking)
 {
 	
-	printk(KERN_INFO "!!!dgnet: videobuf-core.c: stream_next_buffer 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-core.c: stream_next_buffer 0\n");
 	
 	int retval;
 	struct videobuf_buffer *buf = NULL;
@@ -745,7 +745,7 @@ int videobuf_dqbuf(struct videobuf_queue *q,
 		   struct v4l2_buffer *b, int nonblocking)
 {
 	
-	printk(KERN_INFO "!!!dgnet: videobuf-core.c: videobuf_dqbuf 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-core.c: videobuf_dqbuf 0\n");
 	
 	struct videobuf_buffer *buf = NULL;
 	int retval;
@@ -787,7 +787,7 @@ EXPORT_SYMBOL_GPL(videobuf_dqbuf);
 int videobuf_streamon(struct videobuf_queue *q)
 {
 	
-	printk(KERN_INFO "!!!dgnet: videobuf-core.c: videobuf_streamon 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-core.c: videobuf_streamon 0\n");
 	
 	struct videobuf_buffer *buf;
 	unsigned long flags = 0;
@@ -828,7 +828,7 @@ static int __videobuf_streamoff(struct videobuf_queue *q)
 int videobuf_streamoff(struct videobuf_queue *q)
 {
 	
-	printk(KERN_INFO "!!!dgnet: videobuf-core.c: videobuf_streamoff 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-core.c: videobuf_streamoff 0\n");
 	
 	int retval;
 
@@ -846,7 +846,7 @@ static ssize_t videobuf_read_zerocopy(struct videobuf_queue *q,
 				      size_t count, loff_t *ppos)
 {
 	
-	printk(KERN_INFO "!!!dgnet: videobuf-core.c: videobuf_read_zerocopy 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-core.c: videobuf_read_zerocopy 0\n");
 	
 	
 	enum v4l2_field field;
@@ -896,7 +896,7 @@ static int __videobuf_copy_to_user(struct videobuf_queue *q,
 				   int nonblocking)
 {
 	
-	printk(KERN_INFO "!!!dgnet: videobuf-core.c: __videobuf_copy_to_user 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-core.c: __videobuf_copy_to_user 0\n");
 	
 	void *vaddr = CALLPTR(q, vaddr, buf);
 
@@ -916,7 +916,7 @@ static int __videobuf_copy_stream(struct videobuf_queue *q,
 				  int vbihack, int nonblocking)
 {
 	
-	printk(KERN_INFO "!!!dgnet: videobuf-core.c: __videobuf_copy_stream 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-core.c: __videobuf_copy_stream 0\n");
 	
 	unsigned int *fc = CALLPTR(q, vaddr, buf);
 
@@ -944,7 +944,7 @@ ssize_t videobuf_read_one(struct videobuf_queue *q,
 			  int nonblocking)
 {
 	
-	printk(KERN_INFO "!!!dgnet: videobuf-core.c: videobuf_read_one 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-core.c: videobuf_read_one 0\n");
 	
 	enum v4l2_field field;
 	unsigned long flags = 0;
@@ -1068,7 +1068,7 @@ static void __videobuf_read_stop(struct videobuf_queue *q)
 {
 	
 	
-	printk(KERN_INFO "!!!dgnet: videobuf-core.c: __videobuf_read_stop 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-core.c: __videobuf_read_stop 0\n");
 	
 	int i;
 
@@ -1087,7 +1087,7 @@ static void __videobuf_read_stop(struct videobuf_queue *q)
 int videobuf_read_start(struct videobuf_queue *q)
 {
 	
-	printk(KERN_INFO "!!!dgnet: videobuf-core.c: videobuf_read_start 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-core.c: videobuf_read_start 0\n");
 	
 	
 	int rc;
@@ -1103,7 +1103,7 @@ EXPORT_SYMBOL_GPL(videobuf_read_start);
 void videobuf_read_stop(struct videobuf_queue *q)
 {
 	
-	printk(KERN_INFO "!!!dgnet: videobuf-core.c: videobuf_read_stop 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-core.c: videobuf_read_stop 0\n");
 	
 	videobuf_queue_lock(q);
 	__videobuf_read_stop(q);
@@ -1114,7 +1114,7 @@ EXPORT_SYMBOL_GPL(videobuf_read_stop);
 void videobuf_stop(struct videobuf_queue *q)
 {
 	
-	printk(KERN_INFO "!!!dgnet: videobuf-core.c: videobuf_stop 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-core.c: videobuf_stop 0\n");
 	
 	videobuf_queue_lock(q);
 
@@ -1133,7 +1133,7 @@ ssize_t videobuf_read_stream(struct videobuf_queue *q,
 			     int vbihack, int nonblocking)
 {
 	
-	printk(KERN_INFO "!!!dgnet: videobuf-core.c: videobuf_read_stream 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-core.c: videobuf_read_stream 0\n");
 	
 	int rc, retval;
 	unsigned long flags = 0;
@@ -1209,7 +1209,7 @@ __poll_t videobuf_poll_stream(struct file *file,
 			      poll_table *wait)
 {
 	
-	printk(KERN_INFO "!!!dgnet: videobuf-core.c: videobuf_poll_stream 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-core.c: videobuf_poll_stream 0\n");
 	
 	__poll_t req_events = poll_requested_events(wait);
 	struct videobuf_buffer *buf = NULL;
@@ -1263,7 +1263,7 @@ EXPORT_SYMBOL_GPL(videobuf_poll_stream);
 int videobuf_mmap_mapper(struct videobuf_queue *q, struct vm_area_struct *vma)
 {
 	
-	printk(KERN_INFO "!!!dgnet: videobuf-core.c: videobuf_mmap_mapper 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-core.c: videobuf_mmap_mapper 0\n");
 	
 	int rc = -EINVAL;
 	int i;
