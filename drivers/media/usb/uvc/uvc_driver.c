@@ -543,7 +543,9 @@ static int uvc_parse_format(struct uvc_device *dev,
 	u32 **intervals, unsigned char *buffer, int buflen)
 {
 	
+	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_driver.c: uvc_parse_format: dev->uvc_version: %d, dev->udev->product: %d, dev->udev->manufacturer: %d,  dev->udev->udev->serial: %d\n", dev->uvc_version, dev->udev->product, dev->udev->manufacturer, dev->udev->serial);
 	printk(KERN_INFO "!!!dgnet: drivers/media/usb/uvc/uvc_driver.c: uvc_parse_format: dev->udev->devnum: %d, buflen: %d\n", dev->udev->devnum, buflen);
+
 	dev_info(&dev->udev->dev, "!!!dgnet: uvc_parse_format: dev->udev->devnum: %d, buflen: %d\n", dev->udev->devnum, buflen);
 
 	struct usb_interface *intf = streaming->intf;
