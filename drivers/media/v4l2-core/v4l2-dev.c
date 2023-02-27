@@ -947,7 +947,6 @@ int __video_register_device(struct video_device *vdev,
 {
 	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-dev.c: __video_register_device 0\n");
 	
-	
 	int i = 0;
 	int ret;
 	int minor_offset = 0;
