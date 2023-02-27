@@ -145,6 +145,9 @@ static u64 usbfs_memory_usage;	/* Total memory currently allocated */
 /* Check whether it's okay to allocate more memory for a transfer */
 static int usbfs_increase_memory_usage(u64 amount)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usbfs_increase_memory_usage 0\n");
+	
+	
 	u64 lim, total_mem;
 	unsigned long flags;
 	int ret;
@@ -167,6 +170,9 @@ static int usbfs_increase_memory_usage(u64 amount)
 /* Memory for a transfer is being deallocated */
 static void usbfs_decrease_memory_usage(u64 amount)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usbfs_decrease_memory_usage 0\n");
+	
+	
 	unsigned long flags;
 
 	spin_lock_irqsave(&usbfs_memory_usage_lock, flags);
@@ -179,12 +185,16 @@ static void usbfs_decrease_memory_usage(u64 amount)
 
 static int connected(struct usb_dev_state *ps)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: connected 0\n");
+	
 	return (!list_empty(&ps->list) &&
 			ps->dev->state != USB_STATE_NOTATTACHED);
 }
 
 static void dec_usb_memory_use_count(struct usb_memory *usbm, int *count)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: dec_usb_memory_use_count 0\n");
+	
 	struct usb_dev_state *ps = usbm->ps;
 	unsigned long flags;
 
@@ -206,6 +216,9 @@ static void dec_usb_memory_use_count(struct usb_memory *usbm, int *count)
 
 static void usbdev_vm_open(struct vm_area_struct *vma)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usbdev_vm_open 0\n");
+	
+	
 	struct usb_memory *usbm = vma->vm_private_data;
 	unsigned long flags;
 
@@ -216,6 +229,8 @@ static void usbdev_vm_open(struct vm_area_struct *vma)
 
 static void usbdev_vm_close(struct vm_area_struct *vma)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usbdev_vm_close 0\n");
+	
 	struct usb_memory *usbm = vma->vm_private_data;
 
 	dec_usb_memory_use_count(usbm, &usbm->vma_use_count);
@@ -228,6 +243,8 @@ static const struct vm_operations_struct usbdev_vm_ops = {
 
 static int usbdev_mmap(struct file *file, struct vm_area_struct *vma)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usbdev_mmap 0\n");
+	
 	struct usb_memory *usbm = NULL;
 	struct usb_dev_state *ps = file->private_data;
 	struct usb_hcd *hcd = bus_to_hcd(ps->dev->bus);
@@ -301,6 +318,8 @@ error:
 static ssize_t usbdev_read(struct file *file, char __user *buf, size_t nbytes,
 			   loff_t *ppos)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usbdev_read 0\n");
+	
 	struct usb_dev_state *ps = file->private_data;
 	struct usb_device *dev = ps->dev;
 	ssize_t ret = 0;
@@ -390,6 +409,8 @@ err:
 
 static struct async *alloc_async(unsigned int numisoframes)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: alloc_async 0\n");
+	
 	struct async *as;
 
 	as = kzalloc(sizeof(struct async), GFP_KERNEL);
@@ -405,6 +426,9 @@ static struct async *alloc_async(unsigned int numisoframes)
 
 static void free_async(struct async *as)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: alloc_async 0\n");
+	
+	
 	int i;
 
 	put_pid(as->pid);
@@ -429,6 +453,9 @@ static void free_async(struct async *as)
 
 static void async_newpending(struct async *as)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: async_newpending 0\n");
+	
+	
 	struct usb_dev_state *ps = as->ps;
 	unsigned long flags;
 
@@ -439,6 +466,9 @@ static void async_newpending(struct async *as)
 
 static void async_removepending(struct async *as)
 {
+	
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: async_removepending 0\n");
+	
 	struct usb_dev_state *ps = as->ps;
 	unsigned long flags;
 
@@ -449,6 +479,8 @@ static void async_removepending(struct async *as)
 
 static struct async *async_getcompleted(struct usb_dev_state *ps)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: async_getcompleted 0\n");
+	
 	unsigned long flags;
 	struct async *as = NULL;
 
@@ -465,6 +497,9 @@ static struct async *async_getcompleted(struct usb_dev_state *ps)
 static struct async *async_getpending(struct usb_dev_state *ps,
 					     void __user *userurb)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: async_getpending 0\n");
+	
+	
 	struct async *as;
 
 	list_for_each_entry(as, &ps->async_pending, asynclist)
@@ -481,6 +516,8 @@ static void snoop_urb(struct usb_device *udev,
 		int timeout_or_status, enum snoop_when when,
 		unsigned char *data, unsigned data_len)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: snoop_urb 0\n");
+	
 	static const char *types[] = {"isoc", "int", "ctrl", "bulk"};
 	static const char *dirs[] = {"out", "in"};
 	int ep;
@@ -523,6 +560,10 @@ static void snoop_urb(struct usb_device *udev,
 
 static void snoop_urb_data(struct urb *urb, unsigned len)
 {
+	
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: snoop_urb_data 0\n");
+	
+	
 	int i, size;
 
 	len = min(len, usbfs_snoop_max);
@@ -545,6 +586,9 @@ static void snoop_urb_data(struct urb *urb, unsigned len)
 
 static int copy_urb_data_to_user(u8 __user *userbuffer, struct urb *urb)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: copy_urb_data_to_user 0\n");
+	
+	
 	unsigned i, len, size;
 
 	if (urb->number_of_packets > 0)		/* Isochronous */
@@ -576,6 +620,9 @@ static void cancel_bulk_urbs(struct usb_dev_state *ps, unsigned bulk_addr)
 __releases(ps->lock)
 __acquires(ps->lock)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: cancel_bulk_urbs 0\n");
+	
+	
 	struct urb *urb;
 	struct async *as;
 
@@ -612,6 +659,9 @@ __acquires(ps->lock)
 
 static void async_completed(struct urb *urb)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: async_completed 0\n");
+	
+	
 	struct async *as = urb->context;
 	struct usb_dev_state *ps = as->ps;
 	struct pid *pid = NULL;
@@ -652,6 +702,9 @@ static void async_completed(struct urb *urb)
 
 static void destroy_async(struct usb_dev_state *ps, struct list_head *list)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: destroy_async 0\n");
+	
+	
 	struct urb *urb;
 	struct async *as;
 	unsigned long flags;
@@ -675,6 +728,9 @@ static void destroy_async(struct usb_dev_state *ps, struct list_head *list)
 static void destroy_async_on_interface(struct usb_dev_state *ps,
 				       unsigned int ifnum)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: destroy_async_on_interface 0\n");
+	
+	
 	struct list_head *p, *q, hitlist;
 	unsigned long flags;
 
@@ -689,6 +745,8 @@ static void destroy_async_on_interface(struct usb_dev_state *ps,
 
 static void destroy_all_async(struct usb_dev_state *ps)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: destroy_all_async 0\n");
+	
 	destroy_async(ps, &ps->async_pending);
 }
 
@@ -701,11 +759,15 @@ static void destroy_all_async(struct usb_dev_state *ps)
 static int driver_probe(struct usb_interface *intf,
 			const struct usb_device_id *id)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: driver_probe 0\n");
+	
 	return -ENODEV;
 }
 
 static void driver_disconnect(struct usb_interface *intf)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: driver_disconnect 0\n");
+	
 	struct usb_dev_state *ps = usb_get_intfdata(intf);
 	unsigned int ifnum = intf->altsetting->desc.bInterfaceNumber;
 
@@ -731,22 +793,30 @@ static void driver_disconnect(struct usb_interface *intf)
 /* We don't care about suspend/resume of claimed interfaces */
 static int driver_suspend(struct usb_interface *intf, pm_message_t msg)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: driver_suspend 0\n");
+	
 	return 0;
 }
 
 static int driver_resume(struct usb_interface *intf)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: driver_resume 0\n");
+	
 	return 0;
 }
 
 /* The following routines apply to the entire device, not interfaces */
 void usbfs_notify_suspend(struct usb_device *udev)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usbfs_notify_suspend 0\n");
+	
 	/* We don't need to handle this */
 }
 
 void usbfs_notify_resume(struct usb_device *udev)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usbfs_notify_resume 0\n");
+	
 	struct usb_dev_state *ps;
 
 	/* Protect against simultaneous remove or release */
@@ -769,6 +839,8 @@ struct usb_driver usbfs_driver = {
 
 static int claimintf(struct usb_dev_state *ps, unsigned int ifnum)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: claimintf 0\n");
+	
 	struct usb_device *dev = ps->dev;
 	struct usb_interface *intf;
 	int err;
@@ -802,6 +874,8 @@ static int claimintf(struct usb_dev_state *ps, unsigned int ifnum)
 
 static int releaseintf(struct usb_dev_state *ps, unsigned int ifnum)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: releaseintf 0\n");
+	
 	struct usb_device *dev;
 	struct usb_interface *intf;
 	int err;
@@ -828,6 +902,8 @@ static int releaseintf(struct usb_dev_state *ps, unsigned int ifnum)
 
 static int checkintf(struct usb_dev_state *ps, unsigned int ifnum)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: checkintf 0\n");
+	
 	if (ps->dev->state != USB_STATE_CONFIGURED)
 		return -EHOSTUNREACH;
 	if (ifnum >= 8*sizeof(ps->ifclaimed))
@@ -843,6 +919,8 @@ static int checkintf(struct usb_dev_state *ps, unsigned int ifnum)
 
 static int findintfep(struct usb_device *dev, unsigned int ep)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: findintfep 0\n");
+	
 	unsigned int i, j, e;
 	struct usb_interface *intf;
 	struct usb_host_interface *alts;
@@ -869,6 +947,8 @@ static int findintfep(struct usb_device *dev, unsigned int ep)
 static int check_ctrlrecip(struct usb_dev_state *ps, unsigned int requesttype,
 			   unsigned int request, unsigned int index)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: check_ctrlrecip 0\n");
+	
 	int ret = 0;
 	struct usb_host_interface *alt_setting;
 
@@ -928,6 +1008,8 @@ static int check_ctrlrecip(struct usb_dev_state *ps, unsigned int requesttype,
 static struct usb_host_endpoint *ep_to_host_endpoint(struct usb_device *dev,
 						     unsigned char ep)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usb_host_endpoint 0\n");
+	
 	if (ep & USB_ENDPOINT_DIR_MASK)
 		return dev->ep_in[ep & USB_ENDPOINT_NUMBER_MASK];
 	else
@@ -941,6 +1023,8 @@ static int parse_usbdevfs_streams(struct usb_dev_state *ps,
 				  struct usb_host_endpoint ***eps_ret,
 				  struct usb_interface **intf_ret)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: parse_usbdevfs_streams 0\n");
+	
 	unsigned int i, num_streams, num_eps;
 	struct usb_host_endpoint **eps;
 	struct usb_interface *intf = NULL;
@@ -1009,6 +1093,8 @@ error:
 
 static struct usb_device *usbdev_lookup_by_devt(dev_t devt)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usbdev_lookup_by_devt 0\n");
+	
 	struct device *dev;
 
 	dev = bus_find_device_by_devt(&usb_bus_type, devt);
@@ -1022,6 +1108,8 @@ static struct usb_device *usbdev_lookup_by_devt(dev_t devt)
  */
 static int usbdev_open(struct inode *inode, struct file *file)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usbdev_open 0\n");
+	
 	struct usb_device *dev = NULL;
 	struct usb_dev_state *ps;
 	int ret;
@@ -1079,6 +1167,8 @@ static int usbdev_open(struct inode *inode, struct file *file)
 
 static int usbdev_release(struct inode *inode, struct file *file)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usbdev_release 0\n");
+	
 	struct usb_dev_state *ps = file->private_data;
 	struct usb_device *dev = ps->dev;
 	unsigned int ifnum;
@@ -1117,6 +1207,8 @@ static int usbdev_release(struct inode *inode, struct file *file)
 
 static void usbfs_blocking_completion(struct urb *urb)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usbfs_blocking_completion 0\n");
+	
 	complete((struct completion *) urb->context);
 }
 
@@ -1127,6 +1219,8 @@ static void usbfs_blocking_completion(struct urb *urb)
 static int usbfs_start_wait_urb(struct urb *urb, int timeout,
 		unsigned int *actlen)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usbfs_start_wait_urb 0\n");
+	
 	DECLARE_COMPLETION_ONSTACK(ctx);
 	unsigned long expire;
 	int rc;
@@ -1157,6 +1251,8 @@ static int usbfs_start_wait_urb(struct urb *urb, int timeout,
 static int do_proc_control(struct usb_dev_state *ps,
 		struct usbdevfs_ctrltransfer *ctrl)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: do_proc_control 0\n");
+	
 	struct usb_device *dev = ps->dev;
 	unsigned int tmo;
 	unsigned char *tbuf;
@@ -1261,6 +1357,8 @@ static int do_proc_control(struct usb_dev_state *ps,
 
 static int proc_control(struct usb_dev_state *ps, void __user *arg)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: proc_control 0\n");
+	
 	struct usbdevfs_ctrltransfer ctrl;
 
 	if (copy_from_user(&ctrl, arg, sizeof(ctrl)))
@@ -1271,6 +1369,8 @@ static int proc_control(struct usb_dev_state *ps, void __user *arg)
 static int do_proc_bulk(struct usb_dev_state *ps,
 		struct usbdevfs_bulktransfer *bulk)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: do_proc_bulk 0\n");
+	
 	struct usb_device *dev = ps->dev;
 	unsigned int tmo, len1, len2, pipe;
 	unsigned char *tbuf;
@@ -1360,6 +1460,8 @@ static int do_proc_bulk(struct usb_dev_state *ps,
 
 static int proc_bulk(struct usb_dev_state *ps, void __user *arg)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: proc_bulk 0\n");
+	
 	struct usbdevfs_bulktransfer bulk;
 
 	if (copy_from_user(&bulk, arg, sizeof(bulk)))
@@ -1370,6 +1472,8 @@ static int proc_bulk(struct usb_dev_state *ps, void __user *arg)
 static void check_reset_of_active_ep(struct usb_device *udev,
 		unsigned int epnum, char *ioctl_name)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: check_reset_of_active_ep 0\n");
+	
 	struct usb_host_endpoint **eps;
 	struct usb_host_endpoint *ep;
 
@@ -1383,6 +1487,8 @@ static void check_reset_of_active_ep(struct usb_device *udev,
 
 static int proc_resetep(struct usb_dev_state *ps, void __user *arg)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: proc_resetep 0\n");
+	
 	unsigned int ep;
 	int ret;
 
@@ -1401,6 +1507,8 @@ static int proc_resetep(struct usb_dev_state *ps, void __user *arg)
 
 static int proc_clearhalt(struct usb_dev_state *ps, void __user *arg)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: proc_clearhalt 0\n");
+	
 	unsigned int ep;
 	int pipe;
 	int ret;
@@ -1424,6 +1532,8 @@ static int proc_clearhalt(struct usb_dev_state *ps, void __user *arg)
 
 static int proc_getdriver(struct usb_dev_state *ps, void __user *arg)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: proc_getdriver 0\n");
+	
 	struct usbdevfs_getdriver gd;
 	struct usb_interface *intf;
 	int ret;
@@ -1443,6 +1553,8 @@ static int proc_getdriver(struct usb_dev_state *ps, void __user *arg)
 
 static int proc_connectinfo(struct usb_dev_state *ps, void __user *arg)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: proc_connectinfo 0\n");
+	
 	struct usbdevfs_connectinfo ci;
 
 	memset(&ci, 0, sizeof(ci));
@@ -1457,6 +1569,8 @@ static int proc_connectinfo(struct usb_dev_state *ps, void __user *arg)
 static int proc_conninfo_ex(struct usb_dev_state *ps,
 			    void __user *arg, size_t size)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: proc_conninfo_ex 0\n");
+	
 	struct usbdevfs_conninfo_ex ci;
 	struct usb_device *udev = ps->dev;
 
@@ -1489,6 +1603,8 @@ static int proc_conninfo_ex(struct usb_dev_state *ps,
 
 static int proc_resetdevice(struct usb_dev_state *ps)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: proc_resetdevice 0\n");
+	
 	struct usb_host_config *actconfig = ps->dev->actconfig;
 	struct usb_interface *interface;
 	int i, number;
@@ -1516,6 +1632,8 @@ static int proc_resetdevice(struct usb_dev_state *ps)
 
 static int proc_setintf(struct usb_dev_state *ps, void __user *arg)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: proc_setintf 0\n");
+	
 	struct usbdevfs_setinterface setintf;
 	int ret;
 
@@ -1533,6 +1651,8 @@ static int proc_setintf(struct usb_dev_state *ps, void __user *arg)
 
 static int proc_setconfig(struct usb_dev_state *ps, void __user *arg)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: proc_setconfig 0\n");
+	
 	int u;
 	int status = 0;
 	struct usb_host_config *actconfig;
@@ -1582,6 +1702,8 @@ static int proc_setconfig(struct usb_dev_state *ps, void __user *arg)
 static struct usb_memory *
 find_memory_area(struct usb_dev_state *ps, const struct usbdevfs_urb *uurb)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: find_memory_area 0\n");
+	
 	struct usb_memory *usbm = NULL, *iter;
 	unsigned long flags;
 	unsigned long uurb_start = (unsigned long)uurb->buffer;
@@ -1608,6 +1730,8 @@ static int proc_do_submiturb(struct usb_dev_state *ps, struct usbdevfs_urb *uurb
 			struct usbdevfs_iso_packet_desc __user *iso_frame_desc,
 			void __user *arg, sigval_t userurb_sigval)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: proc_do_submiturb 0\n");
+	
 	struct usbdevfs_iso_packet_desc *isopkt = NULL;
 	struct usb_host_endpoint *ep;
 	struct async *as = NULL;
@@ -1979,6 +2103,8 @@ static int proc_do_submiturb(struct usb_dev_state *ps, struct usbdevfs_urb *uurb
 
 static int proc_submiturb(struct usb_dev_state *ps, void __user *arg)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: proc_submiturb 0\n");
+	
 	struct usbdevfs_urb uurb;
 	sigval_t userurb_sigval;
 
@@ -1995,6 +2121,8 @@ static int proc_submiturb(struct usb_dev_state *ps, void __user *arg)
 
 static int proc_unlinkurb(struct usb_dev_state *ps, void __user *arg)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: proc_unlinkurb 0\n");
+	
 	struct urb *urb;
 	struct async *as;
 	unsigned long flags;
@@ -2018,6 +2146,8 @@ static int proc_unlinkurb(struct usb_dev_state *ps, void __user *arg)
 
 static void compute_isochronous_actual_length(struct urb *urb)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: compute_isochronous_actual_length 0\n");
+	
 	unsigned int i;
 
 	if (urb->number_of_packets > 0) {
@@ -2030,6 +2160,8 @@ static void compute_isochronous_actual_length(struct urb *urb)
 
 static int processcompl(struct async *as, void __user * __user *arg)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: processcompl 0\n");
+	
 	struct urb *urb = as->urb;
 	struct usbdevfs_urb __user *userurb = as->userurb;
 	void __user *addr = as->userurb;
@@ -2068,6 +2200,8 @@ err_out:
 
 static struct async *reap_as(struct usb_dev_state *ps)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: reap_as 0\n");
+	
 	DECLARE_WAITQUEUE(wait, current);
 	struct async *as = NULL;
 	struct usb_device *dev = ps->dev;
@@ -2091,6 +2225,8 @@ static struct async *reap_as(struct usb_dev_state *ps)
 
 static int proc_reapurb(struct usb_dev_state *ps, void __user *arg)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: proc_reapurb 0\n");
+	
 	struct async *as = reap_as(ps);
 
 	if (as) {
@@ -2108,6 +2244,8 @@ static int proc_reapurb(struct usb_dev_state *ps, void __user *arg)
 
 static int proc_reapurbnonblock(struct usb_dev_state *ps, void __user *arg)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: proc_reapurbnonblock 0\n");
+	
 	int retval;
 	struct async *as;
 
@@ -2126,6 +2264,8 @@ static int proc_reapurbnonblock(struct usb_dev_state *ps, void __user *arg)
 static int proc_control_compat(struct usb_dev_state *ps,
 				struct usbdevfs_ctrltransfer32 __user *p32)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: proc_control_compat 0\n");
+	
 	struct usbdevfs_ctrltransfer ctrl;
 	u32 udata;
 
@@ -2139,6 +2279,8 @@ static int proc_control_compat(struct usb_dev_state *ps,
 static int proc_bulk_compat(struct usb_dev_state *ps,
 			struct usbdevfs_bulktransfer32 __user *p32)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: proc_bulk_compat 0\n");
+	
 	struct usbdevfs_bulktransfer bulk;
 	compat_caddr_t addr;
 
@@ -2153,6 +2295,8 @@ static int proc_bulk_compat(struct usb_dev_state *ps,
 
 static int proc_disconnectsignal_compat(struct usb_dev_state *ps, void __user *arg)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: proc_disconnectsignal_compat 0\n");
+	
 	struct usbdevfs_disconnectsignal32 ds;
 
 	if (copy_from_user(&ds, arg, sizeof(ds)))
@@ -2165,6 +2309,8 @@ static int proc_disconnectsignal_compat(struct usb_dev_state *ps, void __user *a
 static int get_urb32(struct usbdevfs_urb *kurb,
 		     struct usbdevfs_urb32 __user *uurb)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: get_urb32 0\n");
+	
 	struct usbdevfs_urb32 urb32;
 	if (copy_from_user(&urb32, uurb, sizeof(*uurb)))
 		return -EFAULT;
@@ -2185,6 +2331,8 @@ static int get_urb32(struct usbdevfs_urb *kurb,
 
 static int proc_submiturb_compat(struct usb_dev_state *ps, void __user *arg)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: proc_submiturb_compat 0\n");
+	
 	struct usbdevfs_urb uurb;
 	sigval_t userurb_sigval;
 
@@ -2201,6 +2349,8 @@ static int proc_submiturb_compat(struct usb_dev_state *ps, void __user *arg)
 
 static int processcompl_compat(struct async *as, void __user * __user *arg)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: processcompl_compat 0\n");
+	
 	struct urb *urb = as->urb;
 	struct usbdevfs_urb32 __user *userurb = as->userurb;
 	void __user *addr = as->userurb;
@@ -2236,6 +2386,8 @@ static int processcompl_compat(struct async *as, void __user * __user *arg)
 
 static int proc_reapurb_compat(struct usb_dev_state *ps, void __user *arg)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: proc_reapurb_compat 0\n");
+	
 	struct async *as = reap_as(ps);
 
 	if (as) {
@@ -2253,6 +2405,8 @@ static int proc_reapurb_compat(struct usb_dev_state *ps, void __user *arg)
 
 static int proc_reapurbnonblock_compat(struct usb_dev_state *ps, void __user *arg)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: proc_reapurbnonblock_compat 0\n");
+	
 	int retval;
 	struct async *as;
 
@@ -2272,6 +2426,8 @@ static int proc_reapurbnonblock_compat(struct usb_dev_state *ps, void __user *ar
 
 static int proc_disconnectsignal(struct usb_dev_state *ps, void __user *arg)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: proc_disconnectsignalt 0\n");
+	
 	struct usbdevfs_disconnectsignal ds;
 
 	if (copy_from_user(&ds, arg, sizeof(ds)))
@@ -2283,6 +2439,8 @@ static int proc_disconnectsignal(struct usb_dev_state *ps, void __user *arg)
 
 static int proc_claiminterface(struct usb_dev_state *ps, void __user *arg)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: proc_claiminterface 0\n");
+	
 	unsigned int ifnum;
 
 	if (get_user(ifnum, (unsigned int __user *)arg))
@@ -2292,6 +2450,8 @@ static int proc_claiminterface(struct usb_dev_state *ps, void __user *arg)
 
 static int proc_releaseinterface(struct usb_dev_state *ps, void __user *arg)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: proc_releaseinterface 0\n");
+	
 	unsigned int ifnum;
 	int ret;
 
@@ -2306,6 +2466,8 @@ static int proc_releaseinterface(struct usb_dev_state *ps, void __user *arg)
 
 static int proc_ioctl(struct usb_dev_state *ps, struct usbdevfs_ioctl *ctl)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: proc_ioctl 0\n");
+	
 	int			size;
 	void			*buf = NULL;
 	int			retval = 0;
@@ -2384,6 +2546,8 @@ static int proc_ioctl(struct usb_dev_state *ps, struct usbdevfs_ioctl *ctl)
 
 static int proc_ioctl_default(struct usb_dev_state *ps, void __user *arg)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: proc_ioctl_default 0\n");
+	
 	struct usbdevfs_ioctl	ctrl;
 
 	if (copy_from_user(&ctrl, arg, sizeof(ctrl)))
@@ -2394,6 +2558,8 @@ static int proc_ioctl_default(struct usb_dev_state *ps, void __user *arg)
 #ifdef CONFIG_COMPAT
 static int proc_ioctl_compat(struct usb_dev_state *ps, compat_uptr_t arg)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: proc_ioctl_compat 0\n");
+	
 	struct usbdevfs_ioctl32 ioc32;
 	struct usbdevfs_ioctl ctrl;
 
@@ -2408,6 +2574,8 @@ static int proc_ioctl_compat(struct usb_dev_state *ps, compat_uptr_t arg)
 
 static int proc_claim_port(struct usb_dev_state *ps, void __user *arg)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: proc_claim_port 0\n");
+	
 	unsigned portnum;
 	int rc;
 
@@ -2422,6 +2590,8 @@ static int proc_claim_port(struct usb_dev_state *ps, void __user *arg)
 
 static int proc_release_port(struct usb_dev_state *ps, void __user *arg)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: proc_release_port 0\n");
+	
 	unsigned portnum;
 
 	if (get_user(portnum, (unsigned __user *) arg))
@@ -2431,6 +2601,8 @@ static int proc_release_port(struct usb_dev_state *ps, void __user *arg)
 
 static int proc_get_capabilities(struct usb_dev_state *ps, void __user *arg)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: proc_get_capabilities 0\n");
+	
 	__u32 caps;
 
 	caps = USBDEVFS_CAP_ZERO_PACKET | USBDEVFS_CAP_NO_PACKET_SIZE_LIM |
@@ -2450,6 +2622,8 @@ static int proc_get_capabilities(struct usb_dev_state *ps, void __user *arg)
 
 static int proc_disconnect_claim(struct usb_dev_state *ps, void __user *arg)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: proc_disconnect_claim 0\n");
+	
 	struct usbdevfs_disconnect_claim dc;
 	struct usb_interface *intf;
 
@@ -2485,6 +2659,8 @@ static int proc_disconnect_claim(struct usb_dev_state *ps, void __user *arg)
 
 static int proc_alloc_streams(struct usb_dev_state *ps, void __user *arg)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: proc_alloc_streams 0\n");
+	
 	unsigned num_streams, num_eps;
 	struct usb_host_endpoint **eps;
 	struct usb_interface *intf;
@@ -2505,6 +2681,8 @@ static int proc_alloc_streams(struct usb_dev_state *ps, void __user *arg)
 
 static int proc_free_streams(struct usb_dev_state *ps, void __user *arg)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: proc_free_streams 0\n");
+	
 	unsigned num_eps;
 	struct usb_host_endpoint **eps;
 	struct usb_interface *intf;
@@ -2524,6 +2702,8 @@ static int proc_free_streams(struct usb_dev_state *ps, void __user *arg)
 
 static int proc_drop_privileges(struct usb_dev_state *ps, void __user *arg)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: proc_drop_privileges 0\n");
+	
 	u32 data;
 
 	if (copy_from_user(&data, arg, sizeof(data)))
@@ -2541,6 +2721,8 @@ static int proc_drop_privileges(struct usb_dev_state *ps, void __user *arg)
 
 static int proc_forbid_suspend(struct usb_dev_state *ps)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: proc_forbid_suspend 0\n");
+	
 	int ret = 0;
 
 	if (ps->suspend_allowed) {
@@ -2555,6 +2737,8 @@ static int proc_forbid_suspend(struct usb_dev_state *ps)
 
 static int proc_allow_suspend(struct usb_dev_state *ps)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: proc_allow_suspend 0\n");
+	
 	if (!connected(ps))
 		return -ENODEV;
 
@@ -2568,6 +2752,8 @@ static int proc_allow_suspend(struct usb_dev_state *ps)
 
 static int proc_wait_for_resume(struct usb_dev_state *ps)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: proc_wait_for_resume 0\n");
+	
 	int ret;
 
 	usb_unlock_device(ps->dev);
@@ -2588,6 +2774,8 @@ static int proc_wait_for_resume(struct usb_dev_state *ps)
 static long usbdev_do_ioctl(struct file *file, unsigned int cmd,
 				void __user *p)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usbdev_do_ioctl 0\n");
+	
 	struct usb_dev_state *ps = file->private_data;
 	struct inode *inode = file_inode(file);
 	struct usb_device *dev = ps->dev;
@@ -2601,22 +2789,26 @@ static long usbdev_do_ioctl(struct file *file, unsigned int cmd,
 	/* Reap operations are allowed even after disconnection */
 	switch (cmd) {
 	case USBDEVFS_REAPURB:
+		printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usbdev_do_ioctl: USBDEVFS_REAPURB\n");
 		snoop(&dev->dev, "%s: REAPURB\n", __func__);
 		ret = proc_reapurb(ps, p);
 		goto done;
 
 	case USBDEVFS_REAPURBNDELAY:
+		printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usbdev_do_ioctl: USBDEVFS_REAPURBNDELAY\n");
 		snoop(&dev->dev, "%s: REAPURBNDELAY\n", __func__);
 		ret = proc_reapurbnonblock(ps, p);
 		goto done;
 
 #ifdef CONFIG_COMPAT
 	case USBDEVFS_REAPURB32:
+		printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usbdev_do_ioctl: USBDEVFS_REAPURB32\n");
 		snoop(&dev->dev, "%s: REAPURB32\n", __func__);
 		ret = proc_reapurb_compat(ps, p);
 		goto done;
 
 	case USBDEVFS_REAPURBNDELAY32:
+		printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usbdev_do_ioctl: USBDEVFS_REAPURBNDELAY32\n");
 		snoop(&dev->dev, "%s: REAPURBNDELAY32\n", __func__);
 		ret = proc_reapurbnonblock_compat(ps, p);
 		goto done;
@@ -2630,6 +2822,7 @@ static long usbdev_do_ioctl(struct file *file, unsigned int cmd,
 
 	switch (cmd) {
 	case USBDEVFS_CONTROL:
+		printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usbdev_do_ioctl: USBDEVFS_CONTROL\n");
 		snoop(&dev->dev, "%s: CONTROL\n", __func__);
 		ret = proc_control(ps, p);
 		if (ret >= 0)
@@ -2637,6 +2830,7 @@ static long usbdev_do_ioctl(struct file *file, unsigned int cmd,
 		break;
 
 	case USBDEVFS_BULK:
+		printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usbdev_do_ioctl: USBDEVFS_BULK\n");
 		snoop(&dev->dev, "%s: BULK\n", __func__);
 		ret = proc_bulk(ps, p);
 		if (ret >= 0)
@@ -2644,6 +2838,7 @@ static long usbdev_do_ioctl(struct file *file, unsigned int cmd,
 		break;
 
 	case USBDEVFS_RESETEP:
+		printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usbdev_do_ioctl: USBDEVFS_RESETEP\n");
 		snoop(&dev->dev, "%s: RESETEP\n", __func__);
 		ret = proc_resetep(ps, p);
 		if (ret >= 0)
@@ -2651,11 +2846,13 @@ static long usbdev_do_ioctl(struct file *file, unsigned int cmd,
 		break;
 
 	case USBDEVFS_RESET:
+		printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usbdev_do_ioctl: USBDEVFS_RESET\n");
 		snoop(&dev->dev, "%s: RESET\n", __func__);
 		ret = proc_resetdevice(ps);
 		break;
 
 	case USBDEVFS_CLEAR_HALT:
+		printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usbdev_do_ioctl: USBDEVFS_CLEAR_HALT\n");
 		snoop(&dev->dev, "%s: CLEAR_HALT\n", __func__);
 		ret = proc_clearhalt(ps, p);
 		if (ret >= 0)
@@ -2663,26 +2860,31 @@ static long usbdev_do_ioctl(struct file *file, unsigned int cmd,
 		break;
 
 	case USBDEVFS_GETDRIVER:
+		printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usbdev_do_ioctl: USBDEVFS_GETDRIVER\n");
 		snoop(&dev->dev, "%s: GETDRIVER\n", __func__);
 		ret = proc_getdriver(ps, p);
 		break;
 
 	case USBDEVFS_CONNECTINFO:
+		printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usbdev_do_ioctl: USBDEVFS_CONNECTINFO\n");
 		snoop(&dev->dev, "%s: CONNECTINFO\n", __func__);
 		ret = proc_connectinfo(ps, p);
 		break;
 
 	case USBDEVFS_SETINTERFACE:
+		printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usbdev_do_ioctl: USBDEVFS_SETINTERFACE\n");
 		snoop(&dev->dev, "%s: SETINTERFACE\n", __func__);
 		ret = proc_setintf(ps, p);
 		break;
 
 	case USBDEVFS_SETCONFIGURATION:
+		printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usbdev_do_ioctl: USBDEVFS_SETCONFIGURATION\n");
 		snoop(&dev->dev, "%s: SETCONFIGURATION\n", __func__);
 		ret = proc_setconfig(ps, p);
 		break;
 
 	case USBDEVFS_SUBMITURB:
+		printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usbdev_do_ioctl: USBDEVFS_SUBMITURB\n");
 		snoop(&dev->dev, "%s: SUBMITURB\n", __func__);
 		ret = proc_submiturb(ps, p);
 		if (ret >= 0)
@@ -2691,6 +2893,7 @@ static long usbdev_do_ioctl(struct file *file, unsigned int cmd,
 
 #ifdef CONFIG_COMPAT
 	case USBDEVFS_CONTROL32:
+		printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usbdev_do_ioctl: USBDEVFS_CONTROL32\n");
 		snoop(&dev->dev, "%s: CONTROL32\n", __func__);
 		ret = proc_control_compat(ps, p);
 		if (ret >= 0)
@@ -2698,6 +2901,7 @@ static long usbdev_do_ioctl(struct file *file, unsigned int cmd,
 		break;
 
 	case USBDEVFS_BULK32:
+		printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usbdev_do_ioctl: USBDEVFS_BULK32\n");
 		snoop(&dev->dev, "%s: BULK32\n", __func__);
 		ret = proc_bulk_compat(ps, p);
 		if (ret >= 0)
@@ -2705,11 +2909,13 @@ static long usbdev_do_ioctl(struct file *file, unsigned int cmd,
 		break;
 
 	case USBDEVFS_DISCSIGNAL32:
+		printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usbdev_do_ioctl: USBDEVFS_DISCSIGNAL32\n");
 		snoop(&dev->dev, "%s: DISCSIGNAL32\n", __func__);
 		ret = proc_disconnectsignal_compat(ps, p);
 		break;
 
 	case USBDEVFS_SUBMITURB32:
+		printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usbdev_do_ioctl: USBDEVFS_SUBMITURB32\n");
 		snoop(&dev->dev, "%s: SUBMITURB32\n", __func__);
 		ret = proc_submiturb_compat(ps, p);
 		if (ret >= 0)
@@ -2717,70 +2923,87 @@ static long usbdev_do_ioctl(struct file *file, unsigned int cmd,
 		break;
 
 	case USBDEVFS_IOCTL32:
+		printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usbdev_do_ioctl: USBDEVFS_IOCTL32\n");
 		snoop(&dev->dev, "%s: IOCTL32\n", __func__);
 		ret = proc_ioctl_compat(ps, ptr_to_compat(p));
 		break;
 #endif
 
 	case USBDEVFS_DISCARDURB:
+		printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usbdev_do_ioctl: USBDEVFS_DISCARDURB\n");
 		snoop(&dev->dev, "%s: DISCARDURB %px\n", __func__, p);
 		ret = proc_unlinkurb(ps, p);
 		break;
 
 	case USBDEVFS_DISCSIGNAL:
+		printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usbdev_do_ioctl: USBDEVFS_DISCSIGNAL\n");
 		snoop(&dev->dev, "%s: DISCSIGNAL\n", __func__);
 		ret = proc_disconnectsignal(ps, p);
 		break;
 
 	case USBDEVFS_CLAIMINTERFACE:
+		printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usbdev_do_ioctl: USBDEVFS_CLAIMINTERFACE\n");
 		snoop(&dev->dev, "%s: CLAIMINTERFACE\n", __func__);
 		ret = proc_claiminterface(ps, p);
 		break;
 
 	case USBDEVFS_RELEASEINTERFACE:
+		printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usbdev_do_ioctl: USBDEVFS_RELEASEINTERFACE\n");
 		snoop(&dev->dev, "%s: RELEASEINTERFACE\n", __func__);
 		ret = proc_releaseinterface(ps, p);
 		break;
 
 	case USBDEVFS_IOCTL:
+		printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usbdev_do_ioctl: USBDEVFS_IOCTL\n");
 		snoop(&dev->dev, "%s: IOCTL\n", __func__);
 		ret = proc_ioctl_default(ps, p);
 		break;
 
 	case USBDEVFS_CLAIM_PORT:
+		printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usbdev_do_ioctl: USBDEVFS_CLAIM_PORT\n");
 		snoop(&dev->dev, "%s: CLAIM_PORT\n", __func__);
 		ret = proc_claim_port(ps, p);
 		break;
 
 	case USBDEVFS_RELEASE_PORT:
+		printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usbdev_do_ioctl: USBDEVFS_RELEASE_PORT\n");
 		snoop(&dev->dev, "%s: RELEASE_PORT\n", __func__);
 		ret = proc_release_port(ps, p);
 		break;
 	case USBDEVFS_GET_CAPABILITIES:
+		printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usbdev_do_ioctl: USBDEVFS_GET_CAPABILITIES\n");
 		ret = proc_get_capabilities(ps, p);
 		break;
 	case USBDEVFS_DISCONNECT_CLAIM:
+		printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usbdev_do_ioctl: USBDEVFS_DISCONNECT_CLAIM\n");
 		ret = proc_disconnect_claim(ps, p);
 		break;
 	case USBDEVFS_ALLOC_STREAMS:
+		printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usbdev_do_ioctl: USBDEVFS_ALLOC_STREAMS\n");
 		ret = proc_alloc_streams(ps, p);
 		break;
 	case USBDEVFS_FREE_STREAMS:
+		printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usbdev_do_ioctl: USBDEVFS_FREE_STREAMS\n");
 		ret = proc_free_streams(ps, p);
 		break;
 	case USBDEVFS_DROP_PRIVILEGES:
+		printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usbdev_do_ioctl: USBDEVFS_DROP_PRIVILEGES\n");
 		ret = proc_drop_privileges(ps, p);
 		break;
 	case USBDEVFS_GET_SPEED:
+		printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usbdev_do_ioctl: USBDEVFS_GET_SPEED\n");
 		ret = ps->dev->speed;
 		break;
 	case USBDEVFS_FORBID_SUSPEND:
+		printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usbdev_do_ioctl: USBDEVFS_FORBID_SUSPEND\n");
 		ret = proc_forbid_suspend(ps);
 		break;
 	case USBDEVFS_ALLOW_SUSPEND:
+		printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usbdev_do_ioctl: USBDEVFS_ALLOW_SUSPEND\n");
 		ret = proc_allow_suspend(ps);
 		break;
 	case USBDEVFS_WAIT_FOR_RESUME:
+		printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usbdev_do_ioctl: USBDEVFS_WAIT_FOR_RESUME\n");
 		ret = proc_wait_for_resume(ps);
 		break;
 	}
@@ -2802,6 +3025,8 @@ static long usbdev_do_ioctl(struct file *file, unsigned int cmd,
 static long usbdev_ioctl(struct file *file, unsigned int cmd,
 			unsigned long arg)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usbdev_ioctl 0\n");
+	
 	int ret;
 
 	ret = usbdev_do_ioctl(file, cmd, (void __user *)arg);
@@ -2813,6 +3038,8 @@ static long usbdev_ioctl(struct file *file, unsigned int cmd,
 static __poll_t usbdev_poll(struct file *file,
 				struct poll_table_struct *wait)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usbdev_poll 0\n");
+	
 	struct usb_dev_state *ps = file->private_data;
 	__poll_t mask = 0;
 
@@ -2840,6 +3067,8 @@ const struct file_operations usbdev_file_operations = {
 
 static void usbdev_remove(struct usb_device *udev)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usbdev_remove 0\n");
+	
 	struct usb_dev_state *ps;
 
 	/* Protect against simultaneous resume */
@@ -2861,6 +3090,8 @@ static void usbdev_remove(struct usb_device *udev)
 static int usbdev_notify(struct notifier_block *self,
 			       unsigned long action, void *dev)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usbdev_notify 0\n");
+	
 	switch (action) {
 	case USB_DEVICE_ADD:
 		break;
@@ -2879,6 +3110,8 @@ static struct cdev usb_device_cdev;
 
 int __init usb_devio_init(void)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usb_devio_init 0\n");
+
 	int retval;
 
 	retval = register_chrdev_region(USB_DEVICE_DEV, USB_DEVICE_MAX,
@@ -2905,6 +3138,8 @@ error_cdev:
 
 void usb_devio_cleanup(void)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usb_devio_cleanup 0\n");
+	
 	usb_unregister_notify(&usbdev_nb);
 	cdev_del(&usb_device_cdev);
 	unregister_chrdev_region(USB_DEVICE_DEV, USB_DEVICE_MAX);
