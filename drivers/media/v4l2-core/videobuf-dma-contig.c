@@ -38,6 +38,8 @@ static int __videobuf_dc_alloc(struct device *dev,
 			       struct videobuf_dma_contig_memory *mem,
 			       unsigned long size, gfp_t flags)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-dma-config.c: __videobuf_dc_alloc 0\n");
+	
 	mem->size = size;
 	mem->vaddr = dma_alloc_coherent(dev, mem->size,
 					&mem->dma_handle, flags);
@@ -55,6 +57,8 @@ static int __videobuf_dc_alloc(struct device *dev,
 static void __videobuf_dc_free(struct device *dev,
 			       struct videobuf_dma_contig_memory *mem)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-dma-config.c: __videobuf_dc_free 0\n");
+	
 	dma_free_coherent(dev, mem->size, mem->vaddr, mem->dma_handle);
 
 	mem->vaddr = NULL;
@@ -62,6 +66,8 @@ static void __videobuf_dc_free(struct device *dev,
 
 static void videobuf_vm_open(struct vm_area_struct *vma)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-dma-config.c: videobuf_vm_open 0\n");
+	
 	struct videobuf_mapping *map = vma->vm_private_data;
 
 	dev_dbg(map->q->dev, "vm_open %p [count=%u,vma=%08lx-%08lx]\n",
@@ -72,6 +78,9 @@ static void videobuf_vm_open(struct vm_area_struct *vma)
 
 static void videobuf_vm_close(struct vm_area_struct *vma)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-dma-config.c: videobuf_vm_close 0\n");
+	
+
 	struct videobuf_mapping *map = vma->vm_private_data;
 	struct videobuf_queue *q = map->q;
 	int i;
@@ -157,6 +166,8 @@ static void videobuf_dma_contig_user_put(struct videobuf_dma_contig_memory *mem)
 static int videobuf_dma_contig_user_get(struct videobuf_dma_contig_memory *mem,
 					struct videobuf_buffer *vb)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-dma-config.c: videobuf_dma_contig_user_get 0\n");
+	
 	unsigned long untagged_baddr = untagged_addr(vb->baddr);
 	struct mm_struct *mm = current->mm;
 	struct vm_area_struct *vma;
@@ -208,6 +219,8 @@ out_up:
 
 static struct videobuf_buffer *__videobuf_alloc(size_t size)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-dma-config.c: __videobuf_alloc 0\n");
+	
 	struct videobuf_dma_contig_memory *mem;
 	struct videobuf_buffer *vb;
 
@@ -223,6 +236,8 @@ static struct videobuf_buffer *__videobuf_alloc(size_t size)
 
 static void *__videobuf_to_vaddr(struct videobuf_buffer *buf)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-dma-config.c: __videobuf_to_vaddr 0\n");
+	
 	struct videobuf_dma_contig_memory *mem = buf->priv;
 
 	BUG_ON(!mem);
@@ -235,6 +250,8 @@ static int __videobuf_iolock(struct videobuf_queue *q,
 			     struct videobuf_buffer *vb,
 			     struct v4l2_framebuffer *fbuf)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-dma-config.c: __videobuf_iolock 0\n");
+	
 	struct videobuf_dma_contig_memory *mem = vb->priv;
 
 	BUG_ON(!mem);
@@ -275,6 +292,8 @@ static int __videobuf_mmap_mapper(struct videobuf_queue *q,
 				  struct videobuf_buffer *buf,
 				  struct vm_area_struct *vma)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-dma-config.c: __videobuf_mmap_mapper 0\n");
+	
 	struct videobuf_dma_contig_memory *mem;
 	struct videobuf_mapping *map;
 	int retval;
@@ -354,6 +373,8 @@ void videobuf_queue_dma_contig_init(struct videobuf_queue *q,
 				    void *priv,
 				    struct mutex *ext_lock)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-dma-config.c: videobuf_queue_dma_contig_init 0\n");
+	
 	videobuf_queue_core_init(q, ops, dev, irqlock, type, field, msize,
 				 priv, &qops, ext_lock);
 }
@@ -361,6 +382,8 @@ EXPORT_SYMBOL_GPL(videobuf_queue_dma_contig_init);
 
 dma_addr_t videobuf_to_dma_contig(struct videobuf_buffer *buf)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-dma-config.c: videobuf_to_dma_contig 0\n");
+	
 	struct videobuf_dma_contig_memory *mem = buf->priv;
 
 	BUG_ON(!mem);
@@ -373,6 +396,8 @@ EXPORT_SYMBOL_GPL(videobuf_to_dma_contig);
 void videobuf_dma_contig_free(struct videobuf_queue *q,
 			      struct videobuf_buffer *buf)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-dma-config.c: videobuf_dma_contig_free 0\n");
+	
 	struct videobuf_dma_contig_memory *mem = buf->priv;
 
 	/* mmapped memory can't be freed here, otherwise mmapped region

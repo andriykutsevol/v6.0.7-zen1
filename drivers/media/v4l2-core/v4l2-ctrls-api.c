@@ -41,6 +41,9 @@ static int ptr_to_user(struct v4l2_ext_control *c,
 		       struct v4l2_ctrl *ctrl,
 		       union v4l2_ctrl_ptr ptr)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-ioctl.c: ptr_to_user 0\n");
+	
+	
 	u32 len;
 
 	if (ctrl->is_ptr && !ctrl->is_string)

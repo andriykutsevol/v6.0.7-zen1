@@ -62,6 +62,8 @@ MODULE_LICENSE("GPL");
 static struct scatterlist *videobuf_vmalloc_to_sg(unsigned char *virt,
 						  int nr_pages)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-dms-sg.c: videobuf_vmalloc_to_sg 0\n");
+	
 	struct scatterlist *sglist;
 	struct page *pg;
 	int i;
@@ -92,6 +94,8 @@ err:
 static struct scatterlist *videobuf_pages_to_sg(struct page **pages,
 					int nr_pages, int offset, size_t size)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-dms-sg.c: videobuf_pages_to_sg 0\n");
+	
 	struct scatterlist *sglist;
 	int i;
 
@@ -133,6 +137,8 @@ highmem:
 
 struct videobuf_dmabuf *videobuf_to_dma(struct videobuf_buffer *buf)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-dms-sg.c: videobuf_to_dma 0\n");
+	
 	struct videobuf_dma_sg_memory *mem = buf->priv;
 	BUG_ON(!mem);
 
@@ -144,6 +150,8 @@ EXPORT_SYMBOL_GPL(videobuf_to_dma);
 
 static void videobuf_dma_init(struct videobuf_dmabuf *dma)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-dms-sg.c: videobuf_dma_init 0\n");
+	
 	memset(dma, 0, sizeof(*dma));
 	dma->magic = MAGIC_DMABUF;
 }
@@ -151,6 +159,8 @@ static void videobuf_dma_init(struct videobuf_dmabuf *dma)
 static int videobuf_dma_init_user_locked(struct videobuf_dmabuf *dma,
 			int direction, unsigned long data, unsigned long size)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-dms-sg.c: videobuf_dma_init_user_locked 0\n");
+	
 	unsigned long first, last;
 	int err, rw = 0;
 	unsigned int flags = FOLL_FORCE;
@@ -198,6 +208,8 @@ static int videobuf_dma_init_user_locked(struct videobuf_dmabuf *dma,
 static int videobuf_dma_init_user(struct videobuf_dmabuf *dma, int direction,
 			   unsigned long data, unsigned long size)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-dms-sg.c: videobuf_dma_init_user 0\n");
+	
 	int ret;
 
 	mmap_read_lock(current->mm);
@@ -210,6 +222,8 @@ static int videobuf_dma_init_user(struct videobuf_dmabuf *dma, int direction,
 static int videobuf_dma_init_kernel(struct videobuf_dmabuf *dma, int direction,
 				    unsigned long nr_pages)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-dms-sg.c: videobuf_dma_init_kernel 0\n");
+	
 	int i;
 
 	dprintk(1, "init kernel [%lu pages]\n", nr_pages);
@@ -269,6 +283,9 @@ out_free_pages:
 static int videobuf_dma_init_overlay(struct videobuf_dmabuf *dma, int direction,
 			      dma_addr_t addr, unsigned long nr_pages)
 {
+	
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-dms-sg.c: videobuf_dma_init_overlay 0\n");
+	
 	dprintk(1, "init overlay [%lu pages @ bus 0x%lx]\n",
 		nr_pages, (unsigned long)addr);
 	dma->direction = direction;
@@ -284,6 +301,8 @@ static int videobuf_dma_init_overlay(struct videobuf_dmabuf *dma, int direction,
 
 static int videobuf_dma_map(struct device *dev, struct videobuf_dmabuf *dma)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-dms-sg.c: videobuf_dma_map 0\n");
+	
 	MAGIC_CHECK(dma->magic, MAGIC_DMABUF);
 	BUG_ON(0 == dma->nr_pages);
 
@@ -327,6 +346,9 @@ static int videobuf_dma_map(struct device *dev, struct videobuf_dmabuf *dma)
 
 int videobuf_dma_unmap(struct device *dev, struct videobuf_dmabuf *dma)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-dms-sg.c: videobuf_dma_unmap 0\n");
+	
+	
 	MAGIC_CHECK(dma->magic, MAGIC_DMABUF);
 
 	if (!dma->sglen)
@@ -344,6 +366,9 @@ EXPORT_SYMBOL_GPL(videobuf_dma_unmap);
 
 int videobuf_dma_free(struct videobuf_dmabuf *dma)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-dms-sg.c: videobuf_dma_free 0\n");
+	
+	
 	int i;
 	MAGIC_CHECK(dma->magic, MAGIC_DMABUF);
 	BUG_ON(dma->sglen);
@@ -383,6 +408,8 @@ EXPORT_SYMBOL_GPL(videobuf_dma_free);
 
 static void videobuf_vm_open(struct vm_area_struct *vma)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-dms-sg.c: videobuf_vm_open 0\n");
+	
 	struct videobuf_mapping *map = vma->vm_private_data;
 
 	dprintk(2, "vm_open %p [count=%d,vma=%08lx-%08lx]\n", map,
@@ -393,6 +420,8 @@ static void videobuf_vm_open(struct vm_area_struct *vma)
 
 static void videobuf_vm_close(struct vm_area_struct *vma)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-dms-sg.c: videobuf_vm_close 0\n");
+	
 	struct videobuf_mapping *map = vma->vm_private_data;
 	struct videobuf_queue *q = map->q;
 	struct videobuf_dma_sg_memory *mem;
@@ -433,6 +462,8 @@ static void videobuf_vm_close(struct vm_area_struct *vma)
  */
 static vm_fault_t videobuf_vm_fault(struct vm_fault *vmf)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-dms-sg.c: videobuf_vm_fault 0\n");
+	
 	struct vm_area_struct *vma = vmf->vma;
 	struct page *page;
 
@@ -466,6 +497,8 @@ static const struct vm_operations_struct videobuf_vm_ops = {
 
 static struct videobuf_buffer *__videobuf_alloc_vb(size_t size)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-dms-sg.c: __videobuf_alloc_vb 0\n");
+	
 	struct videobuf_dma_sg_memory *mem;
 	struct videobuf_buffer *vb;
 
@@ -487,6 +520,9 @@ static struct videobuf_buffer *__videobuf_alloc_vb(size_t size)
 
 static void *__videobuf_to_vaddr(struct videobuf_buffer *buf)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-dms-sg.c: __videobuf_to_vaddr 0\n");
+	
+	
 	struct videobuf_dma_sg_memory *mem = buf->priv;
 	BUG_ON(!mem);
 
@@ -499,6 +535,9 @@ static int __videobuf_iolock(struct videobuf_queue *q,
 			     struct videobuf_buffer *vb,
 			     struct v4l2_framebuffer *fbuf)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-dms-sg.c: __videobuf_iolock 0\n");
+	
+	
 	struct videobuf_dma_sg_memory *mem = vb->priv;
 	unsigned long pages;
 	dma_addr_t bus;
@@ -573,6 +612,9 @@ static int __videobuf_iolock(struct videobuf_queue *q,
 static int __videobuf_sync(struct videobuf_queue *q,
 			   struct videobuf_buffer *buf)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-dms-sg.c: __videobuf_sync 0\n");
+	
+	
 	struct videobuf_dma_sg_memory *mem = buf->priv;
 	BUG_ON(!mem || !mem->dma.sglen);
 
@@ -589,6 +631,9 @@ static int __videobuf_mmap_mapper(struct videobuf_queue *q,
 				  struct videobuf_buffer *buf,
 				  struct vm_area_struct *vma)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-dms-sg.c: __videobuf_mmap_mapper 0\n");
+	
+	
 	struct videobuf_dma_sg_memory *mem = buf->priv;
 	struct videobuf_mapping *map;
 	unsigned int first, last, size = 0, i;
@@ -657,6 +702,8 @@ static struct videobuf_qtype_ops sg_ops = {
 
 void *videobuf_sg_alloc(size_t size)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-dms-sg.c: videobuf_sg_alloc 0\n");
+	
 	struct videobuf_queue q;
 
 	/* Required to make generic handler to call __videobuf_alloc */
@@ -678,6 +725,8 @@ void videobuf_queue_sg_init(struct videobuf_queue *q,
 			 void *priv,
 			 struct mutex *ext_lock)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-dms-sg.c: videobuf_queue_sg_init 0\n");
+	
 	videobuf_queue_core_init(q, ops, dev, irqlock, type, field, msize,
 				 priv, &sg_ops, ext_lock);
 }

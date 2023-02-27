@@ -50,6 +50,8 @@ MODULE_LICENSE("GPL");
 
 static void videobuf_vm_open(struct vm_area_struct *vma)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-vmalloc.c: videobuf_vm_open 0\n");
+	
 	struct videobuf_mapping *map = vma->vm_private_data;
 
 	dprintk(2, "vm_open %p [count=%u,vma=%08lx-%08lx]\n", map,
@@ -60,6 +62,8 @@ static void videobuf_vm_open(struct vm_area_struct *vma)
 
 static void videobuf_vm_close(struct vm_area_struct *vma)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-vmalloc.c: videobuf_vm_close 0\n");
+	
 	struct videobuf_mapping *map = vma->vm_private_data;
 	struct videobuf_queue *q = map->q;
 	int i;
@@ -134,6 +138,8 @@ static const struct vm_operations_struct videobuf_vm_ops = {
 
 static struct videobuf_buffer *__videobuf_alloc_vb(size_t size)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-vmalloc.c: __videobuf_alloc_vb 0\n");
+	
 	struct videobuf_vmalloc_memory *mem;
 	struct videobuf_buffer *vb;
 
@@ -155,6 +161,8 @@ static int __videobuf_iolock(struct videobuf_queue *q,
 			     struct videobuf_buffer *vb,
 			     struct v4l2_framebuffer *fbuf)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-vmalloc.c: __videobuf_iolock 0\n");
+	
 	struct videobuf_vmalloc_memory *mem = vb->priv;
 	int pages;
 
@@ -210,6 +218,8 @@ static int __videobuf_mmap_mapper(struct videobuf_queue *q,
 				  struct videobuf_buffer *buf,
 				  struct vm_area_struct *vma)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-vmalloc.c: __videobuf_mmap_mapper 0\n");
+	
 	struct videobuf_vmalloc_memory *mem;
 	struct videobuf_mapping *map;
 	int retval, pages;
@@ -284,6 +294,8 @@ void videobuf_queue_vmalloc_init(struct videobuf_queue *q,
 			 void *priv,
 			 struct mutex *ext_lock)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-vmalloc.c: videobuf_queue_vmalloc_init 0\n");
+	
 	videobuf_queue_core_init(q, ops, dev, irqlock, type, field, msize,
 				 priv, &qops, ext_lock);
 }
@@ -291,6 +303,8 @@ EXPORT_SYMBOL_GPL(videobuf_queue_vmalloc_init);
 
 void *videobuf_to_vmalloc(struct videobuf_buffer *buf)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-vmalloc.c: videobuf_to_vmalloc 0\n");
+	
 	struct videobuf_vmalloc_memory *mem = buf->priv;
 	BUG_ON(!mem);
 	MAGIC_CHECK(mem->magic, MAGIC_VMAL_MEM);
@@ -301,6 +315,8 @@ EXPORT_SYMBOL_GPL(videobuf_to_vmalloc);
 
 void videobuf_vmalloc_free(struct videobuf_buffer *buf)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/videobuf-vmalloc.c: videobuf_vmalloc_free 0\n");
+	
 	struct videobuf_vmalloc_memory *mem = buf->priv;
 
 	/* mmapped memory can't be freed here, otherwise mmapped region
