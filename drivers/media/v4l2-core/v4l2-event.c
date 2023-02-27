@@ -20,12 +20,16 @@
 
 static unsigned int sev_pos(const struct v4l2_subscribed_event *sev, unsigned int idx)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-event.c: sev_pos 0\n");
+	
 	idx += sev->first;
 	return idx >= sev->elems ? idx - sev->elems : idx;
 }
 
 static int __v4l2_event_dequeue(struct v4l2_fh *fh, struct v4l2_event *event)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-event.c: __v4l2_event_dequeue 0\n");
+	
 	struct v4l2_kevent *kev;
 	struct timespec64 ts;
 	unsigned long flags;
@@ -59,6 +63,8 @@ static int __v4l2_event_dequeue(struct v4l2_fh *fh, struct v4l2_event *event)
 int v4l2_event_dequeue(struct v4l2_fh *fh, struct v4l2_event *event,
 		       int nonblocking)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-event.c: v4l2_event_dequeue 0\n");
+	
 	int ret;
 
 	if (nonblocking)
@@ -88,6 +94,9 @@ EXPORT_SYMBOL_GPL(v4l2_event_dequeue);
 static struct v4l2_subscribed_event *v4l2_event_subscribed(
 		struct v4l2_fh *fh, u32 type, u32 id)
 {
+	
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-event.c: v4l2_event_subscribed 0\n");
+	
 	struct v4l2_subscribed_event *sev;
 
 	assert_spin_locked(&fh->vdev->fh_lock);
@@ -102,6 +111,9 @@ static struct v4l2_subscribed_event *v4l2_event_subscribed(
 static void __v4l2_event_queue_fh(struct v4l2_fh *fh,
 				  const struct v4l2_event *ev, u64 ts)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-event.c: __v4l2_event_queue_f 0\n");
+	
+	
 	struct v4l2_subscribed_event *sev;
 	struct v4l2_kevent *kev;
 	bool copy_payload = true;
@@ -152,6 +164,9 @@ static void __v4l2_event_queue_fh(struct v4l2_fh *fh,
 
 void v4l2_event_queue(struct video_device *vdev, const struct v4l2_event *ev)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-event.c: v4l2_event_queue 0\n");
+	
+	
 	struct v4l2_fh *fh;
 	unsigned long flags;
 	u64 ts;
@@ -172,6 +187,8 @@ EXPORT_SYMBOL_GPL(v4l2_event_queue);
 
 void v4l2_event_queue_fh(struct v4l2_fh *fh, const struct v4l2_event *ev)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-event.c: v4l2_event_queue_fh 0\n");
+	
 	unsigned long flags;
 	u64 ts = ktime_get_ns();
 
@@ -183,12 +200,16 @@ EXPORT_SYMBOL_GPL(v4l2_event_queue_fh);
 
 int v4l2_event_pending(struct v4l2_fh *fh)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-event.c: v4l2_event_pending 0\n");
+	
 	return fh->navailable;
 }
 EXPORT_SYMBOL_GPL(v4l2_event_pending);
 
 void v4l2_event_wake_all(struct video_device *vdev)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-event.c: v4l2_event_wake_all 0\n");
+	
 	struct v4l2_fh *fh;
 	unsigned long flags;
 
@@ -206,6 +227,8 @@ EXPORT_SYMBOL_GPL(v4l2_event_wake_all);
 
 static void __v4l2_event_unsubscribe(struct v4l2_subscribed_event *sev)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-event.c: __v4l2_event_unsubscribe 0\n");
+	
 	struct v4l2_fh *fh = sev->fh;
 	unsigned int i;
 
@@ -224,6 +247,8 @@ int v4l2_event_subscribe(struct v4l2_fh *fh,
 			 const struct v4l2_event_subscription *sub, unsigned int elems,
 			 const struct v4l2_subscribed_event_ops *ops)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-event.c: v4l2_event_subscribe 0\n");
+	
 	struct v4l2_subscribed_event *sev, *found_ev;
 	unsigned long flags;
 	unsigned int i;
@@ -276,6 +301,8 @@ EXPORT_SYMBOL_GPL(v4l2_event_subscribe);
 
 void v4l2_event_unsubscribe_all(struct v4l2_fh *fh)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-event.c: v4l2_event_unsubscribe_all 0\n");
+	
 	struct v4l2_event_subscription sub;
 	struct v4l2_subscribed_event *sev;
 	unsigned long flags;
@@ -300,6 +327,8 @@ EXPORT_SYMBOL_GPL(v4l2_event_unsubscribe_all);
 int v4l2_event_unsubscribe(struct v4l2_fh *fh,
 			   const struct v4l2_event_subscription *sub)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-event.c: v4l2_event_unsubscribe 0\n");
+	
 	struct v4l2_subscribed_event *sev;
 	unsigned long flags;
 
@@ -332,6 +361,8 @@ EXPORT_SYMBOL_GPL(v4l2_event_unsubscribe);
 int v4l2_event_subdev_unsubscribe(struct v4l2_subdev *sd, struct v4l2_fh *fh,
 				  struct v4l2_event_subscription *sub)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-event.c: v4l2_event_subdev_unsubscribe 0\n");
+	
 	return v4l2_event_unsubscribe(fh, sub);
 }
 EXPORT_SYMBOL_GPL(v4l2_event_subdev_unsubscribe);
@@ -339,6 +370,8 @@ EXPORT_SYMBOL_GPL(v4l2_event_subdev_unsubscribe);
 static void v4l2_event_src_replace(struct v4l2_event *old,
 				const struct v4l2_event *new)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-event.c: v4l2_event_src_replace 0\n");
+	
 	u32 old_changes = old->u.src_change.changes;
 
 	old->u.src_change = new->u.src_change;
@@ -348,6 +381,8 @@ static void v4l2_event_src_replace(struct v4l2_event *old,
 static void v4l2_event_src_merge(const struct v4l2_event *old,
 				struct v4l2_event *new)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-event.c: v4l2_event_src_merge 0\n");
+	
 	new->u.src_change.changes |= old->u.src_change.changes;
 }
 
@@ -359,6 +394,8 @@ static const struct v4l2_subscribed_event_ops v4l2_event_src_ch_ops = {
 int v4l2_src_change_event_subscribe(struct v4l2_fh *fh,
 				const struct v4l2_event_subscription *sub)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-event.c: v4l2_src_change_event_subscribe 0\n");
+	
 	if (sub->type == V4L2_EVENT_SOURCE_CHANGE)
 		return v4l2_event_subscribe(fh, sub, 0, &v4l2_event_src_ch_ops);
 	return -EINVAL;
@@ -368,6 +405,8 @@ EXPORT_SYMBOL_GPL(v4l2_src_change_event_subscribe);
 int v4l2_src_change_event_subdev_subscribe(struct v4l2_subdev *sd,
 		struct v4l2_fh *fh, struct v4l2_event_subscription *sub)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-event.c: v4l2_src_change_event_subdev_subscribe 0\n");
+	
 	return v4l2_src_change_event_subscribe(fh, sub);
 }
 EXPORT_SYMBOL_GPL(v4l2_src_change_event_subdev_subscribe);

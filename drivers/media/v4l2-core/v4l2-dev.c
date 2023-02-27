@@ -46,6 +46,8 @@
 static ssize_t index_show(struct device *cd,
 			  struct device_attribute *attr, char *buf)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-dev.c: index_show 0\n");
+	
 	struct video_device *vdev = to_video_device(cd);
 
 	return sprintf(buf, "%i\n", vdev->index);
@@ -55,6 +57,8 @@ static DEVICE_ATTR_RO(index);
 static ssize_t dev_debug_show(struct device *cd,
 			  struct device_attribute *attr, char *buf)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-dev.c: dev_debug_show 0\n");
+	
 	struct video_device *vdev = to_video_device(cd);
 
 	return sprintf(buf, "%i\n", vdev->dev_debug);
@@ -63,6 +67,8 @@ static ssize_t dev_debug_show(struct device *cd,
 static ssize_t dev_debug_store(struct device *cd, struct device_attribute *attr,
 			  const char *buf, size_t len)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-dev.c: dev_debug_store 0\n");
+	
 	struct video_device *vdev = to_video_device(cd);
 	int res = 0;
 	u16 value;
@@ -79,6 +85,8 @@ static DEVICE_ATTR_RW(dev_debug);
 static ssize_t name_show(struct device *cd,
 			 struct device_attribute *attr, char *buf)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-dev.c: name_show 0\n");
+	
 	struct video_device *vdev = to_video_device(cd);
 
 	return sprintf(buf, "%.*s\n", (int)sizeof(vdev->name), vdev->name);
@@ -120,6 +128,7 @@ static inline unsigned long *devnode_bits(enum vfl_devnode_type vfl_type)
 /* Return the bitmap corresponding to vfl_type. */
 static inline unsigned long *devnode_bits(enum vfl_devnode_type vfl_type)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-dev.c: devnode_bits 0\n");
 	return devnode_nums[vfl_type];
 }
 #endif
@@ -127,29 +136,34 @@ static inline unsigned long *devnode_bits(enum vfl_devnode_type vfl_type)
 /* Mark device node number vdev->num as used */
 static inline void devnode_set(struct video_device *vdev)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-dev.c: devnode_set 0\n");
 	set_bit(vdev->num, devnode_bits(vdev->vfl_type));
 }
 
 /* Mark device node number vdev->num as unused */
 static inline void devnode_clear(struct video_device *vdev)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-dev.c: devnode_clear 0\n");
 	clear_bit(vdev->num, devnode_bits(vdev->vfl_type));
 }
 
 /* Try to find a free device node number in the range [from, to> */
 static inline int devnode_find(struct video_device *vdev, int from, int to)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-dev.c: devnode_find 0\n");
 	return find_next_zero_bit(devnode_bits(vdev->vfl_type), to, from);
 }
 
 struct video_device *video_device_alloc(void)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-dev.c: video_device_alloc 0\n");
 	return kzalloc(sizeof(struct video_device), GFP_KERNEL);
 }
 EXPORT_SYMBOL(video_device_alloc);
 
 void video_device_release(struct video_device *vdev)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-dev.c: video_device_release 0\n");
 	kfree(vdev);
 }
 EXPORT_SYMBOL(video_device_release);
@@ -163,17 +177,21 @@ EXPORT_SYMBOL(video_device_release_empty);
 
 static inline void video_get(struct video_device *vdev)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-dev.c: video_get 0\n");
 	get_device(&vdev->dev);
 }
 
 static inline void video_put(struct video_device *vdev)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-dev.c: video_put 0\n");
 	put_device(&vdev->dev);
 }
 
 /* Called when the last user of the video device exits. */
 static void v4l2_device_release(struct device *cd)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-dev.c: v4l2_device_release 0\n");
+	
 	struct video_device *vdev = to_video_device(cd);
 	struct v4l2_device *v4l2_dev = vdev->v4l2_dev;
 
@@ -234,6 +252,8 @@ static struct class video_class = {
 
 struct video_device *video_devdata(struct file *file)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-dev.c: video_devdata 0\n");
+	
 	return video_devices[iminor(file_inode(file))];
 }
 EXPORT_SYMBOL(video_devdata);
@@ -250,6 +270,8 @@ static inline bool prio_is_valid(enum v4l2_priority prio)
 
 void v4l2_prio_init(struct v4l2_prio_state *global)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-dev.c: v4l2_prio_init 0\n");
+	
 	memset(global, 0, sizeof(*global));
 }
 EXPORT_SYMBOL(v4l2_prio_init);
@@ -257,6 +279,8 @@ EXPORT_SYMBOL(v4l2_prio_init);
 int v4l2_prio_change(struct v4l2_prio_state *global, enum v4l2_priority *local,
 		     enum v4l2_priority new)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-dev.c: v4l2_prio_change 0\n");
+	
 	if (!prio_is_valid(new))
 		return -EINVAL;
 	if (*local == new)
@@ -272,12 +296,16 @@ EXPORT_SYMBOL(v4l2_prio_change);
 
 void v4l2_prio_open(struct v4l2_prio_state *global, enum v4l2_priority *local)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-dev.c: v4l2_prio_open 0\n");
+	
 	v4l2_prio_change(global, local, V4L2_PRIORITY_DEFAULT);
 }
 EXPORT_SYMBOL(v4l2_prio_open);
 
 void v4l2_prio_close(struct v4l2_prio_state *global, enum v4l2_priority local)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-dev.c: v4l2_prio_close 0\n");
+	
 	if (prio_is_valid(local))
 		atomic_dec(&global->prios[local]);
 }
@@ -285,6 +313,8 @@ EXPORT_SYMBOL(v4l2_prio_close);
 
 enum v4l2_priority v4l2_prio_max(struct v4l2_prio_state *global)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-dev.c: v4l2_prio_max 0\n");
+	
 	if (atomic_read(&global->prios[V4L2_PRIORITY_RECORD]) > 0)
 		return V4L2_PRIORITY_RECORD;
 	if (atomic_read(&global->prios[V4L2_PRIORITY_INTERACTIVE]) > 0)
@@ -297,6 +327,8 @@ EXPORT_SYMBOL(v4l2_prio_max);
 
 int v4l2_prio_check(struct v4l2_prio_state *global, enum v4l2_priority local)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-dev.c: v4l2_prio_check 0\n");
+	
 	return (local < v4l2_prio_max(global)) ? -EBUSY : 0;
 }
 EXPORT_SYMBOL(v4l2_prio_check);
@@ -305,6 +337,9 @@ EXPORT_SYMBOL(v4l2_prio_check);
 static ssize_t v4l2_read(struct file *filp, char __user *buf,
 		size_t sz, loff_t *off)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-dev.c: v4l2_read 0\n");
+	
+	
 	struct video_device *vdev = video_devdata(filp);
 	int ret = -ENODEV;
 
@@ -322,6 +357,9 @@ static ssize_t v4l2_read(struct file *filp, char __user *buf,
 static ssize_t v4l2_write(struct file *filp, const char __user *buf,
 		size_t sz, loff_t *off)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-dev.c: v4l2_write 0\n");
+
+	
 	struct video_device *vdev = video_devdata(filp);
 	int ret = -ENODEV;
 
@@ -338,6 +376,9 @@ static ssize_t v4l2_write(struct file *filp, const char __user *buf,
 
 static __poll_t v4l2_poll(struct file *filp, struct poll_table_struct *poll)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-dev.c: v4l2_poll 0\n");
+	
+	
 	struct video_device *vdev = video_devdata(filp);
 	__poll_t res = EPOLLERR | EPOLLHUP | EPOLLPRI;
 
@@ -356,6 +397,9 @@ static __poll_t v4l2_poll(struct file *filp, struct poll_table_struct *poll)
 
 static long v4l2_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-dev.c: v4l2_ioctl 0\n");
+	
+	
 	struct video_device *vdev = video_devdata(filp);
 	int ret = -ENODEV;
 
@@ -375,6 +419,9 @@ static unsigned long v4l2_get_unmapped_area(struct file *filp,
 		unsigned long addr, unsigned long len, unsigned long pgoff,
 		unsigned long flags)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-dev.c: v4l2_get_unmapped_area 0\n");
+	
+	
 	struct video_device *vdev = video_devdata(filp);
 	int ret;
 
@@ -392,6 +439,9 @@ static unsigned long v4l2_get_unmapped_area(struct file *filp,
 
 static int v4l2_mmap(struct file *filp, struct vm_area_struct *vm)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-dev.c: v4l2_mmap 0\n");
+	
+	
 	struct video_device *vdev = video_devdata(filp);
 	int ret = -ENODEV;
 
@@ -408,6 +458,9 @@ static int v4l2_mmap(struct file *filp, struct vm_area_struct *vm)
 /* Override for the open function */
 static int v4l2_open(struct inode *inode, struct file *filp)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-dev.c: v4l2_open 0\n");
+	
+	
 	struct video_device *vdev;
 	int ret = 0;
 
@@ -441,6 +494,9 @@ static int v4l2_open(struct inode *inode, struct file *filp)
 /* Override for the release function */
 static int v4l2_release(struct inode *inode, struct file *filp)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-dev.c: v4l2_release 0\n");
+	
+	
 	struct video_device *vdev = video_devdata(filp);
 	int ret = 0;
 
@@ -501,6 +557,9 @@ static const struct file_operations v4l2_fops = {
  */
 static int get_index(struct video_device *vdev)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-dev.c: get_index 0\n");
+	
+	
 	/* This can be static since this function is called with the global
 	   videodev_lock held. */
 	static DECLARE_BITMAP(used, VIDEO_NUM_DEVICES);
@@ -536,6 +595,9 @@ static int get_index(struct video_device *vdev)
  */
 static void determine_valid_ioctls(struct video_device *vdev)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-dev.c: determine_valid_ioctls 0\n");
+	
+	
 	const u32 vid_caps = V4L2_CAP_VIDEO_CAPTURE |
 			     V4L2_CAP_VIDEO_CAPTURE_MPLANE |
 			     V4L2_CAP_VIDEO_OUTPUT |
@@ -785,6 +847,8 @@ static void determine_valid_ioctls(struct video_device *vdev)
 
 static int video_register_media_controller(struct video_device *vdev)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-dev.c: video_register_media_controller 0\n");
+
 #if defined(CONFIG_MEDIA_CONTROLLER)
 	u32 intf_type;
 	int ret;
@@ -881,6 +945,9 @@ int __video_register_device(struct video_device *vdev,
 			    int nr, int warn_if_nr_in_use,
 			    struct module *owner)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-dev.c: __video_register_device 0\n");
+	
+	
 	int i = 0;
 	int ret;
 	int minor_offset = 0;
@@ -1079,6 +1146,9 @@ EXPORT_SYMBOL(__video_register_device);
  */
 void video_unregister_device(struct video_device *vdev)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-dev.c: video_unregister_device 0\n");
+	
+	
 	/* Check if vdev was ever registered at all */
 	if (!vdev || !video_is_registered(vdev))
 		return;
@@ -1100,6 +1170,9 @@ EXPORT_SYMBOL(video_unregister_device);
  */
 static int __init videodev_init(void)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-dev.c: videodev_init 0\n");
+	
+	
 	dev_t dev = MKDEV(VIDEO_MAJOR, 0);
 	int ret;
 
@@ -1123,6 +1196,9 @@ static int __init videodev_init(void)
 
 static void __exit videodev_exit(void)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-dev.c: videodev_exit 0\n");
+	
+	
 	dev_t dev = MKDEV(VIDEO_MAJOR, 0);
 
 	class_unregister(&video_class);

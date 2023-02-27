@@ -16,6 +16,8 @@
 
 int v4l2_device_register(struct device *dev, struct v4l2_device *v4l2_dev)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-device.c: v4l2_device_register 0\n");
+	
 	if (v4l2_dev == NULL)
 		return -EINVAL;
 
@@ -44,6 +46,8 @@ EXPORT_SYMBOL_GPL(v4l2_device_register);
 
 static void v4l2_device_release(struct kref *ref)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-device.c: v4l2_device_release 0\n");
+	
 	struct v4l2_device *v4l2_dev =
 		container_of(ref, struct v4l2_device, ref);
 
@@ -53,6 +57,7 @@ static void v4l2_device_release(struct kref *ref)
 
 int v4l2_device_put(struct v4l2_device *v4l2_dev)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-device.c: v4l2_device_put 0\n");
 	return kref_put(&v4l2_dev->ref, v4l2_device_release);
 }
 EXPORT_SYMBOL_GPL(v4l2_device_put);
@@ -60,6 +65,8 @@ EXPORT_SYMBOL_GPL(v4l2_device_put);
 int v4l2_device_set_name(struct v4l2_device *v4l2_dev, const char *basename,
 						atomic_t *instance)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-device.c: v4l2_device_set_name 0\n");
+	
 	int num = atomic_inc_return(instance) - 1;
 	int len = strlen(basename);
 
@@ -75,6 +82,8 @@ EXPORT_SYMBOL_GPL(v4l2_device_set_name);
 
 void v4l2_device_disconnect(struct v4l2_device *v4l2_dev)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-device.c: v4l2_device_disconnect 0\n");
+	
 	if (v4l2_dev->dev == NULL)
 		return;
 
@@ -87,6 +96,9 @@ EXPORT_SYMBOL_GPL(v4l2_device_disconnect);
 
 void v4l2_device_unregister(struct v4l2_device *v4l2_dev)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-device.c: v4l2_device_unregister 0\n");
+
+	
 	struct v4l2_subdev *sd, *next;
 
 	/* Just return if v4l2_dev is NULL or if it was already
@@ -111,6 +123,10 @@ EXPORT_SYMBOL_GPL(v4l2_device_unregister);
 int v4l2_device_register_subdev(struct v4l2_device *v4l2_dev,
 				struct v4l2_subdev *sd)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-device.c: v4l2_device_register_subdev 0\n");
+	
+
+	
 	int err;
 
 	/* Check for valid input */
@@ -172,6 +188,9 @@ EXPORT_SYMBOL_GPL(v4l2_device_register_subdev);
 
 static void v4l2_subdev_release(struct v4l2_subdev *sd)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-device.c: v4l2_subdev_release 0\n");
+	
+	
 	struct module *owner = !sd->owner_v4l2_dev ? sd->owner : NULL;
 
 	if (sd->internal_ops && sd->internal_ops->release)
@@ -182,6 +201,9 @@ static void v4l2_subdev_release(struct v4l2_subdev *sd)
 
 static void v4l2_device_release_subdev_node(struct video_device *vdev)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-device.c: v4l2_device_release_subdev_node 0\n");
+	
+	
 	v4l2_subdev_release(video_get_drvdata(vdev));
 	kfree(vdev);
 }
@@ -189,6 +211,9 @@ static void v4l2_device_release_subdev_node(struct video_device *vdev)
 int __v4l2_device_register_subdev_nodes(struct v4l2_device *v4l2_dev,
 					bool read_only)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-device.c: __v4l2_device_register_subdev_nodes 0\n");
+	
+	
 	struct video_device *vdev;
 	struct v4l2_subdev *sd;
 	int err;
@@ -260,6 +285,9 @@ EXPORT_SYMBOL_GPL(__v4l2_device_register_subdev_nodes);
 
 void v4l2_device_unregister_subdev(struct v4l2_subdev *sd)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-device.c: v4l2_device_unregister_subdev 0\n");
+	
+	
 	struct v4l2_device *v4l2_dev;
 
 	/* return if it isn't registered */
