@@ -145,7 +145,7 @@ static u64 usbfs_memory_usage;	/* Total memory currently allocated */
 /* Check whether it's okay to allocate more memory for a transfer */
 static int usbfs_increase_memory_usage(u64 amount)
 {
-	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usbfs_increase_memory_usage 0\n");
+	//printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usbfs_increase_memory_usage 0\n");
 	
 	
 	u64 lim, total_mem;
@@ -170,7 +170,7 @@ static int usbfs_increase_memory_usage(u64 amount)
 /* Memory for a transfer is being deallocated */
 static void usbfs_decrease_memory_usage(u64 amount)
 {
-	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usbfs_decrease_memory_usage 0\n");
+	//printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usbfs_decrease_memory_usage 0\n");
 	
 	
 	unsigned long flags;
@@ -185,7 +185,7 @@ static void usbfs_decrease_memory_usage(u64 amount)
 
 static int connected(struct usb_dev_state *ps)
 {
-	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: connected 0\n");
+	//printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: connected 0\n");
 	
 	return (!list_empty(&ps->list) &&
 			ps->dev->state != USB_STATE_NOTATTACHED);
@@ -193,7 +193,7 @@ static int connected(struct usb_dev_state *ps)
 
 static void dec_usb_memory_use_count(struct usb_memory *usbm, int *count)
 {
-	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: dec_usb_memory_use_count 0\n");
+	//printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: dec_usb_memory_use_count 0\n");
 	
 	struct usb_dev_state *ps = usbm->ps;
 	unsigned long flags;
@@ -216,7 +216,7 @@ static void dec_usb_memory_use_count(struct usb_memory *usbm, int *count)
 
 static void usbdev_vm_open(struct vm_area_struct *vma)
 {
-	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usbdev_vm_open 0\n");
+	//printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usbdev_vm_open 0\n");
 	
 	
 	struct usb_memory *usbm = vma->vm_private_data;
@@ -229,7 +229,7 @@ static void usbdev_vm_open(struct vm_area_struct *vma)
 
 static void usbdev_vm_close(struct vm_area_struct *vma)
 {
-	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usbdev_vm_close 0\n");
+	//printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usbdev_vm_close 0\n");
 	
 	struct usb_memory *usbm = vma->vm_private_data;
 
@@ -243,7 +243,7 @@ static const struct vm_operations_struct usbdev_vm_ops = {
 
 static int usbdev_mmap(struct file *file, struct vm_area_struct *vma)
 {
-	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usbdev_mmap 0\n");
+	//printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usbdev_mmap 0\n");
 	
 	struct usb_memory *usbm = NULL;
 	struct usb_dev_state *ps = file->private_data;
@@ -318,7 +318,7 @@ error:
 static ssize_t usbdev_read(struct file *file, char __user *buf, size_t nbytes,
 			   loff_t *ppos)
 {
-	printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usbdev_read 0\n");
+	//printk(KERN_INFO "!!!dgnet: drivers/usb/core/devio.c: usbdev_read 0\n");
 	
 	struct usb_dev_state *ps = file->private_data;
 	struct usb_device *dev = ps->dev;
