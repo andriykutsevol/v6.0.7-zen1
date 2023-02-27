@@ -1849,7 +1849,7 @@ int v4l2_ctrl_add_handler(struct v4l2_ctrl_handler *hdl,
 	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-ctrls-core.c: v4l2_ctrl_add_handler 0\n");
 	
 	
-	truct v4l2_ctrl_ref *ref;
+	struct v4l2_ctrl_ref *ref;
 	int ret = 0;
 
 	/* Do nothing if either handler is NULL or if they are the same */
