@@ -41,7 +41,7 @@ static int ptr_to_user(struct v4l2_ext_control *c,
 		       struct v4l2_ctrl *ctrl,
 		       union v4l2_ctrl_ptr ptr)
 {
-	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-ioctl.c: ptr_to_user 0\n");
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-ctrls-api.c: ptr_to_user 0\n");
 	
 	
 	u32 len;
@@ -72,6 +72,8 @@ static int ptr_to_user(struct v4l2_ext_control *c,
 /* Helper function: copy the current control value back to the caller */
 static int cur_to_user(struct v4l2_ext_control *c, struct v4l2_ctrl *ctrl)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-ctrls-api.c: cur_to_user 0\n");
+	
 	return ptr_to_user(c, ctrl, ctrl->p_cur);
 }
 
@@ -79,6 +81,8 @@ static int cur_to_user(struct v4l2_ext_control *c, struct v4l2_ctrl *ctrl)
 static int new_to_user(struct v4l2_ext_control *c,
 		       struct v4l2_ctrl *ctrl)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-ctrls-api.c: new_to_user 0\n");
+	
 	return ptr_to_user(c, ctrl, ctrl->p_new);
 }
 
@@ -86,12 +90,17 @@ static int new_to_user(struct v4l2_ext_control *c,
 static int req_to_user(struct v4l2_ext_control *c,
 		       struct v4l2_ctrl_ref *ref)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-ctrls-api.c: req_to_user 0\n");
+	
 	return ptr_to_user(c, ref->ctrl, ref->p_req);
 }
 
 /* Helper function: copy the initial control value back to the caller */
 static int def_to_user(struct v4l2_ext_control *c, struct v4l2_ctrl *ctrl)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-ctrls-api.c: def_to_user 0\n");
+	
+	
 	int idx;
 
 	for (idx = 0; idx < ctrl->elems; idx++)
@@ -105,6 +114,8 @@ static int user_to_ptr(struct v4l2_ext_control *c,
 		       struct v4l2_ctrl *ctrl,
 		       union v4l2_ctrl_ptr ptr)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-ctrls-api.c: user_to_ptr 0\n");
+	
 	int ret;
 	u32 size;
 
@@ -153,6 +164,8 @@ static int user_to_ptr(struct v4l2_ext_control *c,
 /* Helper function: copy the caller-provider value as the new control value */
 static int user_to_new(struct v4l2_ext_control *c, struct v4l2_ctrl *ctrl)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-ctrls-api.c: user_to_new 0\n");
+	
 	return user_to_ptr(c, ctrl, ctrl->p_new);
 }
 
@@ -210,6 +223,8 @@ static int prepare_ext_ctrls(struct v4l2_ctrl_handler *hdl,
 			     struct video_device *vdev,
 			     bool get)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-ctrls-api.c: prepare_ext_ctrls 0\n");
+	
 	struct v4l2_ctrl_helper *h;
 	bool have_clusters = false;
 	u32 i;
@@ -338,6 +353,8 @@ static int prepare_ext_ctrls(struct v4l2_ctrl_handler *hdl,
  */
 static int class_check(struct v4l2_ctrl_handler *hdl, u32 which)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-ctrls-api.c: class_check 0\n");
+	
 	if (which == 0 || which == V4L2_CTRL_WHICH_DEF_VAL ||
 	    which == V4L2_CTRL_WHICH_REQUEST_VAL)
 		return 0;
@@ -355,6 +372,9 @@ int v4l2_g_ext_ctrls_common(struct v4l2_ctrl_handler *hdl,
 			    struct v4l2_ext_controls *cs,
 			    struct video_device *vdev)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-ctrls-api.c: v4l2_g_ext_ctrls_common 0\n");
+	
+	
 	struct v4l2_ctrl_helper helper[4];
 	struct v4l2_ctrl_helper *helpers = helper;
 	int ret;
@@ -453,6 +473,8 @@ int v4l2_g_ext_ctrls_common(struct v4l2_ctrl_handler *hdl,
 int v4l2_g_ext_ctrls(struct v4l2_ctrl_handler *hdl, struct video_device *vdev,
 		     struct media_device *mdev, struct v4l2_ext_controls *cs)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-ctrls-api.c: v4l2_g_ext_ctrls 0\n");
+	
 	if (cs->which == V4L2_CTRL_WHICH_REQUEST_VAL)
 		return v4l2_g_ext_ctrls_request(hdl, vdev, mdev, cs);
 
@@ -466,6 +488,9 @@ static int validate_ctrls(struct v4l2_ext_controls *cs,
 			  struct video_device *vdev,
 			  bool set)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-ctrls-api.c: validate_ctrls 0\n");
+	
+	
 	unsigned int i;
 	int ret = 0;
 
@@ -519,6 +544,8 @@ int try_set_ext_ctrls_common(struct v4l2_fh *fh,
 			     struct v4l2_ext_controls *cs,
 			     struct video_device *vdev, bool set)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-ctrls-api.c: validate_ctrls 0\n");
+	
 	struct v4l2_ctrl_helper helper[4];
 	struct v4l2_ctrl_helper *helpers = helper;
 	unsigned int i, j;
@@ -655,6 +682,8 @@ static int try_set_ext_ctrls(struct v4l2_fh *fh,
 			     struct media_device *mdev,
 			     struct v4l2_ext_controls *cs, bool set)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-ctrls-api.c: try_set_ext_ctrls 0\n");
+	
 	int ret;
 
 	if (cs->which == V4L2_CTRL_WHICH_REQUEST_VAL)
@@ -674,6 +703,8 @@ int v4l2_try_ext_ctrls(struct v4l2_ctrl_handler *hdl,
 		       struct media_device *mdev,
 		       struct v4l2_ext_controls *cs)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-ctrls-api.c: v4l2_try_ext_ctrls 0\n");
+	
 	return try_set_ext_ctrls(NULL, hdl, vdev, mdev, cs, false);
 }
 EXPORT_SYMBOL(v4l2_try_ext_ctrls);
@@ -684,6 +715,8 @@ int v4l2_s_ext_ctrls(struct v4l2_fh *fh,
 		     struct media_device *mdev,
 		     struct v4l2_ext_controls *cs)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-ctrls-api.c: v4l2_s_ext_ctrls 0\n");
+	
 	return try_set_ext_ctrls(fh, hdl, vdev, mdev, cs, true);
 }
 EXPORT_SYMBOL(v4l2_s_ext_ctrls);
@@ -695,6 +728,8 @@ EXPORT_SYMBOL(v4l2_s_ext_ctrls);
 /* Helper function to get a single control */
 static int get_ctrl(struct v4l2_ctrl *ctrl, struct v4l2_ext_control *c)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-ctrls-api.c: get_ctrl 0\n");
+	
 	struct v4l2_ctrl *master = ctrl->cluster[0];
 	int ret = 0;
 	int i;
@@ -725,6 +760,8 @@ static int get_ctrl(struct v4l2_ctrl *ctrl, struct v4l2_ext_control *c)
 
 int v4l2_g_ctrl(struct v4l2_ctrl_handler *hdl, struct v4l2_control *control)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-ctrls-api.c: v4l2_g_ctrl 0\n");
+	
 	struct v4l2_ctrl *ctrl = v4l2_ctrl_find(hdl, control->id);
 	struct v4l2_ext_control c;
 	int ret;
@@ -740,6 +777,8 @@ EXPORT_SYMBOL(v4l2_g_ctrl);
 /* Helper function for VIDIOC_S_CTRL compatibility */
 static int set_ctrl(struct v4l2_fh *fh, struct v4l2_ctrl *ctrl, u32 ch_flags)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-ctrls-api.c: set_ctrl 0\n");
+	
 	struct v4l2_ctrl *master = ctrl->cluster[0];
 	int ret;
 	int i;
@@ -770,6 +809,9 @@ static int set_ctrl(struct v4l2_fh *fh, struct v4l2_ctrl *ctrl, u32 ch_flags)
 static int set_ctrl_lock(struct v4l2_fh *fh, struct v4l2_ctrl *ctrl,
 			 struct v4l2_ext_control *c)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-ctrls-api.c: set_ctrl_lock 0\n");
+	
+	
 	int ret;
 
 	v4l2_ctrl_lock(ctrl);
@@ -784,6 +826,8 @@ static int set_ctrl_lock(struct v4l2_fh *fh, struct v4l2_ctrl *ctrl,
 int v4l2_s_ctrl(struct v4l2_fh *fh, struct v4l2_ctrl_handler *hdl,
 		struct v4l2_control *control)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-ctrls-api.c: v4l2_s_ctrl 0\n");
+	
 	struct v4l2_ctrl *ctrl = v4l2_ctrl_find(hdl, control->id);
 	struct v4l2_ext_control c = { control->id };
 	int ret;
@@ -807,6 +851,8 @@ EXPORT_SYMBOL(v4l2_s_ctrl);
 
 s32 v4l2_ctrl_g_ctrl(struct v4l2_ctrl *ctrl)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-ctrls-api.c: v4l2_ctrl_g_ctrl 0\n");
+	
 	struct v4l2_ext_control c;
 
 	/* It's a driver bug if this happens. */
@@ -820,6 +866,8 @@ EXPORT_SYMBOL(v4l2_ctrl_g_ctrl);
 
 s64 v4l2_ctrl_g_ctrl_int64(struct v4l2_ctrl *ctrl)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-ctrls-api.c: v4l2_ctrl_g_ctrl_int6 0\n");
+	
 	struct v4l2_ext_control c;
 
 	/* It's a driver bug if this happens. */
@@ -833,6 +881,8 @@ EXPORT_SYMBOL(v4l2_ctrl_g_ctrl_int64);
 
 int __v4l2_ctrl_s_ctrl(struct v4l2_ctrl *ctrl, s32 val)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-ctrls-api.c: __v4l2_ctrl_s_ctrl 0\n");
+	
 	lockdep_assert_held(ctrl->handler->lock);
 
 	/* It's a driver bug if this happens. */
@@ -845,6 +895,9 @@ EXPORT_SYMBOL(__v4l2_ctrl_s_ctrl);
 
 int __v4l2_ctrl_s_ctrl_int64(struct v4l2_ctrl *ctrl, s64 val)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-ctrls-api.c: __v4l2_ctrl_s_ctrl_int64 0\n");
+	
+	
 	lockdep_assert_held(ctrl->handler->lock);
 
 	/* It's a driver bug if this happens. */
@@ -857,6 +910,8 @@ EXPORT_SYMBOL(__v4l2_ctrl_s_ctrl_int64);
 
 int __v4l2_ctrl_s_ctrl_string(struct v4l2_ctrl *ctrl, const char *s)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-ctrls-api.c: __v4l2_ctrl_s_ctrl_string 0\n");
+	
 	lockdep_assert_held(ctrl->handler->lock);
 
 	/* It's a driver bug if this happens. */
@@ -870,6 +925,8 @@ EXPORT_SYMBOL(__v4l2_ctrl_s_ctrl_string);
 int __v4l2_ctrl_s_ctrl_compound(struct v4l2_ctrl *ctrl,
 				enum v4l2_ctrl_type type, const void *p)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-ctrls-api.c: __v4l2_ctrl_s_ctrl_compound 0\n");
+	
 	lockdep_assert_held(ctrl->handler->lock);
 
 	/* It's a driver bug if this happens. */
@@ -886,6 +943,9 @@ EXPORT_SYMBOL(__v4l2_ctrl_s_ctrl_compound);
 int __v4l2_ctrl_modify_range(struct v4l2_ctrl *ctrl,
 			     s64 min, s64 max, u64 step, s64 def)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-ctrls-api.c: __v4l2_ctrl_modify_range 0\n");
+	
+	
 	bool value_changed;
 	bool range_changed = false;
 	int ret;
@@ -942,6 +1002,9 @@ EXPORT_SYMBOL(__v4l2_ctrl_modify_range);
 /* Implement VIDIOC_QUERY_EXT_CTRL */
 int v4l2_query_ext_ctrl(struct v4l2_ctrl_handler *hdl, struct v4l2_query_ext_ctrl *qc)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-ctrls-api.c:  v4l2_query_ext_ctrl 0\n");
+	
+	
 	const unsigned int next_flags = V4L2_CTRL_FLAG_NEXT_CTRL | V4L2_CTRL_FLAG_NEXT_COMPOUND;
 	u32 id = qc->id & V4L2_CTRL_ID_MASK;
 	struct v4l2_ctrl_ref *ref;
@@ -1039,6 +1102,9 @@ EXPORT_SYMBOL(v4l2_query_ext_ctrl);
 /* Implement VIDIOC_QUERYCTRL */
 int v4l2_queryctrl(struct v4l2_ctrl_handler *hdl, struct v4l2_queryctrl *qc)
 {
+	
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-ctrls-api.c:  v4l2_queryctrl 0\n");
+	
 	struct v4l2_query_ext_ctrl qec = { qc->id };
 	int rc;
 
@@ -1076,6 +1142,9 @@ EXPORT_SYMBOL(v4l2_queryctrl);
 /* Implement VIDIOC_QUERYMENU */
 int v4l2_querymenu(struct v4l2_ctrl_handler *hdl, struct v4l2_querymenu *qm)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-ctrls-api.c:  v4l2_querymenu 0\n");
+	
+	
 	struct v4l2_ctrl *ctrl;
 	u32 i = qm->index;
 
@@ -1122,6 +1191,8 @@ EXPORT_SYMBOL(v4l2_querymenu);
 
 int v4l2_ctrl_log_status(struct file *file, void *fh)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-ctrls-api.c:  v4l2_ctrl_log_status 0\n");
+	
 	struct video_device *vfd = video_devdata(file);
 	struct v4l2_fh *vfh = file->private_data;
 
@@ -1134,6 +1205,8 @@ EXPORT_SYMBOL(v4l2_ctrl_log_status);
 
 int v4l2_ctrl_subdev_log_status(struct v4l2_subdev *sd)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-ctrls-api.c:  v4l2_ctrl_subdev_log_status 0\n");
+	
 	v4l2_ctrl_handler_log_status(sd->ctrl_handler, sd->name);
 	return 0;
 }
@@ -1146,6 +1219,9 @@ EXPORT_SYMBOL(v4l2_ctrl_subdev_log_status);
 static int v4l2_ctrl_add_event(struct v4l2_subscribed_event *sev,
 			       unsigned int elems)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-ctrls-api.c:  v4l2_ctrl_add_event 0\n");
+	
+	
 	struct v4l2_ctrl *ctrl = v4l2_ctrl_find(sev->fh->ctrl_handler, sev->id);
 
 	if (!ctrl)
@@ -1162,6 +1238,9 @@ static int v4l2_ctrl_add_event(struct v4l2_subscribed_event *sev,
 
 static void v4l2_ctrl_del_event(struct v4l2_subscribed_event *sev)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-ctrls-api.c:  v4l2_ctrl_del_event 0\n");
+	
+	
 	struct v4l2_ctrl *ctrl = v4l2_ctrl_find(sev->fh->ctrl_handler, sev->id);
 
 	if (!ctrl)
@@ -1174,6 +1253,8 @@ static void v4l2_ctrl_del_event(struct v4l2_subscribed_event *sev)
 
 void v4l2_ctrl_replace(struct v4l2_event *old, const struct v4l2_event *new)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-ctrls-api.c:  v4l2_ctrl_replace 0\n");
+	
 	u32 old_changes = old->u.ctrl.changes;
 
 	old->u.ctrl = new->u.ctrl;
@@ -1183,6 +1264,8 @@ EXPORT_SYMBOL(v4l2_ctrl_replace);
 
 void v4l2_ctrl_merge(const struct v4l2_event *old, struct v4l2_event *new)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-ctrls-api.c:  v4l2_ctrl_merge 0\n");
+	
 	new->u.ctrl.changes |= old->u.ctrl.changes;
 }
 EXPORT_SYMBOL(v4l2_ctrl_merge);
@@ -1198,6 +1281,9 @@ EXPORT_SYMBOL(v4l2_ctrl_sub_ev_ops);
 int v4l2_ctrl_subscribe_event(struct v4l2_fh *fh,
 			      const struct v4l2_event_subscription *sub)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-ctrls-api.c:  v4l2_ctrl_subscribe_event 0\n");
+	
+	
 	if (sub->type == V4L2_EVENT_CTRL)
 		return v4l2_event_subscribe(fh, sub, 0, &v4l2_ctrl_sub_ev_ops);
 	return -EINVAL;
@@ -1207,6 +1293,9 @@ EXPORT_SYMBOL(v4l2_ctrl_subscribe_event);
 int v4l2_ctrl_subdev_subscribe_event(struct v4l2_subdev *sd, struct v4l2_fh *fh,
 				     struct v4l2_event_subscription *sub)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-ctrls-api.c:  v4l2_ctrl_subdev_subscribe_event 0\n");
+	
+	
 	if (!sd->ctrl_handler)
 		return -EINVAL;
 	return v4l2_ctrl_subscribe_event(fh, sub);
@@ -1218,6 +1307,8 @@ EXPORT_SYMBOL(v4l2_ctrl_subdev_subscribe_event);
  */
 __poll_t v4l2_ctrl_poll(struct file *file, struct poll_table_struct *wait)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-ctrls-api.c:  v4l2_ctrl_poll 0\n");
+	
 	struct v4l2_fh *fh = file->private_data;
 
 	poll_wait(file, &fh->wait, wait);

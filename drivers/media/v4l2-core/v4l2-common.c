@@ -64,6 +64,9 @@
 /* Fill in a struct v4l2_queryctrl */
 int v4l2_ctrl_query_fill(struct v4l2_queryctrl *qctrl, s32 _min, s32 _max, s32 _step, s32 _def)
 {
+	
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-common.c: v4l2_ctrl_query_fill 0\n");
+	
 	const char *name;
 	s64 min = _min;
 	s64 max = _max;
@@ -93,6 +96,9 @@ EXPORT_SYMBOL(v4l2_ctrl_query_fill);
 static unsigned int clamp_align(unsigned int x, unsigned int min,
 				unsigned int max, unsigned int align)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-common.c: clamp_align 0\n");
+	
+	
 	/* Bits that must be zero to be aligned */
 	unsigned int mask = ~((1 << align) - 1);
 
@@ -109,6 +115,8 @@ static unsigned int clamp_align(unsigned int x, unsigned int min,
 static unsigned int clamp_roundup(unsigned int x, unsigned int min,
 				   unsigned int max, unsigned int alignment)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-common.c: clamp_roundup 0\n");
+	
 	x = clamp(x, min, max);
 	if (alignment)
 		x = round_up(x, alignment);
@@ -121,6 +129,9 @@ void v4l_bound_align_image(u32 *w, unsigned int wmin, unsigned int wmax,
 			   u32 *h, unsigned int hmin, unsigned int hmax,
 			   unsigned int halign, unsigned int salign)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-common.c: v4l_bound_align_image 0\n");
+	
+	
 	*w = clamp_align(*w, wmin, wmax, walign);
 	*h = clamp_align(*h, hmin, hmax, halign);
 
@@ -158,6 +169,9 @@ __v4l2_find_nearest_size(const void *array, size_t array_size,
 			 size_t entry_size, size_t width_offset,
 			 size_t height_offset, s32 width, s32 height)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-common.c: __v4l2_find_nearest_size 0\n");
+	
+	
 	u32 error, min_error = U32_MAX;
 	const void *best = NULL;
 	unsigned int i;
@@ -186,6 +200,9 @@ EXPORT_SYMBOL_GPL(__v4l2_find_nearest_size);
 int v4l2_g_parm_cap(struct video_device *vdev,
 		    struct v4l2_subdev *sd, struct v4l2_streamparm *a)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-common.c: v4l2_g_parm_cap 0\n");
+	
+	
 	struct v4l2_subdev_frame_interval ival = { 0 };
 	int ret;
 
@@ -207,6 +224,9 @@ EXPORT_SYMBOL_GPL(v4l2_g_parm_cap);
 int v4l2_s_parm_cap(struct video_device *vdev,
 		    struct v4l2_subdev *sd, struct v4l2_streamparm *a)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-common.c: v4l2_s_parm_cap 0\n");
+	
+	
 	struct v4l2_subdev_frame_interval ival = {
 		.interval = a->parm.capture.timeperframe
 	};
@@ -324,6 +344,8 @@ EXPORT_SYMBOL(v4l2_format_info);
 
 static inline unsigned int v4l2_format_block_width(const struct v4l2_format_info *info, int plane)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-common.c: v4l2_format_block_width 0\n");
+	
 	if (!info->block_w[plane])
 		return 1;
 	return info->block_w[plane];
@@ -331,6 +353,8 @@ static inline unsigned int v4l2_format_block_width(const struct v4l2_format_info
 
 static inline unsigned int v4l2_format_block_height(const struct v4l2_format_info *info, int plane)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-common.c: v4l2_format_block_height 0\n");
+	
 	if (!info->block_h[plane])
 		return 1;
 	return info->block_h[plane];
@@ -339,6 +363,9 @@ static inline unsigned int v4l2_format_block_height(const struct v4l2_format_inf
 void v4l2_apply_frmsize_constraints(u32 *width, u32 *height,
 				    const struct v4l2_frmsize_stepwise *frmsize)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-common.c: v4l2_apply_frmsize_constraints 0\n");
+	
+	
 	if (!frmsize)
 		return;
 
@@ -356,6 +383,8 @@ EXPORT_SYMBOL_GPL(v4l2_apply_frmsize_constraints);
 int v4l2_fill_pixfmt_mp(struct v4l2_pix_format_mplane *pixfmt,
 			u32 pixelformat, u32 width, u32 height)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-common.c: v4l2_fill_pixfmt_mp 0\n");
+	
 	const struct v4l2_format_info *info;
 	struct v4l2_plane_pix_format *plane;
 	int i;
@@ -411,6 +440,8 @@ EXPORT_SYMBOL_GPL(v4l2_fill_pixfmt_mp);
 int v4l2_fill_pixfmt(struct v4l2_pix_format *pixfmt, u32 pixelformat,
 		     u32 width, u32 height)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-common.c: v4l2_fill_pixfmt 0\n");
+	
 	const struct v4l2_format_info *info;
 	int i;
 
@@ -448,6 +479,9 @@ EXPORT_SYMBOL_GPL(v4l2_fill_pixfmt);
 s64 v4l2_get_link_freq(struct v4l2_ctrl_handler *handler, unsigned int mul,
 		       unsigned int div)
 {
+	
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-common.c: v4l2_get_link_freq 0\n");
+	
 	struct v4l2_ctrl *ctrl;
 	s64 freq;
 

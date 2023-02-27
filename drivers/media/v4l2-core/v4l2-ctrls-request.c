@@ -18,6 +18,9 @@
 /* Initialize the request-related fields in a control handler */
 void v4l2_ctrl_handler_init_request(struct v4l2_ctrl_handler *hdl)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-ctrls-request.c: v4l2_ctrl_handler_init_request 0\n");
+	
+	
 	INIT_LIST_HEAD(&hdl->requests);
 	INIT_LIST_HEAD(&hdl->requests_queued);
 	hdl->request_is_queued = false;
@@ -27,6 +30,9 @@ void v4l2_ctrl_handler_init_request(struct v4l2_ctrl_handler *hdl)
 /* Free the request-related fields in a control handler */
 void v4l2_ctrl_handler_free_request(struct v4l2_ctrl_handler *hdl)
 {
+	
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-ctrls-request.c: v4l2_ctrl_handler_free_request 0\n");
+	
 	struct v4l2_ctrl_handler *req, *next_req;
 
 	/*
@@ -53,6 +59,9 @@ void v4l2_ctrl_handler_free_request(struct v4l2_ctrl_handler *hdl)
 static int v4l2_ctrl_request_clone(struct v4l2_ctrl_handler *hdl,
 				   const struct v4l2_ctrl_handler *from)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-ctrls-request.c: v4l2_ctrl_request_clone 0\n");
+	
+	
 	struct v4l2_ctrl_ref *ref;
 	int err = 0;
 
@@ -82,6 +91,8 @@ static int v4l2_ctrl_request_clone(struct v4l2_ctrl_handler *hdl,
 
 static void v4l2_ctrl_request_queue(struct media_request_object *obj)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-ctrls-request.c: v4l2_ctrl_request_queue 0\n");
+	
 	struct v4l2_ctrl_handler *hdl =
 		container_of(obj, struct v4l2_ctrl_handler, req_obj);
 	struct v4l2_ctrl_handler *main_hdl = obj->priv;
@@ -94,6 +105,9 @@ static void v4l2_ctrl_request_queue(struct media_request_object *obj)
 
 static void v4l2_ctrl_request_unbind(struct media_request_object *obj)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-ctrls-request.c: v4l2_ctrl_request_unbind 0\n");
+	
+	
 	struct v4l2_ctrl_handler *hdl =
 		container_of(obj, struct v4l2_ctrl_handler, req_obj);
 	struct v4l2_ctrl_handler *main_hdl = obj->priv;
@@ -109,6 +123,9 @@ static void v4l2_ctrl_request_unbind(struct media_request_object *obj)
 
 static void v4l2_ctrl_request_release(struct media_request_object *obj)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-ctrls-request.c: v4l2_ctrl_request_release 0\n");
+	
+	
 	struct v4l2_ctrl_handler *hdl =
 		container_of(obj, struct v4l2_ctrl_handler, req_obj);
 
@@ -125,6 +142,9 @@ static const struct media_request_object_ops req_ops = {
 struct v4l2_ctrl_handler *v4l2_ctrl_request_hdl_find(struct media_request *req,
 						     struct v4l2_ctrl_handler *parent)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-ctrls-request.c: v4l2_ctrl_request_hdl_find 0\n");
+
+	
 	struct media_request_object *obj;
 
 	if (WARN_ON(req->state != MEDIA_REQUEST_STATE_VALIDATING &&
@@ -141,6 +161,9 @@ EXPORT_SYMBOL_GPL(v4l2_ctrl_request_hdl_find);
 struct v4l2_ctrl *
 v4l2_ctrl_request_hdl_ctrl_find(struct v4l2_ctrl_handler *hdl, u32 id)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-ctrls-request.c: v4l2_ctrl_request_hdl_ctrl_find 0\n");
+	
+	
 	struct v4l2_ctrl_ref *ref = find_ref_lock(hdl, id);
 
 	return (ref && ref->valid_p_req) ? ref->ctrl : NULL;
@@ -151,6 +174,9 @@ static int v4l2_ctrl_request_bind(struct media_request *req,
 				  struct v4l2_ctrl_handler *hdl,
 				  struct v4l2_ctrl_handler *from)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-ctrls-request.c: v4l2_ctrl_request_bind 0\n");
+	
+	
 	int ret;
 
 	ret = v4l2_ctrl_request_clone(hdl, from);
@@ -171,6 +197,9 @@ static struct media_request_object *
 v4l2_ctrls_find_req_obj(struct v4l2_ctrl_handler *hdl,
 			struct media_request *req, bool set)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-ctrls-request.c: v4l2_ctrls_find_req_obj 0\n");
+	
+	
 	struct media_request_object *obj;
 	struct v4l2_ctrl_handler *new_hdl;
 	int ret;
@@ -219,6 +248,9 @@ v4l2_ctrls_find_req_obj(struct v4l2_ctrl_handler *hdl,
 int v4l2_g_ext_ctrls_request(struct v4l2_ctrl_handler *hdl, struct video_device *vdev,
 			     struct media_device *mdev, struct v4l2_ext_controls *cs)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-ctrls-request.c: v4l2_g_ext_ctrls_request 0\n");
+	
+	
 	struct media_request_object *obj = NULL;
 	struct media_request *req = NULL;
 	int ret;
@@ -264,6 +296,9 @@ int try_set_ext_ctrls_request(struct v4l2_fh *fh,
 			      struct media_device *mdev,
 			      struct v4l2_ext_controls *cs, bool set)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-ctrls-request.c: try_set_ext_ctrls_request 0\n");
+	
+	
 	struct media_request_object *obj = NULL;
 	struct media_request *req = NULL;
 	int ret;
@@ -324,6 +359,9 @@ int try_set_ext_ctrls_request(struct v4l2_fh *fh,
 void v4l2_ctrl_request_complete(struct media_request *req,
 				struct v4l2_ctrl_handler *main_hdl)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-ctrls-request.c: v4l2_ctrl_request_complete 0\n");
+	
+	
 	struct media_request_object *obj;
 	struct v4l2_ctrl_handler *hdl;
 	struct v4l2_ctrl_ref *ref;
@@ -395,6 +433,9 @@ EXPORT_SYMBOL(v4l2_ctrl_request_complete);
 int v4l2_ctrl_request_setup(struct media_request *req,
 			    struct v4l2_ctrl_handler *main_hdl)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-ctrls-request.c: v4l2_ctrl_request_setup 0\n");
+	
+	
 	struct media_request_object *obj;
 	struct v4l2_ctrl_handler *hdl;
 	struct v4l2_ctrl_ref *ref;

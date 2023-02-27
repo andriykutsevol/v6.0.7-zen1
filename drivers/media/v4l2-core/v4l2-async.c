@@ -770,6 +770,9 @@ __v4l2_async_nf_add_fwnode_remote(struct v4l2_async_notifier *notif,
 				  struct fwnode_handle *endpoint,
 				  unsigned int asd_struct_size)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-async.c:  __v4l2_async_nf_add_fwnode_remote 0\n");
+	
+	
 	struct v4l2_async_subdev *asd;
 	struct fwnode_handle *remote;
 
@@ -943,6 +946,8 @@ static void print_waiting_subdev(struct seq_file *s,
 static const char *
 v4l2_async_nf_name(struct v4l2_async_notifier *notifier)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-async.c: v4l2_async_nf_name 0\n");
+	
 	if (notifier->v4l2_dev)
 		return notifier->v4l2_dev->name;
 	else if (notifier->sd)
@@ -953,6 +958,8 @@ v4l2_async_nf_name(struct v4l2_async_notifier *notifier)
 
 static int pending_subdevs_show(struct seq_file *s, void *data)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-async.c: pending_subdevs_show 0\n");
+	
 	struct v4l2_async_notifier *notif;
 	struct v4l2_async_subdev *asd;
 
@@ -974,6 +981,9 @@ static struct dentry *v4l2_async_debugfs_dir;
 
 static int __init v4l2_async_init(void)
 {
+	printk(KERN_INFO "!!!dgnet: drivers/media/v4l2-core/v4l2-async.c: v4l2_async_init 0\n");
+	
+	
 	v4l2_async_debugfs_dir = debugfs_create_dir("v4l2-async", NULL);
 	debugfs_create_file("pending_async_subdevices", 0444,
 			    v4l2_async_debugfs_dir, NULL,
