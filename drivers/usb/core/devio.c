@@ -516,7 +516,7 @@ static void snoop_urb(struct usb_device *udev,
 		int timeout_or_status, enum snoop_when when,
 		unsigned char *data, unsigned data_len)
 {
-	printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: snoop_urb 0\n");
+	//printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: snoop_urb 0\n");
 	
 	static const char *types[] = {"isoc", "int", "ctrl", "bulk"};
 	static const char *dirs[] = {"out", "in"};
