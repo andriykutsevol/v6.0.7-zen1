@@ -467,7 +467,7 @@ static void async_newpending(struct async *as)
 static void async_removepending(struct async *as)
 {
 	
-	printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: async_removepending 0\n");
+	//printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: async_removepending 0\n");
 	
 	struct usb_dev_state *ps = as->ps;
 	unsigned long flags;
@@ -479,7 +479,7 @@ static void async_removepending(struct async *as)
 
 static struct async *async_getcompleted(struct usb_dev_state *ps)
 {
-	printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: async_getcompleted 0\n");
+	//printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: async_getcompleted 0\n");
 	
 	unsigned long flags;
 	struct async *as = NULL;
@@ -497,7 +497,7 @@ static struct async *async_getcompleted(struct usb_dev_state *ps)
 static struct async *async_getpending(struct usb_dev_state *ps,
 					     void __user *userurb)
 {
-	printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: async_getpending 0\n");
+	//printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: async_getpending 0\n");
 	
 	
 	struct async *as;
