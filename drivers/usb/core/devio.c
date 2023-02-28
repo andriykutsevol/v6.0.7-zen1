@@ -620,7 +620,7 @@ static void cancel_bulk_urbs(struct usb_dev_state *ps, unsigned bulk_addr)
 __releases(ps->lock)
 __acquires(ps->lock)
 {
-	//printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: cancel_bulk_urbs 0\n");
+	printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: cancel_bulk_urbs 0\n");
 	
 	
 	struct urb *urb;
@@ -659,7 +659,7 @@ __acquires(ps->lock)
 
 static void async_completed(struct urb *urb)
 {
-	//printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: async_completed 0\n");
+	printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: async_completed 0\n");
 	
 	
 	struct async *as = urb->context;
@@ -702,7 +702,7 @@ static void async_completed(struct urb *urb)
 
 static void destroy_async(struct usb_dev_state *ps, struct list_head *list)
 {
-	//printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: destroy_async 0\n");
+	printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: destroy_async 0\n");
 	
 	
 	struct urb *urb;
@@ -728,7 +728,7 @@ static void destroy_async(struct usb_dev_state *ps, struct list_head *list)
 static void destroy_async_on_interface(struct usb_dev_state *ps,
 				       unsigned int ifnum)
 {
-	//printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: destroy_async_on_interface 0\n");
+	printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: destroy_async_on_interface 0\n");
 	
 	
 	struct list_head *p, *q, hitlist;
@@ -745,7 +745,7 @@ static void destroy_async_on_interface(struct usb_dev_state *ps,
 
 static void destroy_all_async(struct usb_dev_state *ps)
 {
-	//printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: destroy_all_async 0\n");
+	printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: destroy_all_async 0\n");
 	
 	destroy_async(ps, &ps->async_pending);
 }
@@ -759,14 +759,14 @@ static void destroy_all_async(struct usb_dev_state *ps)
 static int driver_probe(struct usb_interface *intf,
 			const struct usb_device_id *id)
 {
-	//printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: driver_probe 0\n");
+	printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: driver_probe 0\n");
 	
 	return -ENODEV;
 }
 
 static void driver_disconnect(struct usb_interface *intf)
 {
-	//printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: driver_disconnect 0\n");
+	printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: driver_disconnect 0\n");
 	
 	struct usb_dev_state *ps = usb_get_intfdata(intf);
 	unsigned int ifnum = intf->altsetting->desc.bInterfaceNumber;
@@ -793,14 +793,14 @@ static void driver_disconnect(struct usb_interface *intf)
 /* We don't care about suspend/resume of claimed interfaces */
 static int driver_suspend(struct usb_interface *intf, pm_message_t msg)
 {
-	//printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: driver_suspend 0\n");
+	printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: driver_suspend 0\n");
 	
 	return 0;
 }
 
 static int driver_resume(struct usb_interface *intf)
 {
-	//printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: driver_resume 0\n");
+	printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: driver_resume 0\n");
 	
 	return 0;
 }
@@ -815,7 +815,7 @@ void usbfs_notify_suspend(struct usb_device *udev)
 
 void usbfs_notify_resume(struct usb_device *udev)
 {
-	//printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: usbfs_notify_resume 0\n");
+	printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: usbfs_notify_resume 0\n");
 	
 	struct usb_dev_state *ps;
 
