@@ -561,7 +561,7 @@ static void snoop_urb(struct usb_device *udev,
 static void snoop_urb_data(struct urb *urb, unsigned len)
 {
 	
-	//printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: snoop_urb_data 0\n");
+	printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: snoop_urb_data 0\n");
 	
 	
 	int i, size;
