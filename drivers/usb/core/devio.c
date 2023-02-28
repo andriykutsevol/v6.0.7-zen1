@@ -409,7 +409,7 @@ err:
 
 static struct async *alloc_async(unsigned int numisoframes)
 {
-	printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: alloc_async 0\n");
+	//printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: alloc_async 0\n");
 	
 	struct async *as;
 
@@ -426,7 +426,7 @@ static struct async *alloc_async(unsigned int numisoframes)
 
 static void free_async(struct async *as)
 {
-	printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: alloc_async 0\n");
+	//printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: alloc_async 0\n");
 	
 	
 	int i;
@@ -453,7 +453,7 @@ static void free_async(struct async *as)
 
 static void async_newpending(struct async *as)
 {
-	printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: async_newpending 0\n");
+	//printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: async_newpending 0\n");
 	
 	
 	struct usb_dev_state *ps = as->ps;
