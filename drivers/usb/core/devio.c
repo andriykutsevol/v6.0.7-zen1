@@ -479,7 +479,7 @@ static void async_removepending(struct async *as)
 
 static struct async *async_getcompleted(struct usb_dev_state *ps)
 {
-	//printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: async_getcompleted 0\n");
+	printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: async_getcompleted 0\n");
 	
 	unsigned long flags;
 	struct async *as = NULL;
@@ -497,7 +497,7 @@ static struct async *async_getcompleted(struct usb_dev_state *ps)
 static struct async *async_getpending(struct usb_dev_state *ps,
 					     void __user *userurb)
 {
-	//printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: async_getpending 0\n");
+	printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: async_getpending 0\n");
 	
 	
 	struct async *as;
@@ -516,7 +516,7 @@ static void snoop_urb(struct usb_device *udev,
 		int timeout_or_status, enum snoop_when when,
 		unsigned char *data, unsigned data_len)
 {
-	//printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: snoop_urb 0\n");
+	printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: snoop_urb 0\n");
 	
 	static const char *types[] = {"isoc", "int", "ctrl", "bulk"};
 	static const char *dirs[] = {"out", "in"};
