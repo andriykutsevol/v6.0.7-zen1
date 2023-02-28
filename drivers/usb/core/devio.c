@@ -586,7 +586,7 @@ static void snoop_urb_data(struct urb *urb, unsigned len)
 
 static int copy_urb_data_to_user(u8 __user *userbuffer, struct urb *urb)
 {
-	//printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: copy_urb_data_to_user 0\n");
+	printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: copy_urb_data_to_user 0\n");
 	
 	
 	unsigned i, len, size;
