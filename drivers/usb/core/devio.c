@@ -318,7 +318,7 @@ error:
 static ssize_t usbdev_read(struct file *file, char __user *buf, size_t nbytes,
 			   loff_t *ppos)
 {
-	//printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: usbdev_read 0\n");
+	printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: usbdev_read 0\n");
 	
 	struct usb_dev_state *ps = file->private_data;
 	struct usb_device *dev = ps->dev;
@@ -409,7 +409,7 @@ err:
 
 static struct async *alloc_async(unsigned int numisoframes)
 {
-	//printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: alloc_async 0\n");
+	printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: alloc_async 0\n");
 	
 	struct async *as;
 
