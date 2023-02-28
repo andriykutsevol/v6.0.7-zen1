@@ -808,7 +808,7 @@ static int driver_resume(struct usb_interface *intf)
 /* The following routines apply to the entire device, not interfaces */
 void usbfs_notify_suspend(struct usb_device *udev)
 {
-	//printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: usbfs_notify_suspend 0\n");
+	printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: usbfs_notify_suspend 0\n");
 	
 	/* We don't need to handle this */
 }
@@ -839,7 +839,7 @@ struct usb_driver usbfs_driver = {
 
 static int claimintf(struct usb_dev_state *ps, unsigned int ifnum)
 {
-	//printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: claimintf 0\n");
+	printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: claimintf 0\n");
 	
 	struct usb_device *dev = ps->dev;
 	struct usb_interface *intf;
@@ -874,7 +874,7 @@ static int claimintf(struct usb_dev_state *ps, unsigned int ifnum)
 
 static int releaseintf(struct usb_dev_state *ps, unsigned int ifnum)
 {
-	//printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: releaseintf 0\n");
+	printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: releaseintf 0\n");
 	
 	struct usb_device *dev;
 	struct usb_interface *intf;
@@ -902,7 +902,7 @@ static int releaseintf(struct usb_dev_state *ps, unsigned int ifnum)
 
 static int checkintf(struct usb_dev_state *ps, unsigned int ifnum)
 {
-	//printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: checkintf 0\n");
+	printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: checkintf 0\n");
 	
 	if (ps->dev->state != USB_STATE_CONFIGURED)
 		return -EHOSTUNREACH;
@@ -919,7 +919,7 @@ static int checkintf(struct usb_dev_state *ps, unsigned int ifnum)
 
 static int findintfep(struct usb_device *dev, unsigned int ep)
 {
-	//printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: findintfep 0\n");
+	printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: findintfep 0\n");
 	
 	unsigned int i, j, e;
 	struct usb_interface *intf;
@@ -947,7 +947,7 @@ static int findintfep(struct usb_device *dev, unsigned int ep)
 static int check_ctrlrecip(struct usb_dev_state *ps, unsigned int requesttype,
 			   unsigned int request, unsigned int index)
 {
-	//printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: check_ctrlrecip 0\n");
+	printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: check_ctrlrecip 0\n");
 	
 	int ret = 0;
 	struct usb_host_interface *alt_setting;
@@ -1008,7 +1008,7 @@ static int check_ctrlrecip(struct usb_dev_state *ps, unsigned int requesttype,
 static struct usb_host_endpoint *ep_to_host_endpoint(struct usb_device *dev,
 						     unsigned char ep)
 {
-	//printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: usb_host_endpoint 0\n");
+	printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: usb_host_endpoint 0\n");
 	
 	if (ep & USB_ENDPOINT_DIR_MASK)
 		return dev->ep_in[ep & USB_ENDPOINT_NUMBER_MASK];
@@ -1023,7 +1023,7 @@ static int parse_usbdevfs_streams(struct usb_dev_state *ps,
 				  struct usb_host_endpoint ***eps_ret,
 				  struct usb_interface **intf_ret)
 {
-	//printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: parse_usbdevfs_streams 0\n");
+	printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: parse_usbdevfs_streams 0\n");
 	
 	unsigned int i, num_streams, num_eps;
 	struct usb_host_endpoint **eps;
@@ -1093,7 +1093,7 @@ error:
 
 static struct usb_device *usbdev_lookup_by_devt(dev_t devt)
 {
-	//printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: usbdev_lookup_by_devt 0\n");
+	printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: usbdev_lookup_by_devt 0\n");
 	
 	struct device *dev;
 
@@ -1108,7 +1108,7 @@ static struct usb_device *usbdev_lookup_by_devt(dev_t devt)
  */
 static int usbdev_open(struct inode *inode, struct file *file)
 {
-	//printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: usbdev_open 0\n");
+	printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: usbdev_open 0\n");
 	
 	struct usb_device *dev = NULL;
 	struct usb_dev_state *ps;
@@ -1167,7 +1167,7 @@ static int usbdev_open(struct inode *inode, struct file *file)
 
 static int usbdev_release(struct inode *inode, struct file *file)
 {
-	//printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: usbdev_release 0\n");
+	printk(KERN_INFO "!!!dgnet drivers/usb/core/devio.c: usbdev_release 0\n");
 	
 	struct usb_dev_state *ps = file->private_data;
 	struct usb_device *dev = ps->dev;
